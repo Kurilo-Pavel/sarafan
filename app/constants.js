@@ -1,6 +1,6 @@
 const USER = "pkuryla";
 const PASS = "hcarfnblkzgbehrs"
-const URL = "http://localhost:7780";
+const URL = "https://sarafan-server5.onrender.com";
 const SALT = "1afadvf0bjda2bmad4bo1fbd2bl";
 const COUNT_ITEMS = 10;
 const EMAIL = {
