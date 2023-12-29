@@ -1,0 +1,55 @@
+.contact_content {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+}
+
+.contact_chapter {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.chapter_title {
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.chapter_contain {
+  margin: 0;
+  padding: 0;
+}
+
+.contact_feedback {
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+}
+
+.contact_inf {
+  margin-bottom: 30px;
+}
+
+.idea {
+  font-size: 18px;
+  margin: 0;
+  padding: 0;
+}
+
+.feedback_information {
+  margin: 30px 0 10px;
+  padding: 0;
+  font-size: 14px;
+  color: #C4C4C4;
+}
+
+.contact_rules {
+  font-size: 14px;
+  color: #6F6F6F;
+  margin-bottom: 35px;
+}
+
+.contact_map {
+  width: 100%;
+  height: 100%;
+}

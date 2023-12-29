@@ -1,0 +1,36 @@
+.product_header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.filter {
+  display: flex;
+  gap: 90px;
+  align-self: center;
+  justify-content: flex-end;
+  height: 2.5rem;
+  font-size: 14px;
+}
+
+.page_title {
+  font-size: 2rem;
+}
+
+.product_gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 40vw);
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+  row-gap: 40px;
+  column-gap: 30px;
+}
+
+.product_button {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 56px;
+  margin-top: 50px;
+  font-size: 18px;
+}

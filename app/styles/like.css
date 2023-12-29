@@ -1,0 +1,7 @@
+.like_page {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  row-gap: 3rem;
+  margin: 0 5vw 7rem 5vw;
+}

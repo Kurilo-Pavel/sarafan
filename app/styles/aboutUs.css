@@ -1,0 +1,15 @@
+.aboutUs_text {
+  margin-block: 50px;
+}
+
+.aboutUs_content {
+  display: grid;
+  grid-template-columns: 2fr 1.5fr;
+  gap: 30px;
+  width: 100%;
+}
+
+.aboutUs_img {
+  width: 100%;
+  height: 100%;
+}

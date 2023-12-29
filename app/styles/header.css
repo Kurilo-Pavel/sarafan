@@ -1,0 +1,54 @@
+.header {
+  position: relative;
+  height: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-inline: 3.5rem;
+  z-index: 1
+}
+
+.header_menu {
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: space-between;
+  height: 100%;
+  max-width: 27rem;
+  width: 100%;
+  min-width: 20rem;
+  margin: 0;
+  padding: 0;
+}
+
+.main_section {
+  display: inline;
+  padding-block: 2rem;
+  text-decoration: none;
+  color: black;
+}
+
+.main_section:hover {
+  border-bottom: 1px solid grey;
+  color: grey;
+  padding-bottom: 2rem;
+  cursor: pointer;
+}
+
+.header_dataUser {
+  display: grid;
+  grid-auto-flow: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: 32rem;
+  width: 100%;
+}
+
+.elem_hov {
+  cursor: pointer;
+}
+
+.account_img {
+  width: 2rem;
+  height: 2rem;
+}

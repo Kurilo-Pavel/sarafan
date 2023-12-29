@@ -1,0 +1,25 @@
+.select_label {
+  align-self: center;
+}
+
+.select {
+  width: 170px;
+  border: none;
+  cursor: pointer;
+}
+
+.select:focus-visible {
+  outline: none;
+}
+
+.item_selection {
+  padding-block: 20px;
+  margin-bottom: 10px;
+  text-align: center;
+  border: 1px solid #CECECE;
+  font-size: 1rem;
+}
+.item_selection:focus-visible{
+  outline: none;
+  
+}

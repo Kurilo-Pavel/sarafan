@@ -1,0 +1,12 @@
+.path {
+  margin-block: 1rem;
+  font-size: 1rem;
+}
+
+.path_link {
+  color: black;
+  text-decoration: none;
+}
+.path_link:hover{
+  text-decoration: underline;
+}

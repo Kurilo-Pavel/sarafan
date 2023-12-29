@@ -1,0 +1,126 @@
+.wrapper_slider {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.background {
+  width: 100%;
+  height: 100%;
+}
+
+.section_contain {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+  color: white;
+}
+
+.locate_right {
+  right: 0;
+  
+}
+
+.locate_left {
+  left: 0;
+}
+
+.contain_text {
+  font-weight: 400;
+  font-size: 2.5vw;
+}
+
+.contain_title {
+  width: 25vw;
+  text-align: center;
+  font-weight: 500;
+  font-size: 4vw;
+  margin-block: 2vw;
+}
+
+.moveSubLeft {
+  animation: 3s linear 0s 1 both subLeft;
+}
+
+@keyframes subLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.moveMainLeft {
+  animation: 3s linear 0s 1 both mainLeft;
+}
+
+@keyframes mainLeft {
+  from {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+
+.moveSubRight {
+  animation: 3s linear 0s 1 both subRight;
+}
+
+@keyframes subRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.moveMainRight {
+  animation: 3s linear 0s 1 both mainRight;
+}
+
+@keyframes mainRight {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+.showBlock {
+  animation: 3s linear 0s 1 both showOpacity;
+}
+
+@keyframes showOpacity {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.hideBlock {
+  animation: 3s linear 0s 1 both hideOpacity;
+}
+
+@keyframes hideOpacity {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}

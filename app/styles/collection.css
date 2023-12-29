@@ -1,0 +1,48 @@
+.collection_new {
+  position: relative;
+}
+
+.collection_title {
+  font-size: 2rem;
+  font-weight: 400;
+  margin-bottom: 2rem;
+}
+
+.wrapper_collection {
+  display: flex;
+  position: relative;
+  height: 34vw;
+  width: 100%;
+  overflow: hidden;
+}
+
+.collection_containFirst {
+  display: grid;
+  grid-template-columns:repeat(6, 21vw);
+  /*column-gap: 2rem;*/
+}
+
+.slider_arrows {
+  position: absolute;
+  width: 100%;
+  top: 45%;
+  color: grey;
+  font-size: 2rem;
+  z-index: 2;
+}
+
+.arrow {
+  position: relative;
+  cursor: pointer;
+  padding: 1rem;
+}
+
+.right_arrow {
+  position: absolute;
+  right: -4rem;
+}
+
+.left_arrow {
+  position: absolute;
+  left: -4rem;
+}

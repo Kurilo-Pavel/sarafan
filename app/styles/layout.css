@@ -1,0 +1,43 @@
+body {
+  margin: 0;
+}
+
+.hide_scroll {
+  overflow: hidden;
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  position: relative;
+  margin: 0 3.5rem 7rem;
+}
+
+.close {
+  position: absolute;
+  top: 4rem;
+  right: 4rem;
+  padding: 1rem;
+  cursor: pointer;
+}
+
+.cross {
+  position: absolute;
+  left: 1px;
+}
+
+.cross:after, .cross:before {
+  position: absolute;
+  width: 1rem;
+  content: "";
+  border: 1px solid black;
+}
+
+.cross:before {
+  transform: rotate(-45deg);
+}
+
+.cross:after {
+  transform: rotate(45deg);
+}

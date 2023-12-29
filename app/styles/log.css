@@ -1,0 +1,35 @@
+.log_wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-block: 100px;
+}
+
+.log {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  min-width: 450px;
+}
+
+.log_text {
+  max-width: 450px;
+  text-align: center;
+}
+
+.registration_label {
+  font-size: 14px;
+}
+
+.log_alternative {
+  margin-top: 20px;
+}
+
+.log_link {
+  text-decoration: none;
+  color: black;
+}
+
+.log_link:hover {
+  text-decoration: underline;
+}

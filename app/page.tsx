@@ -1,95 +1,125 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+"use client";
+import "./styles/mainPage.css";
+import Collection from "./components/Collection";
+import MainInform from "./components/MainInform";
+import MiniCollection from "./components/MiniCollection";
+import {useAppDispatch, useAppSelector} from "@/app/store/hooks";
+import {useEffect, useState} from "react";
+import {getItems} from "@/app/store/product/productSlice";
+import {Slide1, Slide2, Slide3, Slide4} from "./components/mainSlider/Slides";
 
-export default function Home() {
-  return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
+let count = 0;
+
+const MainPage = () => {
+  const dispatch = useAppDispatch();
+  const items = useAppSelector(state => state.product.products)
+
+  useEffect(() => {
+    dispatch(getItems(1));
+  }, []);
+
+  const [mainStyle, setMainStile] = useState("");
+  const [subStyle, setSubStyle] = useState("");
+
+  const slides = [
+    {
+      style: "",
+      component: function () {
+        return <Slide1 className={this.style}/>;
+      }
+    },
+    {
+      style: "",
+      component: function () {
+        return <Slide2 className={this.style}/>;
+      }
+    },
+    {
+      style: "",
+      component: function () {
+        return <Slide3 className={this.style}/>;
+      }
+    },
+    {
+      style: "",
+      component: function () {
+        return <Slide4 className={this.style}/>;
+      }
+    },
+  ];
+  const [visibleSlide, setVisibleSlide] = useState(<Slide1 className=""/>);
+  const [hiddenSlide, setHiddenSlide] = useState(<Slide1 className=""/>);
+
+  const moveLeft = () => {
+    slides[count].style = "moveMainLeft";
+    setVisibleSlide(slides[count].component());
+    if (count >= slides.length - 1) {
+      count = 0;
+    } else {
+      count = ++count;
+    }
+    slides[count].style = "moveSubLeft";
+    setHiddenSlide(slides[count].component());
+  };
+
+  const moveRight = () => {
+    slides[count].style = "moveMainRight";
+    setVisibleSlide(slides[count].component());
+    if (count <= 0) {
+      count = slides.length - 1;
+    } else {
+      count = --count;
+    }
+    slides[count].style = "moveSubRight";
+    setHiddenSlide(slides[count].component());
+  };
+
+  const showSlide = (num) => {
+    slides[count].style = "hideBlock";
+    setHiddenSlide(slides[count].component());
+    slides[num].style = "showBlock";
+    setVisibleSlide(slides[num].component());
+    count = num;
+  };
+  return <>
+    <section className="main_page">
+      <div className="main_wrapper">
+        {visibleSlide}
+        {hiddenSlide}
       </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
+      <div className="section_arrows">
+        <span className="arrow" onClick={moveRight}>{"<"}</span>
+        <span className="arrow" onClick={moveLeft}>{">"}</span>
       </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
+      <div className="main_slider">
+        <span className="slider_circle" onClick={() => showSlide("0")}/>
+        <span className="slider_circle" onClick={() => showSlide("1")}/>
+        <span className="slider_circle" onClick={() => showSlide("2")}/>
+        <span className="slider_circle" onClick={() => showSlide("3")}/>
       </div>
-    </main>
-  )
-}
+    </section>
+    <section className="collection">
+      {items.length > 0 && <Collection
+        title={"Новая коллекция"}
+        slider={false}
+        classCard="collection_item"
+        classImage="small_img"
+        items={[items[2], items[3], items[4], items[5]]}
+      />}
+      {items.length > 0 && <MiniCollection
+        items={[items[0], items[1]]}
+        classImage="card_main_page"
+        classCard="collection_item"
+      />}
+      <MainInform/>
+      {items[0] && <Collection
+        title={"Успей купить"}
+        slider={true}
+        classCard="collection_item"
+        classImage="small_img"
+        items={[items[6], items[7], items[8], items[9], items[10], items[11]]}
+      />}
+    </section>
+  </>
+};
+export default MainPage;

@@ -1,0 +1,171 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-inline: 50px;
+  margin-bottom: 100px;
+}
+
+.item_section {
+  display: grid;
+  grid-template-columns: 1fr 7fr 7fr;
+  gap: 10px;
+}
+
+.item_collection {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sub_image {
+  width: 100%;
+  cursor: pointer;
+}
+
+.main_image {
+  width: 100%;
+}
+
+.data_item {
+  display: flex;
+  flex-direction: column;
+  margin-left: 50px;
+  gap: 25px;
+}
+
+.title_item {
+  margin: 0;
+  font-size: 24px;
+}
+
+.item_code {
+  font-size: 14px;
+  color: #DADADA;
+}
+
+.item_price {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+
+.item_coins {
+  font-size: 18px;
+}
+
+.item_description {
+  margin: 0;
+}
+
+.item_color {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.color_name {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  margin: 0;
+}
+
+.item_getColor {
+
+}
+
+.section_colors {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+}
+
+.color {
+  width: 40px;
+  height: 55px;
+  cursor: pointer;
+  border: 1px solid #CECECE;
+}
+
+.table_size {
+  font-size: 14px;
+  color: #CECECE;
+  cursor: pointer;
+}
+
+.table_size:hover {
+  color: #000000;
+}
+
+.item_delivery {
+  color: #000000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.item_delivery:hover {
+  text-decoration: underline;
+}
+
+.item_details {
+  display: flex;
+  flex-direction: column;
+}
+
+.item_field {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+
+.plus, .minus {
+  align-self: center;
+  padding-inline: 10px;
+  font-size: 35px;
+  cursor: pointer;
+}
+
+.plus:before {
+  content: "+";
+}
+
+.minus:before {
+  content: "-";
+}
+.description{
+  display: none;
+}
+
+.close_description {
+  overflow: hidden;
+  margin: 0;
+  animation: 1s linear 0s 1 both hideDescription;
+}
+
+@keyframes hideDescription {
+  from {
+    height: 95px;
+  }
+  to {
+    height: 0;
+    display: none;
+  }
+}
+
+.open_description {
+  display: flex;
+  overflow: hidden;
+  margin: 0;
+  animation: 1s linear 0s 1 both showDescription;
+}
+
+@keyframes showDescription {
+  from {
+    height: 0;
+  }
+  to {
+    height: 95px;
+  }
+}

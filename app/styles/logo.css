@@ -1,0 +1,22 @@
+.logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-inline: 1rem;
+  text-decoration: none;
+  color: black;
+}
+
+.logo:hover {
+  color: grey;
+  text-decoration-line: underline;
+  cursor: pointer;
+}
+
+.headerLogo_name {
+  font-size: 1.5rem;
+}
+
+.headerLogo_text {
+  font-size: 0.8rem;
+}

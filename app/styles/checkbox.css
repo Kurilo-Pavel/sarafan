@@ -1,0 +1,14 @@
+.wrapper_checkbox {
+  display: flex;
+  margin-bottom: 30px;
+  max-width: 450px;
+}
+
+.registration_checkbox {
+  margin-right: 25px;
+  cursor: pointer;
+}
+
+.registration_label {
+  cursor: pointer;
+}
