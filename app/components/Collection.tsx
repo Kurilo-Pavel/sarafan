@@ -19,7 +19,7 @@ type CollectionProps = {
 let count = 0;
 
 const Collection = ({title, slider, items, classImage, classCard}: CollectionProps) => {
-
+  console.log(items)
   const [rightArrow, setRightArrow] = useState(true);
   const [leftArrow, setLeftArrow] = useState(false);
 

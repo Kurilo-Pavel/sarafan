@@ -2,6 +2,7 @@ const USER = "pkuryla";
 const PASS = "hcarfnblkzgbehrs"
 // const URL = "https://sarafan-server5.onrender.com";
 const URL = "http://localhost:7780";
+const FrontendURL = "http://localhost:3000";
 const SALT = "1afadvf0bjda2bmad4bo1fbd2bl";
 const COUNT_ITEMS = 10;
 const EMAIL = {
@@ -51,4 +52,4 @@ const CATEGORY = {
 
 const timeAuthorization = 3 * 60 * 60 * 60 * 60;
 
-export {URL, SALT, COUNT_ITEMS, EMAIL, PASSWORD, USER, PASS, timeAuthorization, LOGIN, DESCRIPTION, CATEGORY};
+export {URL,FrontendURL, SALT, COUNT_ITEMS, EMAIL, PASSWORD, USER, PASS, timeAuthorization, LOGIN, DESCRIPTION, CATEGORY};
