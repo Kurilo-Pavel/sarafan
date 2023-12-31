@@ -31,6 +31,7 @@ const Item = ({params}: ItemProps) => {
 
   useEffect(() => {
     setMainImage(item.main_img);
+    console.log(item)
     if (item.colors) {
       setItemColor(item.colors[0]);
     }

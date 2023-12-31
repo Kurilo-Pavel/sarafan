@@ -23,6 +23,7 @@
     "mysql": "^2.18.1",
     "next": "latest",
     "nodemailer": "^6.9.5",
+    "pg": "^8.11.3",
     "progress-stream": "^2.0.0",
     "react": "latest",
     "react-dom": "latest",

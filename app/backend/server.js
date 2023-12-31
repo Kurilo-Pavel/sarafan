@@ -7,6 +7,7 @@ import {sha256} from "js-sha256";
 import {SALT, USER, PASS, timeAuthorization, URL, COUNT_ITEMS} from "../constants.js";
 import {emailCheck, passwordCheck} from "../script.js";
 import mysql from "mysql";
+import pg from 'pg'
 import nodemailer from "nodemailer";
 import cookieParser from "cookie-parser";
 
@@ -14,6 +15,15 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const server = express();
 const port = 7780;
+
+const connection = new pg.Client({
+  user: "pavel",
+  password: "CgZ69UnjWTApdXUSfyyKaBs90VhL9m47",
+  host: "dpg-cm7hkced3nmc73cgj2vg-a.frankfurt-postgres.render.com",
+  port: 5432,
+  database: "sarafanshop",
+  ssl: true
+})
 
 const storageConfig = multer.diskStorage({
   destination: path.join(__dirname, "../../public/png/big"),
@@ -78,6 +88,7 @@ server.post("/log", express.json({type: "*/*"}), (request, response) => {
     response.send({error: "Incorrect password"});
   } else {
     password = sha256.hmac(password, SALT);
+    console.log(password)
     const connection = mysql.createConnection(connectionConfig);
     connection.connect(err => {
       if (err) {
