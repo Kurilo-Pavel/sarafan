@@ -85,7 +85,7 @@ export const addProduct = createAsyncThunk(
     description: string;
     size: string[];
     color: string[];
-    mainImage: string;
+    mainImage: string|any;
     gallery: {
       size: number | undefined;
       image: Blob | undefined;
