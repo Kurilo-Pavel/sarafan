@@ -260,7 +260,6 @@ server.get("/clothes/:categories/:page", express.json({type: "*/*"}), (request, 
 
   const countItems = (request.params.page - 1) * COUNT_ITEMS;
 
-  // const connection = mysql.createConnection(connectionConfig);
   const connection = new pg.Client(configPG);
 
   connection.connect(err => {
@@ -288,7 +287,6 @@ server.get("/clothes/:categories/:page", express.json({type: "*/*"}), (request, 
 server.post("/category/add/:categories", (request, response) => {
   response.setHeader("Access-Control-Allow-Origin", `${FrontendURL}`);
 
-  // const connection = mysql.createConnection(connectionConfig);
   const connection = new pg.Client(configPG);
   connection.connect(err => {
     if (err) {
@@ -314,7 +312,6 @@ server.post("/category/add/:categories", (request, response) => {
 
 server.delete("/category/delete/:categories", (request, response) => {
   response.setHeader("Access-Control-Allow-Origin", `${FrontendURL}`);
-  // const connection = mysql.createConnection(connectionConfig);
   const connection = new pg.Client(configPG);
   connection.connect(err => {
     if (err) {
@@ -358,7 +355,6 @@ server.post("/category/clothes/sort:sort?category:category?page:page", (request,
     default:
       break;
   }
-  // const connection = mysql.createConnection(connectionConfig);
   const connection = new pg.Client(configPG);
   connection.connect(err => {
     if (err) {
@@ -480,7 +476,6 @@ server.get("/item/:id", (request, response) => {
   response.setHeader("Access-Control-Allow-Origin", `${FrontendURL}`);
   const id = request.params.id;
 
-  // const connection = mysql.createConnection(connectionConfig);
   const connection = new pg.Client(configPG);
   connection.connect(err => {
     if (err) {
@@ -540,7 +535,6 @@ server.get("/items/:page", (request, response) => {
   response.setHeader("Access-Control-Allow-Origin", `${FrontendURL}`);
 
   const countItems = (request.params.page - 1) * COUNT_ITEMS;
-  // const connection = mysql.createConnection(connectionConfig);
   const connection = new pg.Client(configPG);
   connection.connect(err => {
     if (err) {
@@ -569,7 +563,6 @@ server.get("/newItems/:page", (request, response) => {
 
   const countItems = (request.params.page - 1) * COUNT_ITEMS;
 
-  // const connection = mysql.createConnection(connectionConfig);
   const connection = new pg.Client(configPG);
   connection.connect(err => {
     if (err) {
@@ -596,11 +589,9 @@ server.get("/newItems/:page", (request, response) => {
 
 server.get("/sale/:page", (request, response) => {
   response.setHeader("Access-Control-Allow-Origin", `${FrontendURL}`);
-  // response.setHeader("Access-Control-Allow-Credentials", "true");
 
   const countItems = (request.params.page - 1) * COUNT_ITEMS;
 
-  // const connection = mysql.createConnection((connectionConfig));
   const connection = new pg.Client(configPG);
   connection.connect(err => {
     if (err) {
