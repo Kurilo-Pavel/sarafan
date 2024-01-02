@@ -25,11 +25,12 @@ const Categories = () => {
   const dispatch = useAppDispatch();
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [chooseCategory, setChooseCategory] = useState("");
-  const admin = localStorage.getItem("admin");
+  const [admin, setAdmin] = useState(false);
 
   useEffect(() => {
-    dispatch(getCategory());
-  }, [dispatch]);
+      setAdmin(JSON.parse(localStorage.getItem("admin")));
+      dispatch(getCategory());
+  }, []);
 
   const initialValues: FormValues = {
     category: "",
@@ -68,7 +69,7 @@ const Categories = () => {
                 <Link
                   href={`/categories/${item.name_category}`}
                   className="category_link"
-                  >
+                >
                   {item.name_category}
                 </Link>
                 {admin && <div

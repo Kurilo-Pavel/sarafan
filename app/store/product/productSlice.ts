@@ -85,7 +85,7 @@ export const addProduct = createAsyncThunk(
     description: string;
     size: string[];
     color: string[];
-    mainImage: string|any;
+    mainImage: string | undefined;
     gallery: {
       size: number | undefined;
       image: Blob | undefined;
@@ -188,7 +188,7 @@ type Product = {
   sale: number | null;
   size: string | null;
   views: number | null;
-  main_img: string;
+  main_img: string | undefined;
   sub_img: [string];
 }[];
 
@@ -254,6 +254,6 @@ const productSlice = createSlice<Products>({
   }
 });
 export const {
-  setSection,getMyOrders
+  setSection, getMyOrders
 } = productSlice.actions;
 export default productSlice.reducer;

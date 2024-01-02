@@ -4,7 +4,7 @@ import progress from "progress-stream";
 import multer from "multer";
 import {fileURLToPath} from "url";
 import {sha256} from "js-sha256";
-import {SALT, USER, PASS, timeAuthorization, URL, COUNT_ITEMS,FrontendURL} from "../constants.js";
+import {SALT, USER, PASS, timeAuthorization, URL, COUNT_ITEMS, FrontendURL} from "../constants.js";
 import {emailCheck, passwordCheck} from "../script.js";
 import pg from 'pg';
 import nodemailer from "nodemailer";
@@ -15,14 +15,14 @@ const __dirname = dirname(__filename);
 const server = express();
 const port = 7780;
 
-const connection = new pg.Client({
+const configPG = {
   user: "pavel",
   password: "CgZ69UnjWTApdXUSfyyKaBs90VhL9m47",
   host: "dpg-cm7hkced3nmc73cgj2vg-a.frankfurt-postgres.render.com",
   port: 5432,
   database: "sarafanshop",
   ssl: true
-})
+};
 
 const storageConfig = multer.diskStorage({
   destination: path.join(__dirname, "../../public/png/big"),
@@ -46,24 +46,15 @@ const upload = multer({
 });
 const saveFile = upload.fields([{name: 'image', maxCount: 5}]);
 
-// const connectionConfig = {
-//   host: "localhost",
-//   user: "root",
-//   password: "1986@LitvinMaster",
-//   database: "sarafanshop"
-// };
-
 server.options('/*', (req, res) => {
   res.setHeader("Access-Control-Allow-Origin", `${FrontendURL}`);
   res.setHeader("Access-Control-Allow-Credentials", "true");
-  // res.setHeader("Access-Control-Allow-Origin", "http://178.172.195.18:7780");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
   res.setHeader("Access-Control-Allow-Headers", "Authorization");
   res.setHeader("Access-Control-Allow-Methods", "GET,DELETE,POST,PUT");
   res.send("");
 });
 
-// server.use(express.json({type: "*/*"}));
 server.use(cookieParser());
 
 server.use(express.static(__dirname));
@@ -72,8 +63,6 @@ server.use(express.urlencoded({extended: true}));
 
 server.post("/log", express.json({type: "*/*"}), (request, response) => {
   response.setHeader("Access-Control-Allow-Origin", `${FrontendURL}`);
-  // response.setHeader("Access-Control-Allow-Headers", "Content-Type");
-  // response.setHeader("Access-Control-Allow-Methods", "GET,DELETE,POST,PUT");
   const email = request.body.email;
   let password = request.body.password;
   const token = Math.random();
@@ -87,7 +76,7 @@ server.post("/log", express.json({type: "*/*"}), (request, response) => {
     response.send({error: "Incorrect password"});
   } else {
     password = sha256.hmac(password, SALT);
-    // const connection = mysql.createConnection(connectionConfig);
+    const connection = new pg.Client(configPG);
     connection.connect(err => {
       if (err) {
         console.log("not connect with bd", err);
@@ -141,8 +130,7 @@ server.post("/log", express.json({type: "*/*"}), (request, response) => {
 
 server.post("/reg", express.json({type: "*/*"}), (request, response) => {
   response.setHeader("Access-Control-Allow-Origin", `${FrontendURL}`);
-  // response.setHeader("Access-Control-Allow-Headers", "Content-Type");
-  // response.setHeader("Access-Control-Allow-Methods", "GET,DELETE,POST,PUT");
+
   let password = request.body.password;
   const repPassword = request.body.repPassword;
   const email = request.body.email;
@@ -161,7 +149,7 @@ server.post("/reg", express.json({type: "*/*"}), (request, response) => {
     response.send({error: "you must agree to the rules"});
   } else {
     password = sha256.hmac(request.body.password, SALT);
-    // const connection = mysql.createConnection(connectionConfig);
+    const connection = new pg.Client(configPG);
     connection.connect(err => {
       if (err) {
         console.log("not connect with bd", err);
@@ -223,7 +211,7 @@ server.post("/reg", express.json({type: "*/*"}), (request, response) => {
 });
 
 server.get("/check", (request, response) => {
-  // const connection = mysql.createConnection(connectionConfig);
+  const connection = new pg.Client(configPG);
   connection.connect(err => {
     if (err) {
       console.log("not connect with bd", err);
@@ -248,16 +236,17 @@ server.get("/check", (request, response) => {
 
 server.get("/categories", (request, response) => {
   response.setHeader("Access-Control-Allow-Origin", `${FrontendURL}`);
-
-  // const connection = mysql.createConnection(connectionConfig);
+  const connection = new pg.Client(configPG);
   connection.connect(err => {
     if (err) {
       console.log("not connect with bd in categories");
+      connection.end();
     } else {
       connection.query(`select name_category from category`, (err, results) => {
         if (err) {
           console.log("didn't get categories", err);
         } else {
+          console.log("results: ", results.rows)
           response.send(JSON.stringify(results.rows));
           connection.end();
         }
@@ -272,6 +261,8 @@ server.get("/clothes/:categories/:page", express.json({type: "*/*"}), (request, 
   const countItems = (request.params.page - 1) * COUNT_ITEMS;
 
   // const connection = mysql.createConnection(connectionConfig);
+  const connection = new pg.Client(configPG);
+
   connection.connect(err => {
     if (err) {
       console.log("not connect with bd", err);
@@ -298,6 +289,7 @@ server.post("/category/add/:categories", (request, response) => {
   response.setHeader("Access-Control-Allow-Origin", `${FrontendURL}`);
 
   // const connection = mysql.createConnection(connectionConfig);
+  const connection = new pg.Client(configPG);
   connection.connect(err => {
     if (err) {
       console.log("not connection with bd", err);
@@ -323,6 +315,7 @@ server.post("/category/add/:categories", (request, response) => {
 server.delete("/category/delete/:categories", (request, response) => {
   response.setHeader("Access-Control-Allow-Origin", `${FrontendURL}`);
   // const connection = mysql.createConnection(connectionConfig);
+  const connection = new pg.Client(configPG);
   connection.connect(err => {
     if (err) {
       console.log("not connection with bd", err);
@@ -366,6 +359,7 @@ server.post("/category/clothes/sort:sort?category:category?page:page", (request,
       break;
   }
   // const connection = mysql.createConnection(connectionConfig);
+  const connection = new pg.Client(configPG);
   connection.connect(err => {
     if (err) {
       console.log("not connect with bd", err);
@@ -387,11 +381,9 @@ server.post("/category/clothes/addProduct", (request, response, next) => {
   response.setHeader("Access-Control-Allow-Headers", "Content-Type");
   response.setHeader("Access-Control-Allow-Headers", "Authorization");
 
-  // response.setHeader("Access-Control-Allow-Methods", "GET,DELETE,POST,PUT");
-  // console.log(request.body)
   const date = new Date().getTime();
   const token = request.headers.authorization;
-  // const connection = mysql.createConnection(connectionConfig);
+  const connection = new pg.Client(configPG);
   connection.connect(err => {
     if (err) {
       response.status(500).send({error: "not connection with bd"});
@@ -489,6 +481,7 @@ server.get("/item/:id", (request, response) => {
   const id = request.params.id;
 
   // const connection = mysql.createConnection(connectionConfig);
+  const connection = new pg.Client(configPG);
   connection.connect(err => {
     if (err) {
       response.status(500).send({error: "not connection with bd"});
@@ -508,6 +501,7 @@ server.get("/item/:id", (request, response) => {
       const colors = new Promise((resolve, reject) => {
         connection.query(`select color from colors where id=${id}`, (err, result) => {
           if (err) {
+            console.log(err)
             console.log("colors error");
             reject(err);
           } else {
@@ -534,10 +528,10 @@ server.get("/item/:id", (request, response) => {
             dataItem.colors = color;
             dataItem.sizes = size;
             response.send(dataItem);
+            connection.end();
           });
         });
       });
-      connection.end();
     }
   });
 });
@@ -547,7 +541,7 @@ server.get("/items/:page", (request, response) => {
 
   const countItems = (request.params.page - 1) * COUNT_ITEMS;
   // const connection = mysql.createConnection(connectionConfig);
-
+  const connection = new pg.Client(configPG);
   connection.connect(err => {
     if (err) {
       response.status(500).send({error: "not connection with bd"});
@@ -576,6 +570,7 @@ server.get("/newItems/:page", (request, response) => {
   const countItems = (request.params.page - 1) * COUNT_ITEMS;
 
   // const connection = mysql.createConnection(connectionConfig);
+  const connection = new pg.Client(configPG);
   connection.connect(err => {
     if (err) {
       response.status(500).send({error: "not connection with bd"});
@@ -606,6 +601,7 @@ server.get("/sale/:page", (request, response) => {
   const countItems = (request.params.page - 1) * COUNT_ITEMS;
 
   // const connection = mysql.createConnection((connectionConfig));
+  const connection = new pg.Client(configPG);
   connection.connect(err => {
     if (err) {
       response.status(500).send({error: "not connection with bd"});
