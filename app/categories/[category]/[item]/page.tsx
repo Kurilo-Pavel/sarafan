@@ -19,9 +19,9 @@ const Item = ({params}: ItemProps) => {
   const dispatch = useAppDispatch();
   const id = decodeURI(params.item);
   const item = useAppSelector((state => state.product.item));
-  const [mainImage, setMainImage] = useState<string>("");
-  const [itemColor, setItemColor] = useState<string>("");
-  const [itemSize, setItemSize] = useState<string>("");
+  const [mainImage, setMainImage] = useState<string|undefined>("");
+  const [itemColor, setItemColor] = useState<string|undefined>("");
+  const [itemSize, setItemSize] = useState<string|undefined>("");
   const [descriptionItem, setDescriptionItem] = useState<boolean | string>("");
   const [consistItem, setConsistItem] = useState<boolean | string>("");
 
