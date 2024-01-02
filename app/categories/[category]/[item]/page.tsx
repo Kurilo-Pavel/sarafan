@@ -25,8 +25,12 @@ const Item = ({params}: ItemProps) => {
   const [descriptionItem, setDescriptionItem] = useState<boolean | string>("");
   const [consistItem, setConsistItem] = useState<boolean | string>("");
 
+  let start = true;
   useEffect(() => {
-    dispatch(getItem(id));
+    if (start) {
+      dispatch(getItem(id));
+      start = false
+    }
   }, []);
 
   useEffect(() => {
