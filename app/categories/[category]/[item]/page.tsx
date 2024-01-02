@@ -34,6 +34,7 @@ const Item = ({params}: ItemProps) => {
   }, []);
 
   useEffect(() => {
+    console.log(item.main_img)
     setMainImage(item.main_img);
     console.log(item)
     if (item.colors) {
