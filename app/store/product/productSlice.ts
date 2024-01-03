@@ -1,7 +1,5 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {URL} from "../../constants";
-import {useAppDispatch} from "@/app/store/hooks";
-import {array} from "zod";
 
 export const getCategory = createAsyncThunk(
   "clothes/getCategory",
