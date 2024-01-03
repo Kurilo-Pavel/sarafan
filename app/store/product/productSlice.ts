@@ -4,7 +4,9 @@ import {URL} from "../../constants";
 export const getCategory = createAsyncThunk(
   "clothes/getCategory",
   async () => {
-    const response = await fetch(URL + "/categories");
+    const response = await fetch(URL + "/categories",{headers:{
+
+      }});
     const data = await response.json();
     if (response.status === 200) {
       return data;

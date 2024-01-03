@@ -1,18 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    appDir: true
-  },
   async headers() {
     return [
       {
-        source: "https://sarafan.onrender.com/*",
+        source: "/*",
         headers: [
           {key: "Access-Control-Allow-Credentials", value: "true"},
-          {key: "Access-Control-Allow-Origin", value: "*"},
+          {key: "Access-Control-Allow-Origin", value: "https://sarafan.onrender.com"},
           {
             key: "Access-Control-Allow-Methods",
-            value: "GET,OPTIONS,PATCH,DELETE,POST,PUT",
+            value: "GET,DELETE,POST,PUT",
           },
           {
             key: "Access-Control-Allow-Headers",
