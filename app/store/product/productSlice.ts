@@ -217,7 +217,7 @@ const productSlice = createSlice({
   name: "product",
   initialState,
   reducers: {
-    setSection: (state: { section: { title: string, path: string } }, action) => {
+    setSection: (state: {section:{ title: string, path: string }}, action:PayloadAction<{ title: string, path: string }>):void => {
       state.section = action.payload;
     },
   },

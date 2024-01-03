@@ -29,7 +29,6 @@ const Header = () => {
 
 const myCart = () => {
   dispatch(setCart);
-  // dispatch(setSection({title:"",path:""}));
 };
 
   return <div className="header">
@@ -37,6 +36,7 @@ const myCart = () => {
       list={Menu}
       classNameLi="main_section"
       classNameUl="header_menu"
+      myPage={true}
     />
     <Logo/>
     <div className="header_dataUser">

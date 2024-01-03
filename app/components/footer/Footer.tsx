@@ -39,6 +39,7 @@ const Footer = () => {
         title="Компания"
         classNameUl="footer_column"
         classNameTitle="footer_listName"
+        myPage={true}
       />
       <List
         list={Media}
@@ -46,6 +47,7 @@ const Footer = () => {
         title="Следите за нами"
         classNameUl="footer_column"
         classNameTitle="footer_listName"
+        myPage={false}
       />
     </div>
     <p className="footer_text">Все права защищены.Пользовательское соглашение.Политика конфиденциальности

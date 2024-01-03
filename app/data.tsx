@@ -49,10 +49,10 @@ const Company = [
 ];
 
 const Media = [
-  {title: "Tik tok", path: "tik_tok"},
-  {title: "Vk", path: "vk"},
-  {title: "Telegram", path: "telegram"},
-  {title: "Instagram", path: "instagram"}
+  {title: "Tik tok", path: "/"},
+  {title: "Vk", path: "/"},
+  {title: "Telegram", path: "/"},
+  {title: "Instagram", path: "/"}
 ];
 
 export {Menu, Delivery, ReturnAndExchange, Company, Media};
