@@ -25,11 +25,11 @@ const Categories = () => {
   const dispatch = useAppDispatch();
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [chooseCategory, setChooseCategory] = useState("");
-  const [admin, setAdmin] = useState(false);
+  const [admin, setAdmin] = useState<string | null>("");
 
   useEffect(() => {
-      setAdmin(JSON.parse(localStorage.getItem("admin")));
-      dispatch(getCategory());
+    setAdmin(localStorage.getItem("admin"));
+    dispatch(getCategory());
   }, []);
 
   const initialValues: FormValues = {
@@ -40,7 +40,7 @@ const Categories = () => {
     <div>
       <div className="subsection_categories">
         <div className="column_category">
-          {listItem.map((item, index) => {
+          {listItem.map((item:{name_category:string}, index:number) => {
             if (index % 2 === 0) {
               return <div className="category" key={index}>
                 <Link
@@ -63,7 +63,7 @@ const Categories = () => {
           })}
         </div>
         <div className="column_category">
-          {listItem.map((item, index) => {
+          {listItem.map((item:{name_category:string}, index:number) => {
             if (index % 2 !== 0) {
               return <div className="category" key={index}>
                 <Link

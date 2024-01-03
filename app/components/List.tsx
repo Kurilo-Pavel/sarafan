@@ -6,10 +6,10 @@ import {setSection} from "@/app/store/product/productSlice";
 
 type ListProps = {
   list: { title: string, path: string }[];
-  classNameLi: string;
-  classNameUl: string;
-  title: string;
-  classNameTitle:string;
+  classNameLi?: string;
+  classNameUl?: string;
+  title?: string;
+  classNameTitle?:string;
 }
 
 const List = ({list, classNameUl, classNameLi, title, classNameTitle}: ListProps) => {

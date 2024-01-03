@@ -11,7 +11,7 @@ import AddProduct from "@/app/components/AddProduct";
 
 const Clothes = ({params}: { params: { category: string } }) => {
   // const user = useAppSelector(state => state.login.user);
-  const [admin, setAdmin] = useState("");
+  const [admin, setAdmin] = useState<string | null>("");
   const products = useAppSelector((state => state.product.products));
   const dispatch = useAppDispatch();
   const path = decodeURI(params.category);
@@ -19,7 +19,6 @@ const Clothes = ({params}: { params: { category: string } }) => {
   useEffect(() => {
     dispatch(getProducts({path: path, page: 1}));
     setAdmin(localStorage.getItem("admin"));
-    console.log(path)
   }, [])
 
   const selectData = [
@@ -41,7 +40,7 @@ const Clothes = ({params}: { params: { category: string } }) => {
     </div>
     {admin && <AddProduct category={path}/>}
     <div className="product_gallery">
-      <ContentProducts products={products}/>
+      {products.length > 0 && <ContentProducts products={products}/>}
     </div>
     <div className="product_button">
       <Button

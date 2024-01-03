@@ -14,9 +14,9 @@ type HelpProps = {
 const Help = ({data, cart}: HelpProps) => {
   const dispatch = useAppDispatch();
 
-  const close = (element) => {
+  const close = (element:any) => {
     if (element.target.className === "sub_wrapper") {
-      dispatch(resetHelp());
+      dispatch(resetHelp);
     }
   };
 

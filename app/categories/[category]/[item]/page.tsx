@@ -25,23 +25,21 @@ const Item = ({params}: ItemProps) => {
   const [descriptionItem, setDescriptionItem] = useState<boolean | string>("");
   const [consistItem, setConsistItem] = useState<boolean | string>("");
 
-  let start = true;
   useEffect(() => {
-    if (start) {
       dispatch(getItem(id));
-      start = false
-    }
   }, []);
 
   useEffect(() => {
-    if(item.main_img) {
-      setMainImage(item.main_img);
-    }
+    console.log(item)
     if (item.colors) {
       setItemColor(item.colors[0]);
     }
-    if (item.sizes) {
-      setItemSize(item.sizes[0]);
+    if(item.main_img) {
+      setMainImage(item.main_img);
+    }
+
+    if (item.size) {
+      setItemSize(item.size[0]);
     }
   }, [item]);
 
@@ -50,7 +48,7 @@ const Item = ({params}: ItemProps) => {
     <div className="item_section">
       <div className="item_collection">
         <img src={mainImage} alt="image" className="sub_image"/>
-        {item.sub_img && item.sub_img.split(",").map((image, index) => {
+        {item.sub_img && item.sub_img.split(",").map((image:string, index:number) => {
           return image !== mainImage ?
             <img key={index} src={image} alt="image" className="sub_image" onClick={() => setMainImage(image)}/>
             : null
@@ -72,14 +70,14 @@ const Item = ({params}: ItemProps) => {
         <div className="item_color">
           <p className="color_name">Цвет:<span className="item_getColor">{itemColor}</span></p>
           <div className="section_colors">
-            {item.colors && item.colors.map((color, index) =>
+            {item.colors && item.colors.map((color:string, index:number) =>
               <span key={index} className="color" style={{"background": `${color}`}}
                     onClick={() => setItemColor(color)}/>
             )}
           </div>
         </div>
-        {item.sizes && <Select
-          arrayValue={item.sizes.map(size => {
+        {item.size && <Select
+          arrayValue={item.size.map((size:string) => {
             return {name: size, value: size};
           })}
           className="item_selection"
@@ -93,8 +91,8 @@ const Item = ({params}: ItemProps) => {
           type="button"
           onClick={() => addCookie(item.id, "myOrder=")}
         />
-        <span className="item_delivery" onClick={() => dispatch(setDelivery())}>Доставка</span>
-        <span className="item_delivery" onClick={() => dispatch(setExchange())}>Возврат, обмен</span>
+        <span className="item_delivery" onClick={() => dispatch(setDelivery)}>Доставка</span>
+        <span className="item_delivery" onClick={() => dispatch(setExchange)}>Возврат, обмен</span>
         <div className="item_details">
           <div className="item_field">
             <h3>Описание товара</h3>

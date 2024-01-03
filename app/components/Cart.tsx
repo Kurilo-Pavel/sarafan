@@ -7,8 +7,6 @@ import {getItem} from "@/app/store/product/productSlice";
 import {useAppDispatch} from "@/app/store/hooks";
 import classNames from "classnames";
 import Select from "@/app/components/Select";
-import {getMyOrders} from "@/app/store/product/productSlice";
-import {nanoid} from "@reduxjs/toolkit";
 
 type Item = {
   category: string;

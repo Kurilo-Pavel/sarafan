@@ -1,6 +1,7 @@
-import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {URL} from "../../constants";
 import {useAppDispatch} from "@/app/store/hooks";
+import {array} from "zod";
 
 export const getCategory = createAsyncThunk(
   "clothes/getCategory",
@@ -92,7 +93,7 @@ export const addProduct = createAsyncThunk(
       name: string;
       type: string;
     }[];
-    token: string;
+    token: string | null;
     category: string;
   }) => {
     const formData = new FormData();
@@ -123,6 +124,7 @@ export const getItem = createAsyncThunk(
     const response = await fetch(URL + `/item/` + id);
     const data = await response.json();
     if (response.status === 200) {
+      console.log(data)
       return data;
     } else {
       return `error ${response.status}`
@@ -147,10 +149,6 @@ export const getSaleItems = createAsyncThunk(
   "item/getSaleItems",
   async (page: number | undefined) => {
     const response = await fetch(URL + `/sale/` + page,
-      // {
-      // method: "GET",
-      // credentials: "include"
-      // }
     );
     const data = await response.json();
     if (response.status === 200) {
@@ -161,18 +159,6 @@ export const getSaleItems = createAsyncThunk(
   }
 );
 
-// export const getMyOrders =
-//   (orders: string[]) => {
-//     let item:any;
-//     orders.map(async id => {
-//       console.log(id)
-//       if (id) {
-//         item = getItem(id);
-//       }
-//     });
-//     return item
-//   };
-
 type Categories = {
   name_category: string
 }[];
@@ -180,39 +166,56 @@ type Categories = {
 type Product = {
   category: string;
   code: string | null;
-  color: string;
+  colors: string[];
   date: string | null;
-  id: number;
+  id: number | null;
   name: string;
-  price: number;
+  price: number | null;
   sale: number | null;
-  size: string | null;
+  size: string[] | null;
   views: number | null;
   main_img: string | undefined;
-  sub_img: [string];
-}[];
+  sub_img: string;
+  description: string;
+  isLike: boolean;
+};
 
 type Products = {
   categories: Categories;
-  products: Product;
+  products: Product[];
   item: Product;
-  sort_popular: Product;
-  sort_sale: Product;
+  sort_popular: Product[];
+  sort_sale: Product[];
   section: { title: string, path: string };
-  myOrders: Product;
+  myOrders: Product[];
 };
 
 const initialState: Products = {
   categories: [{name_category: ""}],
   products: [],
-  item: [],
+  item: {
+    category: "",
+    code: "",
+    colors: [""],
+    date: "",
+    id: null,
+    name: "",
+    price: null,
+    sale: null,
+    size: [""],
+    views: null,
+    main_img: "",
+    sub_img: "",
+    description: "",
+    isLike: false,
+  },
   sort_popular: [],
   sort_sale: [],
   section: {title: "", path: ""},
   myOrders: [],
 };
 
-const productSlice = createSlice<Products>({
+const productSlice = createSlice({
   name: "product",
   initialState,
   reducers: {
@@ -221,31 +224,31 @@ const productSlice = createSlice<Products>({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(getCategory.fulfilled, (state, action: any) => {
+    builder.addCase(getCategory.fulfilled, (state: { categories: Categories }, action: any) => {
       state.categories = action.payload;
     });
-    builder.addCase(getItems.fulfilled, (state, action: any) => {
+    builder.addCase(getItems.fulfilled, (state: { products: Product[] }, action: any) => {
       state.products = action.payload;
     });
-    builder.addCase(getProducts.fulfilled, (state, action: any) => {
+    builder.addCase(getProducts.fulfilled, (state: { products: Product[] }, action: any) => {
       state.products = action.payload;
     });
-    builder.addCase(addCategory.fulfilled, (state, action: any) => {
+    builder.addCase(addCategory.fulfilled, (state: { categories: Categories }, action: any) => {
       state.categories = action.payload;
     });
-    builder.addCase(deleteCategory.fulfilled, (state, action: any) => {
+    builder.addCase(deleteCategory.fulfilled, (state: { categories: Categories }, action: any) => {
       state.categories = action.payload;
     });
-    builder.addCase(sortProduct.fulfilled, (state, action: any) => {
+    builder.addCase(sortProduct.fulfilled, (state: { products: Product[] }, action: any) => {
       state.products = action.payload;
     });
-    builder.addCase(getItem.fulfilled, (state, action: any) => {
+    builder.addCase(getItem.fulfilled, (state: { item: Product }, action: any) => {
       state.item = action.payload;
     });
-    builder.addCase(getNewItems.fulfilled, (state, action: any) => {
+    builder.addCase(getNewItems.fulfilled, (state: { products: Product[] }, action: PayloadAction<any>) => {
       state.products = action.payload;
     });
-    builder.addCase(getSaleItems.fulfilled, (state, action: any) => {
+    builder.addCase(getSaleItems.fulfilled, (state: { products: Product[] }, action: any) => {
       state.products = action.payload;
     });
     // builder.addCase(getMyOrders(), (state: any, action: any) => {
@@ -254,6 +257,6 @@ const productSlice = createSlice<Products>({
   }
 });
 export const {
-  setSection, getMyOrders
+  setSection
 } = productSlice.actions;
 export default productSlice.reducer;

@@ -29,9 +29,9 @@ const Footer = () => {
       <Logo/>
       <div className="footer_column">
         <span className="footer_listName">Помощь</span>
-        <span className="footer_list" onClick={() => dispatch(setPayment())}>Оплата</span>
-        <span className="footer_list" onClick={() => dispatch(setDelivery())}>Доставка</span>
-        <span className="footer_list" onClick={() => dispatch(setExchange())}>Возврат и обмен</span>
+        <span className="footer_list" onClick={() => dispatch(setPayment(!payment))}>Оплата</span>
+        <span className="footer_list" onClick={() => dispatch(setDelivery(!delivery))}>Доставка</span>
+        <span className="footer_list" onClick={() => dispatch(setExchange(!exchange))}>Возврат и обмен</span>
       </div>
       <List
         list={Company}

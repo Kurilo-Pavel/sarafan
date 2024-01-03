@@ -21,7 +21,7 @@ type Item = {
 const Like = () => {
   const dispatch = useAppDispatch();
   const [cookieItems, setCookieItems] = useState<Item[]>([])
-  let items = [];
+  let items: Item[] = [];
   let marker = true;
 
   useEffect(() => {
@@ -29,7 +29,7 @@ const Like = () => {
     if (marker) {
       idItems.map(item => {
         if (item) {
-          dispatch(getItem(item)).then((data: { payload }) => {
+          dispatch(getItem(item)).then((data: { payload: any }) => {
             items = [...items, data.payload];
             setCookieItems(items);
           });
@@ -50,7 +50,6 @@ const Like = () => {
           isLike={true}
           price={card.price}
           id={card.id}
-          className="small_img"
           title={card.name}
           category={card.category}
           sale={card.sale}

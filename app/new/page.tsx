@@ -8,6 +8,7 @@ import {useAppDispatch, useAppSelector} from "@/app/store/hooks";
 import {useEffect} from "react";
 import {getNewItems} from "@/app/store/product/productSlice";
 
+
 const NewItems = () => {
   const dispatch = useAppDispatch();
   const newProducts = useAppSelector(state => state.product.products);
@@ -20,7 +21,7 @@ const NewItems = () => {
     <Path/>
     <h2 className="page_title">Последние поступления</h2>
     <div className="product_gallery">
-      <ContentProducts products={newProducts}/>
+      {newProducts.length > 0 && <ContentProducts products={newProducts}/>}
     </div>
     <div className="product_button">
       <Button

@@ -28,7 +28,7 @@ const Header = () => {
   }, []);
 
 const myCart = () => {
-  dispatch(setCart());
+  dispatch(setCart);
   // dispatch(setSection({title:"",path:""}));
 };
 

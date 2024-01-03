@@ -28,7 +28,7 @@ interface FormValues {
   color: string[];
   mainImage: string;
   gallery: Gallery;
-  token: string;
+  token: string|null;
   category: string;
 }
 

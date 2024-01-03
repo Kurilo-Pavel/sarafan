@@ -74,7 +74,7 @@ const MainPage = () => {
     setHiddenSlide(slides[count].component());
   };
 
-  const showSlide = (num) => {
+  const showSlide = (num:any) => {
     slides[count].style = "hideBlock";
     setHiddenSlide(slides[count].component());
     slides[num].style = "showBlock";

@@ -1,5 +1,6 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {URL} from "../../constants";
+import productSlice from "@/app/store/product/productSlice";
 
 export const registration = createAsyncThunk(
   "user/registration",
@@ -51,18 +52,24 @@ const initialState: User = {
   message: "",
 };
 
-const userSlice = createSlice<User>({
+const userSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {},
+  reducers: {
+    setAdmin: (state: { message:string }, action) => {
+      state.message = action.payload;
+    },
+  },
   extraReducers: (builder) => {
-    builder.addCase(registration.fulfilled, (state, action:any) => {
-        state.message = action.payload
+    builder.addCase(registration.fulfilled, (state:{message:string}, action:any) => {
+        state.message = action.payload;
     });
-    builder.addCase(login.fulfilled, (state, action:any) => {
+    builder.addCase(login.fulfilled, (state:{user:{email?: string, token?: string, admin?: boolean, error?: string}}, action:any) => {
       state.user = action.payload;
     });
   }
 });
-
+export const {
+  setAdmin
+} = userSlice.actions;
 export default userSlice.reducer;

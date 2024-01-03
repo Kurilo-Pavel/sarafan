@@ -6,10 +6,10 @@ import classNames from "classnames";
 import {userCookie, addCookie, deleteCookie} from "@/app/script";
 
 type CardProps = {
-  id: number;
+  id: number|null;
   image: string;
   title: string;
-  price: number;
+  price: number|null;
   classCard: string;
   classImage: string;
   isLike: boolean;
@@ -24,7 +24,7 @@ const Card = ({image, title, price, classCard, classImage, isLike, id, category,
   useEffect(() => {
     const idCookie: string[] = userCookie("likeItems=")
     idCookie.forEach(idCookie => {
-      if (id == idCookie) {
+      if (id?.toString() === idCookie) {
         setIsClickLike(true);
       }
     })
@@ -65,7 +65,7 @@ const Card = ({image, title, price, classCard, classImage, isLike, id, category,
     >
       {title}
     </Link>
-    {sale && <span className="price_sale">{Math.round(price * (100 - sale) / 100)} руб</span>}
+    {sale && <span className="price_sale">{price?Math.round(price * (100 - sale) / 100):0} руб</span>}
     <span className={classNames({"item_price": !sale, "old_price": sale})}>{price} руб.</span>
   </div>
 };

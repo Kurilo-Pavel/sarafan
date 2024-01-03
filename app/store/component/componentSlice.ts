@@ -1,4 +1,5 @@
-import {createSlice} from "@reduxjs/toolkit";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {boolean} from "zod";
 
 type Components = {
   cart: boolean;
@@ -14,23 +15,23 @@ const initialState: Components = {
   exchange: false,
 };
 
-const componentSlice = createSlice<Components>({
+const componentSlice = createSlice({
   name: "component",
   initialState,
   reducers: {
     setCart: (state: { cart: boolean }) => {
       state.cart = true;
     },
-    setPayment: (state: { payment: boolean }) => {
-      state.payment = true;
+    setPayment: (state: { payment: boolean }, action: PayloadAction<boolean>) => {
+      state.payment = action.payload;
     },
-    setDelivery: (state: { delivery: boolean }) => {
-      state.delivery = true;
+    setDelivery: (state: { delivery: boolean }, action: PayloadAction<boolean>) => {
+      state.delivery = action.payload;
     },
-    setExchange: (state: { exchange: boolean }) => {
-      state.exchange = true;
+    setExchange: (state: { exchange: boolean }, action: PayloadAction<boolean>) => {
+      state.exchange = action.payload;
     },
-    resetHelp: (state: Components) => {
+    resetHelp: (state: Components):void => {
       state.cart = false;
       state.delivery = false;
       state.payment = false;
