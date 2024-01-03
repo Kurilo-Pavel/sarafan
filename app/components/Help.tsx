@@ -22,7 +22,7 @@ const Help = ({data, cart}: HelpProps) => {
 
   return <div className="wrapper_help" onClick={() => close(event)}>
     <div className="sub_wrapper"/>
-    <div className="modal_help">
+    <div className="modal_help" >
       <div className="close" onClick={() => dispatch(resetHelp())}>
         <span className="cross"/>
       </div>
