@@ -14,7 +14,7 @@ const Sale = () => {
 
   useEffect(() => {
     dispatch(getSaleItems(1));
-  }, []);
+  }, [dispatch]);
 
   return <div className="page">
     <Path/>

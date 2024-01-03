@@ -246,7 +246,6 @@ server.get("/categories", (request, response) => {
         if (err) {
           console.log("didn't get categories", err);
         } else {
-          console.log("results: ", results.rows)
           response.send(JSON.stringify(results.rows));
           connection.end();
         }
@@ -599,7 +598,7 @@ server.get("/sale/:page", (request, response) => {
       console.log("not connection with bd sale", err);
     } else {
       const items = new Promise((resolve, reject) => {
-        connection.query(`select * from clothes where sale ${countItems ? 'limit ' + countItems + ',' + COUNT_ITEMS : ''}`, (err, result) => {
+        connection.query(`select * from clothes where sale>0 ${countItems ? 'limit ' + countItems + ',' + COUNT_ITEMS : ''}`, (err, result) => {
           if (err) {
             reject(err);
           } else {

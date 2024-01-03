@@ -37,7 +37,7 @@ const Like = () => {
       });
       marker = false;
     }
-  }, [])
+  }, [dispatch])
 
   return <div className="page">
     <Path page="Избранное"/>
@@ -46,7 +46,7 @@ const Like = () => {
       {cookieItems.length > 0 && cookieItems.map((card, index) => {
         return <Card
           key={index}
-          image={card.main_img}
+          image={card.main_img ? card.main_img : ""}
           isLike={true}
           price={card.price}
           id={card.id}

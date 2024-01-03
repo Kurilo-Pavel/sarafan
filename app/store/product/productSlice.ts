@@ -4,9 +4,9 @@ import {URL} from "../../constants";
 export const getCategory = createAsyncThunk(
   "clothes/getCategory",
   async () => {
-    const response = await fetch(URL + "/categories",{headers:{
-
-      }});
+    const response = await fetch(URL + "/categories", {
+      headers: {}
+    });
     const data = await response.json();
     if (response.status === 200) {
       return data;
@@ -124,7 +124,6 @@ export const getItem = createAsyncThunk(
     const response = await fetch(URL + `/item/` + id);
     const data = await response.json();
     if (response.status === 200) {
-      console.log(data)
       return data;
     } else {
       return `error ${response.status}`
@@ -219,7 +218,7 @@ const productSlice = createSlice({
   name: "product",
   initialState,
   reducers: {
-    setSection: (state: {section:{ title: string, path: string }}, action:PayloadAction<{ title: string, path: string }>):void => {
+    setSection: (state: { section: { title: string, path: string } }, action: PayloadAction<{ title: string, path: string }>): void => {
       state.section = action.payload;
     },
   },
@@ -239,16 +238,16 @@ const productSlice = createSlice({
     builder.addCase(deleteCategory.fulfilled, (state: { categories: Categories }, action: any) => {
       state.categories = action.payload;
     });
-    builder.addCase(sortProduct.fulfilled, (state: { products: Product[] }, action: any) => {
+    builder.addCase(sortProduct.fulfilled, (state: { products: Product[] }, action: PayloadAction<any>) => {
       state.products = action.payload;
     });
-    builder.addCase(getItem.fulfilled, (state: { item: Product }, action: any) => {
+    builder.addCase(getItem.fulfilled, (state: { item: Product }, action: PayloadAction<any>) => {
       state.item = action.payload;
     });
     builder.addCase(getNewItems.fulfilled, (state: { products: Product[] }, action: PayloadAction<any>) => {
       state.products = action.payload;
     });
-    builder.addCase(getSaleItems.fulfilled, (state: { products: Product[] }, action: any) => {
+    builder.addCase(getSaleItems.fulfilled, (state: { products: Product[] }, action: PayloadAction<any>) => {
       state.products = action.payload;
     });
     // builder.addCase(getMyOrders(), (state: any, action: any) => {
