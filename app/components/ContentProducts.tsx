@@ -1,6 +1,6 @@
 import "../styles/contentProducts.css";
 import Card from "./Card";
-import {useId} from "react";
+import {Fragment, useId} from "react";
 
 type ContentProductsProps = {
   products: {
@@ -15,13 +15,12 @@ type ContentProductsProps = {
 
 const ContentProducts = ({products}: ContentProductsProps) => {
   const id = useId();
-  return <div key={id}>
+  return <Fragment key={id}>
     {products.map((prod: {
         category: string, id: number | null, name: string, price: number | null, sale: number | null,
         main_img: string | undefined,
       }, index: number) =>
-        (index / 2 === 1 || index / 7 === 1)
-          ? <Card
+        (index / 2 === 1 || index / 7 === 1) ? <Card
             key={prod.id}
             id={prod.id}
             image={prod.main_img ? prod.main_img : ""}
@@ -44,6 +43,6 @@ const ContentProducts = ({products}: ContentProductsProps) => {
             sale={prod.sale}
           />
     )}
-  </div>
+  </Fragment>
 };
 export default ContentProducts;
