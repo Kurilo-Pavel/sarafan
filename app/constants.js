@@ -2,8 +2,7 @@ const USER = "pkuryla";
 const PASS = "hcarfnblkzgbehrs"
 const URL = "https://sarafan-server1.onrender.com";
 const FrontendURL = "https://sarafan.onrender.com";
-// const URL = "http://localhost:7780";
-// const FrontendURL = "http://localhost:3000";
+
 const SALT = "1afadvf0bjda2bmad4bo1fbd2bl";
 const COUNT_ITEMS = 10;
 const EMAIL = {
