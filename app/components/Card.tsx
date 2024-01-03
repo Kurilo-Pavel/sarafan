@@ -11,7 +11,7 @@ type CardProps = {
   title: string;
   price: number|null;
   classCard: string;
-  classImage: string;
+  classImage?: string;
   isLike: boolean;
   category: string;
   sale: number | null;

@@ -31,7 +31,6 @@ const ContentProducts = ({products}: ContentProductsProps) => {
             classCard="big_card"
             isLike={false}
             sale={prod.sale}
-            classImage=""
           /> : <Card
             key={prod.id}
             id={prod.id}
