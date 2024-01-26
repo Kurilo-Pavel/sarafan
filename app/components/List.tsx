@@ -1,8 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import {useAppDispatch} from "@/app/store/hooks";
-import {setSection} from "@/app/store/product/productSlice";
 
 type ListProps = {
   list: { title: string, path: string }[];
@@ -10,16 +8,10 @@ type ListProps = {
   classNameUl?: string;
   title?: string;
   classNameTitle?: string;
-  myPage: boolean;
 }
 
-const List = ({list, classNameUl, classNameLi, title, classNameTitle, myPage}: ListProps) => {
-    const dispatch = useAppDispatch();
-    const handleClick = (span:{title:string,path:string}) => {
-      if (myPage) {
-        dispatch(setSection({title: span.title, path: span.path}));
-      }
-    };
+const List = ({list, classNameUl, classNameLi, title, classNameTitle}: ListProps) => {
+
     return <div className={classNameUl}>
       {title && <span className={classNameTitle}>{title}</span>}
       {list.map(span => {
@@ -27,7 +19,6 @@ const List = ({list, classNameUl, classNameLi, title, classNameTitle, myPage}: L
           key={span.title}
           href={`/${span.path}`}
           className={classNameLi}
-          onClick={() => handleClick(span)}
         >
           {span.title}
         </Link>

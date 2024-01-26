@@ -1,4 +1,6 @@
 /** @type {import('next').NextConfig} */
+import {FrontendURL} from "./app/constants.js"
+
 const nextConfig = {
   async headers() {
     return [
@@ -6,7 +8,7 @@ const nextConfig = {
         source: "/*",
         headers: [
           {key: "Access-Control-Allow-Credentials", value: "true"},
-          {key: "Access-Control-Allow-Origin", value: "https://sarafan.onrender.com"},
+          {key: "Access-Control-Allow-Origin", value: `${FrontendURL}`},
           {
             key: "Access-Control-Allow-Methods",
             value: "GET,DELETE,POST,PUT",

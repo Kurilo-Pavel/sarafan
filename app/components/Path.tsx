@@ -2,21 +2,29 @@
 
 import "../styles/path.css";
 import Link from "next/link";
-import {useAppSelector} from "@/app/store/hooks";
+import {useAppDispatch, useAppSelector} from "@/app/store/hooks";
 import {Fragment} from "react";
+import {setSection} from "@/app/store/component/componentSlice";
 
 type PageProps = {
   page?: string;
 }
 
 const Path = ({page}: PageProps) => {
-  const section = useAppSelector(state => state.product.section);
+  const dispatch = useAppDispatch();
+  const section = useAppSelector(state => state.component.section);
 
   return <div className="path">
     <Link href="/" className="path_link">Главная</Link>
     <span> / </span>
     {section.title && <Fragment>
-      <Link href={`/${section.path}`} className="path_link">{section.title}</Link>
+      <Link
+        href={`/${section.path}`}
+        className="path_link"
+        onClick={() => dispatch(setSection({title: "", path: ""}))}
+      >
+        {section.title}
+      </Link>
       <span> / </span>
     </Fragment>
     }

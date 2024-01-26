@@ -1,75 +1,112 @@
-import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {URL} from "../../constants";
-import productSlice from "@/app/store/product/productSlice";
+import {FormValues} from "@/app/log/page";
 
-export const registration = createAsyncThunk(
-  "user/registration",
-  async (values: { email: string, password: string, repPassword: string, rules: boolean }) => {
-    const response = await fetch(URL + "/reg", {
-      method: "POST",
-      body: JSON.stringify(values)
-    });
-    const data = await response.json();
-    if (response.status === 200) {
-      return data;
-    } else {
-      return {error: response.status};
-    }
-  });
-
-export const login = createAsyncThunk(
-  "user/login",
-  async (values: { email: string, password: string }) => {
-    const response = await fetch(URL + "/log", {
-      method: "POST",
-      body: JSON.stringify(values)
-    });
-    const data = await response.json();
-    if (response.status === 200) {
-      return data;
-    } else {
-      return {error: data};
-    }
-  });
-
-type User = {
+type User ={
   user: {
     email?: string;
     token?: string;
     admin?: boolean;
-    error?: string;
   },
   message: string;
+  isNewPassword: boolean;
+  error: string
 }
+
+export const registration = createAsyncThunk<User, FormValues>(
+  "user/registration",
+  async (values: FormValues) => {
+    const response = await fetch(URL + "/reg", {
+      method: "POST",
+      body: JSON.stringify(values)
+    });
+    return await response.json();
+  });
+
+export const login = createAsyncThunk<User, FormValues>
+(
+  "user/login",
+  async (values: FormValues) => {
+    const response = await fetch(URL + "/log", {
+      method: "POST",
+      body: JSON.stringify(values)
+    });
+    return await response.json();
+  });
+
+export const updatePassword = createAsyncThunk<User, string>(
+  "user/updatePassword",
+  async (mail) => {
+    const response = await fetch<{ payload: User }>(URL + "/updatePassword", {
+      method: "POST",
+      body: JSON.stringify({email: mail}),
+    });
+    return await response.json();
+  });
+
 
 const initialState: User = {
   user: {
     email: "",
     token: "",
     admin: false,
-    error: "",
   },
   message: "",
+  isNewPassword: false,
+  error: "",
 };
 
-const userSlice = createSlice({
+const userSlice = createSlice<User>({
   name: "user",
   initialState,
   reducers: {
-    setAdmin: (state: { message:string }, action) => {
+    setAdmin: (state: { message: string }, action: PayloadAction<string>) => {
       state.message = action.payload;
+    },
+    resetUser: (state: { user: {} }) => {
+      state.user = {
+        email: "",
+        token: "",
+        admin: false,
+      }
+    },
+    resetMessage: (state: { message: string }) => {
+      state.message = "";
+    },
+    resetError: (state: { error: string }) => {
+      state.error = "";
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(registration.fulfilled, (state:{message:string}, action:any) => {
-        state.message = action.payload;
+    builder.addCase(registration.fulfilled, (state: User, action) => {
+      if (action.payload.message) {
+        state.message = action.payload.message;
+      }
+      if (action.payload.error) {
+        state.error = action.payload.error;
+      }
     });
-    builder.addCase(login.fulfilled, (state:{user:{email?: string, token?: string, admin?: boolean, error?: string}}, action:any) => {
-      state.user = action.payload;
+    builder.addCase(login.fulfilled, (state: User, action) => {
+      if (action.payload.error) {
+        state.error = action.payload.error;
+      }
+      if (action.payload.message) {
+        state.message = action.payload.message;
+      }
+      if (action.payload.user) {
+        state.user = action.payload.user;
+      }
+    });
+    builder.addCase(updatePassword.fulfilled, (state: User, action) => {
+      if (action.payload.message) {
+        state.message = action.payload.message;
+      } if(action.payload.error) {
+        state.error= action.payload.error;
+      }
     });
   }
 });
 export const {
-  setAdmin
+  resetUser, resetMessage, resetError
 } = userSlice.actions;
 export default userSlice.reducer;

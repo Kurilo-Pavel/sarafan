@@ -1,0 +1,71 @@
+.user_order {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.order {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 80%;
+  padding-bottom: 1rem;
+  border-bottom: 4px double #c7c6c6;
+}
+
+.order_block {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.order_title {
+  font-weight: bold;
+}
+
+.order_items {
+}
+
+.order_item {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.order_image {
+  width: 10rem;
+  height: 12rem;
+}
+
+.item_data {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.item_param {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+
+.order_cost {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.order_status {
+  position: absolute;
+  top: 45%;
+  right: 0;
+  color: #dad7d7;
+  font-size: 4rem;
+  text-transform: uppercase;
+  font-family: monospace;
+  font-weight: bold;
+  transform: rotate(-45deg);
+  opacity: 0.5;
+}

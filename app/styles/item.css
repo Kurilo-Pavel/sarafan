@@ -71,13 +71,10 @@
   margin: 0;
 }
 
-.item_getColor {
-
-}
-
 .section_colors {
   display: flex;
   flex-direction: row;
+  align-items: center;
   gap: 8px;
 }
 
@@ -86,6 +83,10 @@
   height: 55px;
   cursor: pointer;
   border: 1px solid #CECECE;
+}
+
+.chooseColor {
+  border: 4px double #CECECE;
 }
 
 .table_size {
@@ -97,6 +98,12 @@
 .table_size:hover {
   color: #000000;
 }
+
+/*.item_block_count {*/
+/*  display: flex;*/
+/*  flex-direction: row;*/
+/*  justify-content: space-between;*/
+/*}*/
 
 .item_delivery {
   color: #000000;
@@ -134,7 +141,8 @@
 .minus:before {
   content: "-";
 }
-.description{
+
+.description {
   display: none;
 }
 

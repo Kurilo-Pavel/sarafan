@@ -51,27 +51,70 @@ const userCookie = (section) => {
     }
   });
   if (cookieItems.length) {
-    return cookieItems[0].slice(section.length + 1).split(",");
+    return JSON.parse(cookieItems[0].slice(section.length + 1).split(","));
   } else {
     return cookieItems;
   }
 };
 
-const addCookie = (id, section) => {
-  let like = userCookie(section);
-  if (like.length) {
-    if (like.every(item => item !== id.toString())) {
-      like = [...like, id.toString()];
-      document.cookie = `${section}${like.join(",")};path=/`;
+const addCookie = (product, section) => {
+  let products = userCookie(section);
+  if (products.length) {
+
+    if (products.every(item => {
+      for (const key in item) {
+        if (key !== "count" && item[key] !== JSON.parse(product)[key]) {
+          return item;
+        }
+      }
+    })) {
+      products = [...products, JSON.parse(product)];
+    } else {
+      products.map(item => {
+        if (item.count) {
+          for (const key in item) {
+            if (key !== "count") {
+              if (item[key] !== JSON.parse(product)[key]) {
+                return item;
+              }
+            }
+          }
+          item.count = item.count + 1;
+          return item;
+        }
+      });
     }
+    document.cookie = `${section}${JSON.stringify(products)};path=/`;
+    return products;
   } else {
-    document.cookie = `${section}${id}`;
+    document.cookie = `${section}${(JSON.stringify([JSON.parse(product)]))};path=/`;
+    return [JSON.parse(product)];
   }
 };
 
-const deleteCookie = (id, section) => {
-  let like = userCookie(section);
-  document.cookie = `${section}${like.filter(item => item !== id.toString())}`;
+const deleteCookie = (item, section) => {
+  let cookie = userCookie(section);
+  const items = cookie.filter(product => product.id !== item);
+  document.cookie = `${section}${JSON.stringify(items)};path=/`;
+  return items;
+};
+
+
+const changeCookie = (product, param) => {
+  let items = userCookie("myOrder=");
+  const value = JSON.parse(param);
+  const changedItems = items.map(item => {
+    if (JSON.stringify(item) === product) {
+      for (const key in value) {
+        item[key] = value[key];
+      }
+      return item;
+    } else {
+      return item;
+    }
+  });
+  document.cookie = `${"myOrder="}${JSON.stringify(changedItems)};path=/`;
+  return changedItems;
 };
 
 export {
@@ -83,5 +126,6 @@ export {
   categoryCheck,
   userCookie,
   addCookie,
-  deleteCookie
+  deleteCookie,
+  changeCookie,
 };

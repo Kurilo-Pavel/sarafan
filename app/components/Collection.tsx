@@ -6,11 +6,11 @@ type CollectionProps = {
   title: string;
   slider: boolean;
   items: {
-    id: number|null;
-    main_img: string|undefined;
+    id: number | null;
+    main_img: string | undefined;
     category: string;
     name: string;
-    price: number|null;
+    price: number | null;
     sale: number | null;
   }[];
   classCard: string;
@@ -60,7 +60,7 @@ const Collection = ({title, slider, items, classImage, classCard}: CollectionPro
     }
   };
 
-  const checkArrow = (cards:any) => {
+  const checkArrow = (cards: any) => {
     if (count <= 0) {
       setLeftArrow(false);
     } else {
@@ -76,14 +76,14 @@ const Collection = ({title, slider, items, classImage, classCard}: CollectionPro
   return <div className="collection_new">
     <h4 className="collection_title">{title}</h4>
     {slider && <div className="slider_arrows">
-      {leftArrow && <span className="arrow left_arrow" onClick={() => slideLeft(event)}>{"<"}</span>}
-      {rightArrow && <span className="arrow right_arrow" onClick={() => slideRight(event)}>{">"}</span>}
+      {leftArrow && <span className="arrow left_arrow" onClick={(event) => slideLeft(event)}>{"<"}</span>}
+      {rightArrow && <span className="arrow right_arrow" onClick={(event) => slideRight(event)}>{">"}</span>}
     </div>}
     <div className="wrapper_collection">
       <div className="collection_containFirst">
-        {items.length && items.map((item, index) => <Card
+        {(items[0] && items[0].id) && items.map((item, index) => <Card
             key={index}
-            image={item.main_img?item.main_img:""}
+            image={item.main_img ? item.main_img : ""}
             category={item.category}
             title={item.name}
             price={item.price}

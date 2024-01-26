@@ -1,0 +1,18 @@
+.data_field {
+  display: flex;
+  justify-content: space-between;
+}
+
+.data_label {
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.data_checkbox {
+  margin-right: 30px;
+}
+
+.data_cost {
+  font-size: 14px;
+  color: #6F6F6F;
+}

@@ -1,6 +1,9 @@
+"use client"
+import Path from "@/app/components/Path";
+
 const OurShops = () => {
-  return <div>
-    our shops
+  return <div className="page">
+    <Path page="Наши магазины"/>
   </div>
 };
 

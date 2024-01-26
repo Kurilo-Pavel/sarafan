@@ -48,6 +48,16 @@
   cursor: pointer;
 }
 
+.user_cart {
+  position: relative;
+}
+
+.count_items {
+  position: absolute;
+  bottom: -0.5rem;
+  right: -1rem;
+}
+
 .account_img {
   width: 2rem;
   height: 2rem;

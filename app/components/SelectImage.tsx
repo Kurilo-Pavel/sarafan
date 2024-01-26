@@ -1,6 +1,6 @@
 "use client";
 import "../styles/input.css";
-import {useRef, useState} from "react";
+import React, {useRef} from "react";
 import Button from "@/app/components/Button";
 
 type Image = {
@@ -44,6 +44,7 @@ const SelectImage = ({buttonText, setSelectImage, selectImage, error}: SelectIma
       ref={imageRef}
       className="selectImage_input"
       onChange={event => handleSelectImage(event)}
+      name="images"
     />
     <Button
       text={buttonText}

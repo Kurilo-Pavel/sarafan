@@ -18,9 +18,9 @@ const Footer = () => {
 
   useEffect(() => {
     if (cart || delivery || exchange || payment) {
-      document.getElementsByTagName("body")[0].style.overflow = "hidden";
+      document.getElementsByTagName("body")[0].style.overflowY = "hidden";
     } else {
-      document.getElementsByTagName("body")[0].style.overflow = "auto";
+      document.getElementsByTagName("body")[0].style.overflowY = "auto";
     }
   }, [cart, delivery, exchange, payment]);
 

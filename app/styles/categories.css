@@ -1,9 +1,7 @@
 .subsection {
   display: grid;
   grid-template-columns: 1.5fr 1fr;
-  top: 0;
-  left: -50px;
-  right: -50px;
+  gap: 2rem;
   padding: 70px 50px;
   background: white;
 }
@@ -23,6 +21,7 @@
 .category {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   align-items: center;
   margin-bottom: 1rem;
 }

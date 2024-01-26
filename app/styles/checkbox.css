@@ -1,14 +1,17 @@
 .wrapper_checkbox {
+  position: relative;
   display: flex;
-  margin-bottom: 30px;
+  margin-bottom: 1rem;
   max-width: 450px;
 }
 
 .registration_checkbox {
-  margin-right: 25px;
+  margin:0 1.5rem 3rem 0;
   cursor: pointer;
 }
 
 .registration_label {
+  position: relative;
+  margin-bottom: 3rem;
   cursor: pointer;
 }
