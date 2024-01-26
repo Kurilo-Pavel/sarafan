@@ -42,7 +42,7 @@ const Cart = () => {
   let items: Item[] = [];
 
   useEffect(() => {
-    dispatch(getOrderCookie());
+    dispatch(getOrderCookie({orderItems: []}));
   }, [dispatch]);
 
   useEffect(() => {

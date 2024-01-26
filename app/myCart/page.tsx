@@ -14,6 +14,7 @@ import Button from "@/app/components/Button";
 import {setModal, setModalOption, setModalSuccess, setModalTitle} from "@/app/store/component/componentSlice";
 import {removeMyOrders} from "@/app/store/product/cookieSlice";
 import {useRouter} from "next/navigation";
+import Modal from "@/app/components/Modal";
 
 interface FormValues {
   firstName: string;
@@ -46,13 +47,14 @@ const MyCart = () => {
   const [itemsCost, setItemsCost] = useState(0);
   const [delivery, setDelivery] = useState(0);
   const [payment, setPayment] = useState("");
+  const [isModal, setIsModal] = useState(false);
+  const [title, setTitle] = useState("");
 
   const userTotal = useAppSelector(state => state.cookie.userTotal);
   const userSales = useAppSelector(state => state.cookie.userSales);
   const modalSuccess = useAppSelector(state => state.component.modalSuccess);
 
-  useEffect(() => {
-    if (modalSuccess !== "" && modalSuccess === "removeOrder") {
+  const  handleClick = () => {
       dispatch(removeMyOrders());
       const paidOrder = {
         id: (Math.random() * 10).toString(),
@@ -64,9 +66,7 @@ const MyCart = () => {
       addCookie(JSON.stringify(paidOrder), "paidOrder=");
       document.cookie = "myOrder=[];path=/";
       router.push("/");
-      dispatch(setModalSuccess(""));
-    }
-  }, [modalSuccess]);
+  };
 
   useEffect(() => {
     if (userTotal !== null && userSales !== null) {
@@ -114,9 +114,8 @@ const MyCart = () => {
             return errors;
           }}
           onSubmit={(values: FormValues) => {
-            dispatch(setModal({isOpen: true, type: ""}));
-            dispatch(setModalTitle(`Вы уверены что хотите ${payment === "cash" ? "оформить" : "оплатить"} заказ на сумму ${itemsCost} руб.`));
-            dispatch(setModalOption("removeOrder"));
+            setIsModal(true);
+            setTitle(`Вы уверены что хотите ${payment === "cash" ? "оформить" : "оплатить"} заказ на сумму ${itemsCost} руб.`);
           }}>
           {({errors, touched}) => {
             return (
@@ -221,6 +220,12 @@ const MyCart = () => {
         </div>
       </div>
     </section>
+    {isModal && <Modal
+      title={title}
+      isInform={false}
+      setIsModal={setIsModal}
+      successHandle={()=>handleClick()}
+    />}
   </div>
 };
 export default MyCart;
