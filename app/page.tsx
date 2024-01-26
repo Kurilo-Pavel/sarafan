@@ -16,7 +16,7 @@ const MainPage = () => {
   const items = useAppSelector(state => state.product.products)
 
   useEffect(() => {
-    dispatch<AppDispatch>(getItems(1));
+    dispatch(getItems(1));
   }, [dispatch]);
 
   const slides = [

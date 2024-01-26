@@ -20,7 +20,7 @@ const Clothes = ({params}: { params: { category: string } }) => {
   const products = useAppSelector((state: RootState) => state.product.products);
 
   useEffect(() => {
-    dispatch<AppDispatch>(getProducts({path: path, page: 1}));
+    dispatch(getProducts({path: path, page: 1}));
     setAdmin(localStorage.getItem("admin"));
   }, [dispatch])
 
@@ -33,7 +33,7 @@ const Clothes = ({params}: { params: { category: string } }) => {
         <Select
           className="select" arrayValue={SelectData}
           disabledValue={"Сортировка"}
-          setSort={(sort: string) => dispatch<AppDispatch>(sortProduct({category: path, type: sort, page: 1}))}
+          setSort={(sort: string) => dispatch(sortProduct({category: path, type: sort, page: 1}))}
         />
         <Button text="Фильтр" className="button_gallery" type="button"/>
       </div>

@@ -14,7 +14,7 @@ const Sale = () => {
   const saleProducts = useAppSelector(state => state.product.products);
 
   useEffect(() => {
-    dispatch<AppDispatch>(getSaleItems(1));
+    dispatch(getSaleItems(1));
   }, [dispatch]);
 
   return <div className="page">

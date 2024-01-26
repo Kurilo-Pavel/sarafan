@@ -103,7 +103,7 @@ const AddProduct = ({category}: AddProductProps) => {
       values.size = size;
       values.gallery = selectImage;
       values.mainImage = mainImage;
-      dispatch<AppDispatch>(addProduct(values));
+      dispatch(addProduct(values));
     }}>
     {({errors, touched}) => {
       return (

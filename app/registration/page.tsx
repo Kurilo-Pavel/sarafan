@@ -88,7 +88,7 @@ const cancelHande = ()=>{
         setEmail(values.email);
         dispatch(resetError({error: ""}));
         dispatch(resetMessage({message: ""}));
-        dispatch<AppDispatch>(registration(values));
+        dispatch(registration(values));
       }}>
       {({errors, touched}) => {
         return (

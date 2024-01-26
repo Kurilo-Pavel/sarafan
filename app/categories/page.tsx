@@ -36,7 +36,7 @@ const Categories = () => {
 
   useEffect(() => {
     setAdmin(localStorage.getItem("admin"));
-    dispatch<AppDispatch>(getCategory());
+    dispatch(getCategory());
   }, [dispatch]);
 
   const removeCategory = (category: string) => {
@@ -116,7 +116,7 @@ const Categories = () => {
             return errors;
           }}
           onSubmit={(values: FormValues) => {
-            dispatch<AppDispatch>(addCategory(values.category));
+            dispatch(addCategory(values.category));
           }}>
           {({errors, touched}) => {
             return (
@@ -145,7 +145,7 @@ const Categories = () => {
       title={`Вы согласны удалить "${category}"`}
       isInform={false}
       setIsModal={setIsModal}
-      successHandle={dispatch<AppDispatch>(deleteCategory(category))}
+      successHandle={dispatch(deleteCategory(category))}
     />}
   </div>
 };

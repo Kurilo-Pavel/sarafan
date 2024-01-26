@@ -81,7 +81,7 @@ const LogIn = () => {
         setEmail(values.email);
         dispatch(resetError({error: ""}));
         dispatch(resetMessage({message: ""}));
-        dispatch<AppDispatch>(login(values));
+        dispatch(login(values));
       }}>
 
       {({errors, touched}) => {

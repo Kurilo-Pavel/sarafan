@@ -28,7 +28,7 @@ const Like = () => {
   useEffect(() => {
     if (likes.length && likes[0].id) {
       likes.forEach(async item => {
-        const data = await dispatch<AppDispatch>(getItem(item.id)) as { payload: { product: Item } };
+        const data = await dispatch(getItem(item.id)) as { payload: { product: Item } };
         items = [...items, data.payload.product];
         setCookieItems(items);
       });

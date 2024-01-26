@@ -15,7 +15,7 @@ const NewItems = () => {
   const newProducts = useAppSelector(state => state.product.products);
 
   useEffect(() => {
-    dispatch<AppDispatch>(getNewItems(1));
+    dispatch(getNewItems(1));
   }, []);
 
   return <div className="page">

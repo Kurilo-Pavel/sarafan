@@ -71,7 +71,7 @@ const ForgotPassword = () => {
         setEmail(values.email);
         dispatch(resetError({error: ""}));
         dispatch(resetMessage({message: ""}));
-        dispatch<AppDispatch>(updatePassword(values.email));
+        dispatch(updatePassword(values.email));
       }}>
       {({errors, touched}) => {
         return (
