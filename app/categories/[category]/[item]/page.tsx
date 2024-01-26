@@ -12,6 +12,7 @@ import {setDelivery, setExchange, setSection} from "@/app/store/component/compon
 import {addOrderCookie} from "@/app/store/product/cookieSlice";
 import {AppDispatch} from "@/app/store";
 import Modal from "@/app/components/Modal";
+import {AnyAction} from "redux";
 
 type ItemProps = {
   params: { item: string };
@@ -31,7 +32,7 @@ const Item = ({params}: ItemProps) => {
   const [consistItem, setConsistItem] = useState<boolean | string>("");
 
   useEffect(() => {
-    dispatch<AppDispatch>(getItem(id));
+    dispatch(getItem(id));
   }, [dispatch]);
 
   useEffect(() => {

@@ -104,7 +104,7 @@ export const addProduct = createAsyncThunk<Products, FormValues>(
     return await response.json();
   });
 
-export const getItem = createAsyncThunk(
+export const getItem = createAsyncThunk<Products, number | null>(
   "product/getItem",
   async (id: number | null) => {
     const response = await fetch(URL + `/item/` + id);
