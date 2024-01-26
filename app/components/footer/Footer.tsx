@@ -18,9 +18,9 @@ const Footer = () => {
 
   useEffect(() => {
     if (cart || delivery || exchange || payment) {
-      document.getElementsByTagName("body")[0].style.overflow = "hidden";
+      document.getElementsByTagName("body")[0].style.overflowY = "hidden";
     } else {
-      document.getElementsByTagName("body")[0].style.overflow = "auto";
+      document.getElementsByTagName("body")[0].style.overflowY = "auto";
     }
   }, [cart, delivery, exchange, payment]);
 
@@ -29,9 +29,9 @@ const Footer = () => {
       <Logo/>
       <div className="footer_column">
         <span className="footer_listName">Помощь</span>
-        <span className="footer_list" onClick={() => dispatch(setPayment())}>Оплата</span>
-        <span className="footer_list" onClick={() => dispatch(setDelivery())}>Доставка</span>
-        <span className="footer_list" onClick={() => dispatch(setExchange())}>Возврат и обмен</span>
+        <span className="footer_list" onClick={() => dispatch(setPayment(!payment))}>Оплата</span>
+        <span className="footer_list" onClick={() => dispatch(setDelivery(!delivery))}>Доставка</span>
+        <span className="footer_list" onClick={() => dispatch(setExchange(!exchange))}>Возврат и обмен</span>
       </div>
       <List
         list={Company}
@@ -39,6 +39,7 @@ const Footer = () => {
         title="Компания"
         classNameUl="footer_column"
         classNameTitle="footer_listName"
+        myPage={true}
       />
       <List
         list={Media}
@@ -46,6 +47,7 @@ const Footer = () => {
         title="Следите за нами"
         classNameUl="footer_column"
         classNameTitle="footer_listName"
+        myPage={false}
       />
     </div>
     <p className="footer_text">Все права защищены.Пользовательское соглашение.Политика конфиденциальности

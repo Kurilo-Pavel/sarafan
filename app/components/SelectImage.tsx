@@ -1,6 +1,6 @@
 "use client";
 import "../styles/input.css";
-import {useRef, useState} from "react";
+import React, {useRef} from "react";
 import Button from "@/app/components/Button";
 
 type Image = {
@@ -17,10 +17,10 @@ type SelectImageProps = {
   setSelectImage: (object: Image) => void;
 }
 const SelectImage = ({buttonText, setSelectImage, selectImage, error}: SelectImageProps) => {
-  const imageRef = useRef(null);
+  const imageRef = useRef<any>(null);
 
   const handleSelectImage = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target["files"].length && !selectImage.some(img => img.name === event.target["files"][0]["name"])) {
+    if (event?.target["files"]?.length && !selectImage.some(img => img.name === event?.target["files"]?.[0]["name"])) {
       const imageData = [...selectImage, {
         image: event.target["files"][0],
         size: event.target["files"][0]["size"],
@@ -44,6 +44,7 @@ const SelectImage = ({buttonText, setSelectImage, selectImage, error}: SelectIma
       ref={imageRef}
       className="selectImage_input"
       onChange={event => handleSelectImage(event)}
+      name="images"
     />
     <Button
       text={buttonText}

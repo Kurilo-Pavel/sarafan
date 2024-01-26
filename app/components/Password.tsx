@@ -1,7 +1,7 @@
 "use client";
 import "../styles/input.css";
 import classNames from "classnames";
-import {useState} from "react";
+import React, {useState} from "react";
 
 type PasswordProps = {
   field: {

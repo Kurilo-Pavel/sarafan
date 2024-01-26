@@ -11,6 +11,7 @@ import {useState} from "react";
 import {useAppDispatch} from "@/app/store/hooks";
 import {descriptionCheck, loginCheck} from "@/app/script";
 import {addProduct} from "@/app/store/product/productSlice";
+import {AppDispatch} from "@/app/store";
 
 type Gallery = {
   size: number | undefined;
@@ -19,7 +20,7 @@ type Gallery = {
   type: string;
 }[];
 
-interface FormValues {
+export interface FormValues {
   name: string;
   price: string;
   sale: string;
@@ -28,7 +29,7 @@ interface FormValues {
   color: string[];
   mainImage: string;
   gallery: Gallery;
-  token: string;
+  token: string|null;
   category: string;
 }
 
@@ -42,6 +43,7 @@ type AddProductProps = {
 
 const AddProduct = ({category}: AddProductProps) => {
   const dispatch = useAppDispatch();
+
   const [mainImage, setMainImage] = useState("");
   const [color, setColor] = useState([]);
   const [size, setSize] = useState([]);
@@ -101,8 +103,7 @@ const AddProduct = ({category}: AddProductProps) => {
       values.size = size;
       values.gallery = selectImage;
       values.mainImage = mainImage;
-      dispatch(addProduct(values));
-      console.log(values)
+      dispatch<AppDispatch>(addProduct(values));
     }}>
     {({errors, touched}) => {
       return (

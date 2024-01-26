@@ -3,41 +3,37 @@ import "../styles/like.css";
 import Path from "../components/Path";
 import Card from "../components/Card";
 import {useEffect, useState} from "react";
-import {userCookie} from "@/app/script";
-import {useAppDispatch} from "@/app/store/hooks";
+import {useAppDispatch, useAppSelector} from "@/app/store/hooks";
 import {getItem} from "@/app/store/product/productSlice";
+import {AppDispatch} from "@/app/store";
 
 type Item = {
   category: string;
-  id: number;
+  id: number | null;
   main_img: string;
   name: string;
   price: number;
   sale: number;
   sizes: string[];
   views: number;
+  colors: string[];
 }
 
 const Like = () => {
   const dispatch = useAppDispatch();
+  const likes = useAppSelector(state => state.cookie.likeItems);
   const [cookieItems, setCookieItems] = useState<Item[]>([])
-  let items = [];
-  let marker = true;
+  let items: Item[] = [];
 
   useEffect(() => {
-    const idItems: string[] = userCookie("likeItems=");
-    if (marker) {
-      idItems.map(item => {
-        if (item) {
-          dispatch(getItem(item)).then((data: { payload }) => {
-            items = [...items, data.payload];
-            setCookieItems(items);
-          });
-        }
+    if (likes.length && likes[0].id) {
+      likes.forEach(async item => {
+        const data = await dispatch<AppDispatch>(getItem(item.id)) as { payload: { product: Item } };
+        items = [...items, data.payload.product];
+        setCookieItems(items);
       });
-      marker = false;
     }
-  }, [])
+  }, [dispatch, likes]);
 
   return <div className="page">
     <Path page="Избранное"/>
@@ -47,10 +43,8 @@ const Like = () => {
         return <Card
           key={index}
           image={card.main_img}
-          isLike={true}
           price={card.price}
           id={card.id}
-          className="small_img"
           title={card.name}
           category={card.category}
           sale={card.sale}

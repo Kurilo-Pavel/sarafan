@@ -1,5 +1,6 @@
 import "../styles/input.css";
 import classNames from "classnames";
+import React from "react";
 
 type EmailProps = {
   field: {
@@ -8,22 +9,23 @@ type EmailProps = {
     onChange: React.ChangeEventHandler<HTMLInputElement>,
     value: string,
   };
-  isEmail: boolean;
+  placeholder: string;
+  className: string;
   error?: string;
-  textError?: string;
+  serverError?:string;
 }
 const Email = ({
-field, error
-}: EmailProps): JSX.Element => {
+  field, error, placeholder, className,serverError
+}: EmailProps) => {
   return <label htmlFor="email" className="label">
     <input
       type="email"
-      placeholder="Введите E-mail"
-      className={classNames("log_input", {"error_color": error})}
+      placeholder={placeholder}
+      className={classNames(className, {"error_color": error})}
       id="email"
       {...field}
     />
-    {error && <span className="error_color error">{error}</span>}
+    {(error||serverError) && <span className="error_color error">{error||serverError}</span>}
   </label>
 };
 

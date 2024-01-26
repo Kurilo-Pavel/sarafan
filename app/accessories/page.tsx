@@ -1,6 +1,8 @@
+import Path from "@/app/components/Path";
+
 const Accessories = () =>{
-  return <div>
-      Accessories
+  return <div className="page">
+      <Path page="Аксессуары"/>
     </div>
 }
 

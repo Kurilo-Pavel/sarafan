@@ -1,6 +1,6 @@
 "use client";
 import "../styles/checkbox.css";
-import {useState} from "react";
+import React, {useState} from "react";
 
 type CheckboxProps = {
   field?: {
@@ -13,7 +13,7 @@ type CheckboxProps = {
   error?: string;
 }
 
-const Checkbox = ({field, error,text}: CheckboxProps): JSX.Element => {
+const Checkbox = ({field, error,text}: CheckboxProps) => {
   const [isChecked, setIsChecked] = useState(false);
   return <div className="wrapper_checkbox">
     <input
@@ -29,6 +29,7 @@ const Checkbox = ({field, error,text}: CheckboxProps): JSX.Element => {
     >
       {text}
     </label>
+    {error && <span className="error_color error">{error}</span>}
   </div>
 };
 

@@ -33,53 +33,9 @@
   margin: 40px 0 30px;
 }
 
-.data_field {
-  display: flex;
-  justify-content: space-between;
-}
-
-.data_label {
-  margin-bottom: 20px;
-  
-}
-
-.data_checkbox {
-  margin-right: 30px;
-}
-
-.data_cost {
-  font-size: 14px;
-  color: #6F6F6F;
-}
-
-.input {
-  height: 40px;
-  width: 100%;
-  margin-bottom: 20px;
-  border: 0;
-  border-bottom: 1px solid #DADADA;
-}
-
-.input:focus-visible {
-  outline: none;
-}
-
-.input::placeholder {
-  color: #C4C4C4;
-  font-size: 14px;
-}
-
 .data_information {
   font-size: 14px;
   color: #C4C4C4;
-}
-
-.button_black {
-  padding: 20px 140px;
-  width: max-content;
-  background: #3f3d3d;
-  color: #FFFFFF;
-  cursor: pointer;
 }
 
 .order_rules {
@@ -96,6 +52,7 @@
 
 .cost_information {
   display: flex;
+  gap: 1rem;
   justify-content: space-between;
   margin-block: 20px;
 }

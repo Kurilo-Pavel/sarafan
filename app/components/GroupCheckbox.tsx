@@ -1,5 +1,7 @@
 "use client";
 
+import React from "react";
+
 type GroupCheckboxProps = {
   field: {
     name: string,
@@ -14,7 +16,7 @@ type GroupCheckboxProps = {
 }
 
 const GroupCheckbox = ({field, list, error, title, setPoint,point}: GroupCheckboxProps) => {
-  const setItem = (item)=>{
+  const setItem = (item:any)=>{
     if(item.checked){
       setPoint([...point,item.id])
     }else{

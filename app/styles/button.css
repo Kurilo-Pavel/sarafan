@@ -11,10 +11,6 @@
 .contact_feedback_button:hover {
   background: #2d2929;
 }
-.contact_feedback_button:active {
-  transform: translate(2px, 2px);
-  box-shadow: none;
-}
 
 .button_gallery {
   padding-inline: 5%;
@@ -58,4 +54,54 @@
   border: 1px solid #e9e9e9;
   background: #FFFFFF;
   cursor: auto;
+}
+
+.delete_order {
+  display: flex;
+  flex-direction: row;
+  align-self: end;
+  gap: 1rem;
+  width: min-content;
+}
+
+.delete_icon {
+  width: 1.5rem;
+}
+
+.delete_button {
+  position: relative;
+  bottom: -2px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  color: #6F6F6F;
+  border: none;
+  background: none;
+}
+
+.delete_category {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 0.3rem;
+}
+
+.delete_icon_category {
+  width: 0.8rem;
+}
+
+.delete_button_category {
+  padding: 0;
+  font-size: 0.8rem;
+  cursor: pointer;
+  color: #6F6F6F;
+  border: none;
+  background: none;
+}
+
+.button_white:active,
+.section_button:active,
+.button_gallery:active,
+.contact_feedback_button:active {
+  transform: translate(2px, 2px);
+  box-shadow: none;
 }

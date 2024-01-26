@@ -7,6 +7,7 @@ import {useAppDispatch, useAppSelector} from "@/app/store/hooks";
 import {useEffect, useState} from "react";
 import {getItems} from "@/app/store/product/productSlice";
 import {Slide1, Slide2, Slide3, Slide4} from "./components/mainSlider/Slides";
+import {AppDispatch} from "@/app/store";
 
 let count = 0;
 
@@ -15,11 +16,8 @@ const MainPage = () => {
   const items = useAppSelector(state => state.product.products)
 
   useEffect(() => {
-    dispatch(getItems(1));
-  }, []);
-
-  const [mainStyle, setMainStile] = useState("");
-  const [subStyle, setSubStyle] = useState("");
+    dispatch<AppDispatch>(getItems(1));
+  }, [dispatch]);
 
   const slides = [
     {
@@ -74,7 +72,7 @@ const MainPage = () => {
     setHiddenSlide(slides[count].component());
   };
 
-  const showSlide = (num) => {
+  const showSlide = (num: any) => {
     slides[count].style = "hideBlock";
     setHiddenSlide(slides[count].component());
     slides[num].style = "showBlock";

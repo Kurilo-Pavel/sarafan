@@ -5,12 +5,13 @@ import {
 } from "formik";
 import {useAppDispatch, useAppSelector} from "../store/hooks";
 import {getCategory, deleteCategory, addCategory} from "../store/product/productSlice";
-import Modal from "../components/Modal";
 import {Fragment, useEffect, useState} from "react";
 import TextInput from "../components/TextInput";
 import Button from "../components/Button";
 import {categoryCheck} from "../script";
 import Link from "next/link";
+import {AppDispatch} from "@/app/store";
+import Modal from "@/app/components/Modal";
 
 interface FormValues {
   category: string;
@@ -21,25 +22,33 @@ interface FormErrors {
 }
 
 const Categories = () => {
-  const listItem = useAppSelector((state => state.product.categories));
   const dispatch = useAppDispatch();
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [chooseCategory, setChooseCategory] = useState("");
-  const admin = localStorage.getItem("admin");
 
-  useEffect(() => {
-    dispatch(getCategory());
-  }, [dispatch]);
+  const listItem = useAppSelector((state => state.product.categories));
+
+  const [category, setCategory] = useState("");
+  const [admin, setAdmin] = useState<string | null>("");
+  const [isModal, setIsModal] = useState(false);
 
   const initialValues: FormValues = {
     category: "",
+  };
+
+  useEffect(() => {
+    setAdmin(localStorage.getItem("admin"));
+    dispatch<AppDispatch>(getCategory());
+  }, [dispatch]);
+
+  const removeCategory = (category: string) => {
+    setIsModal(true);
+    setCategory(category);
   };
 
   return <div className="subsection">
     <div>
       <div className="subsection_categories">
         <div className="column_category">
-          {listItem.map((item, index) => {
+          {listItem.map((item: { name_category: string }, index: number) => {
             if (index % 2 === 0) {
               return <div className="category" key={index}>
                 <Link
@@ -47,38 +56,49 @@ const Categories = () => {
                   className="category_link">
                   {item.name_category}
                 </Link>
-                {admin && <div
-                  className="category_wrapper_minus"
-                  onClick={() => {
-                    setChooseCategory(item.name_category);
-                    setModalIsOpen(true);
-                  }}>
-                  <span className="category_minus">Удалить</span>
-                </div>
-                }
+                {admin && <div className="delete_category">
+                  <img
+                    src="/trash.svg"
+                    alt="delete"
+                    className="delete_icon_category"
+                  />
+                  <Button
+                    text="Удалить"
+                    className="delete_button_category"
+                    type="button"
+                    onClick={() => removeCategory(item.name_category)}
+                  />
+                </div>}
               </div>
             }
             return null;
           })}
         </div>
         <div className="column_category">
-          {listItem.map((item, index) => {
+          {listItem.map((item: { name_category: string }, index: number) => {
             if (index % 2 !== 0) {
               return <div className="category" key={index}>
                 <Link
                   href={`/categories/${item.name_category}`}
                   className="category_link"
-                  >
+                >
                   {item.name_category}
                 </Link>
-                {admin && <div
-                  className="category_wrapper_minus"
-                  onClick={() => {
-                    setChooseCategory(item.name_category);
-                    setModalIsOpen(true);
-                  }}>
-                  <span className="category_minus">Удалить</span>
-                </div>}
+                {admin &&
+                  <div className="delete_category">
+                    <img
+                      src="/trash.svg"
+                      alt="delete"
+                      className="delete_icon_category"
+                    />
+                    <Button
+                      text="Удалить"
+                      className="delete_button_category"
+                      type="button"
+                      onClick={() => removeCategory(item.name_category)}
+                    />
+                  </div>
+                }
               </div>
             }
             return null;
@@ -91,13 +111,12 @@ const Categories = () => {
           validate={async (values: FormValues) => {
             const errors: FormErrors = {};
             if (!categoryCheck(values.category)) {
-              console.log('err')
               errors.category = "incorrect categories";
             }
             return errors;
           }}
           onSubmit={(values: FormValues) => {
-            dispatch(addCategory(values.category));
+            dispatch<AppDispatch>(addCategory(values.category));
           }}>
           {({errors, touched}) => {
             return (
@@ -108,11 +127,13 @@ const Categories = () => {
                   placeholder="Название"
                   id="category"
                   className="contact_input"
-                  erors={touched.category ? errors.category : undefined}/>
+                  error={touched.category ? errors.category : undefined}
+                />
                 <Button
                   type="submit"
                   text="Добавить"
-                  className="contact_feedback_button"/>
+                  className="contact_feedback_button"
+                />
               </Form>
             );
           }}
@@ -120,13 +141,11 @@ const Categories = () => {
       </Fragment>}
     </div>
     <img src="png/IMG_4871.png" alt=""/>
-    {modalIsOpen && <Modal
-      title={`Вы согласны удалить "${chooseCategory}"`}
-      setModalIsOpen={setModalIsOpen}
-      onClick={() => {
-        dispatch(deleteCategory(chooseCategory));
-        setModalIsOpen(false);
-      }}
+    {isModal && <Modal
+      title={`Вы согласны удалить "${category}"`}
+      isInform={false}
+      setIsModal={setIsModal}
+      successHandle={dispatch<AppDispatch>(deleteCategory(category))}
     />}
   </div>
 };

@@ -15,6 +15,7 @@
 .item_selection {
   padding-block: 20px;
   margin-bottom: 10px;
+  width: 100%;
   text-align: center;
   border: 1px solid #CECECE;
   font-size: 1rem;

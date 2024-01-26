@@ -2,16 +2,18 @@
 import "../styles/log.css";
 import {Field, Form, Formik} from "formik";
 import Button from "../components/Button";
-import { useRouter } from 'next/navigation'
+import {useRouter} from 'next/navigation'
 import {emailCheck, passwordCheck} from "../script";
 import Email from "../components/Email";
 import Password from "../components/Password";
-import {login} from "../store/user/userSlice";
+import {login, resetError, resetMessage} from "../store/user/userSlice";
 import {useAppDispatch, useAppSelector} from "../store/hooks";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import Link from "next/link";
+import {AppDispatch, RootState} from "@/app/store";
+import Modal from "@/app/components/Modal";
 
-interface FormValues {
+export interface FormValues {
   email: string;
   password: string;
 }
@@ -21,19 +23,42 @@ interface FormErrors {
 }
 
 const LogIn = () => {
-  const dispatch = useAppDispatch();
-  const token = useAppSelector(state => state.login.user.token);
-  const navigate = useRouter();
-
-  useEffect(() => {
-    if (token) {
-      navigate.push("/");
-    }
-  }, [token]);
 
   const initialValues: FormValues = {
     email: "",
     password: "",
+  };
+
+  const dispatch = useAppDispatch();
+  const user = useAppSelector((state: RootState) => state.user);
+  const navigate = useRouter();
+
+  const [isModal, setIsModal] = useState(false);
+  const [error, setError] = useState("");
+  const [email, setEmail] = useState("");
+
+  useEffect(() => {
+    if (user.error) {
+      dispatch(resetError({error: ""}));
+    }
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (user.error) {
+      setError(user.error);
+    } else {
+      setError("");
+    }
+    if (user.message) {
+     setIsModal(true);
+    }
+    if (user.user.token) {
+      navigate.push("/");
+    }
+  }, [user.message, user.error, user.user.token, dispatch, navigate]);
+
+  const cancelHande = ()=>{
+    dispatch(resetMessage({message: ""}));
   };
 
   return <div className="log_wrapper">
@@ -41,17 +66,24 @@ const LogIn = () => {
       initialValues={initialValues}
       validate={async (values: FormValues) => {
         const errors: FormErrors = {};
+        if (email !== values.email) {
+          setError("");
+        }
         if (!emailCheck(values.email)) {
-          errors.email = "incorrect email";
+          errors.email = "Некорректный Email";
         }
         if (!passwordCheck(values.password)) {
-          errors.password = "incorrect password";
+          errors.password = "Некорректный пароль";
         }
         return errors;
       }}
-      onSubmit={async (values: FormValues) => {
-        dispatch(login(values));
+      onSubmit={(values: FormValues) => {
+        setEmail(values.email);
+        dispatch(resetError({error: ""}));
+        dispatch(resetMessage({message: ""}));
+        dispatch<AppDispatch>(login(values));
       }}>
+
       {({errors, touched}) => {
         return (
           <Form className="log">
@@ -59,11 +91,15 @@ const LogIn = () => {
             <Field
               name="email"
               component={Email}
+              placeholder="Введите Email"
+              className="log_input"
               error={touched.email ? errors.email : undefined}
+              serverError={error}
             />
             <Field
               name="password"
               component={Password}
+              placeholder="Введите пароль"
               error={touched.password ? errors.password : undefined}
             />
             <Button text="Войти" type="submit" className="contact_feedback_button"/>
@@ -76,6 +112,12 @@ const LogIn = () => {
         );
       }}
     </Formik>
+    {isModal && <Modal
+      title={user.message}
+      isInform={true}
+      setIsModal={setIsModal}
+      cancelHandle={cancelHande}
+    />}
   </div>
 };
 export default LogIn;
