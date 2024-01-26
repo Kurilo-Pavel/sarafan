@@ -145,7 +145,7 @@ const Categories = () => {
       title={`Вы согласны удалить "${category}"`}
       isInform={false}
       setIsModal={setIsModal}
-      successHandle={dispatch(deleteCategory(category))}
+      successHandle={()=>dispatch(deleteCategory(category))}
     />}
   </div>
 };
