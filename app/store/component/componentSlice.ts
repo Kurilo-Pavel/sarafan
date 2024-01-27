@@ -28,7 +28,7 @@ const initialState: Components = {
   userInform: true,
 };
 
-const componentSlice = createSlice<Components,{},string>({
+const componentSlice = createSlice({
   name: "component",
   initialState,
   reducers: {
@@ -38,8 +38,8 @@ const componentSlice = createSlice<Components,{},string>({
     setModalSuccess: (state: { modalSuccess: string }, action: PayloadAction<string>) => {
       state.modalSuccess = action.payload;
     },
-    setCart: (state: { cart: boolean }) => {
-      state.cart = true;
+    setCart: (state: { cart: boolean }, action:PayloadAction<{cart:boolean}>) => {
+      state.cart = action.payload.cart;
     },
     setPayment: (state: { payment: boolean }, action: PayloadAction<boolean>) => {
       state.payment = action.payload;
@@ -50,11 +50,12 @@ const componentSlice = createSlice<Components,{},string>({
     setExchange: (state: { exchange: boolean }, action: PayloadAction<boolean>) => {
       state.exchange = action.payload;
     },
-    resetHelp: (state: Components): void => {
-      state.cart = false;
-      state.delivery = false;
-      state.payment = false;
-      state.exchange = false;
+    resetHelp: (state: { cart: boolean, delivery: boolean, payment: boolean, exchange: boolean },
+action: PayloadAction<{ cart: boolean, delivery: boolean, payment: boolean, exchange: boolean }>):void => {
+      state.cart = action.payload.cart;
+      state.delivery = action.payload.delivery;
+      state.payment = action.payload.payment;
+      state.exchange = action.payload.exchange;
     },
     setModal: (state: { modal: boolean; typeModal: string }, action: PayloadAction<{ modal: boolean; typeModal: string }>) => {
       state.modal = action.payload.modal;

@@ -35,7 +35,7 @@ const ForgotPassword = () => {
 
   useEffect(() => {
     if (user.error) {
-      dispatch(resetError({error: ""}));
+      dispatch(resetError());
     }
   }, [dispatch]);
 
@@ -51,7 +51,7 @@ const ForgotPassword = () => {
   }, [user.error, user.message, dispatch]);
 
   const cancelHande = () => {
-    dispatch(resetMessage({message: ""}));
+    dispatch(resetMessage());
   };
 
   return <div className="log_wrapper">
@@ -69,8 +69,8 @@ const ForgotPassword = () => {
       }}
       onSubmit={(values: FormValues) => {
         setEmail(values.email);
-        dispatch(resetError({error: ""}));
-        dispatch(resetMessage({message: ""}));
+        dispatch(resetError());
+        dispatch(resetMessage());
         dispatch(updatePassword(values.email));
       }}>
       {({errors, touched}) => {

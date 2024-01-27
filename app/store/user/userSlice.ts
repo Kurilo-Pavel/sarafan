@@ -37,7 +37,7 @@ export const login = createAsyncThunk<User, FormValues>
 export const updatePassword = createAsyncThunk<User, string>(
   "user/updatePassword",
   async (mail) => {
-    const response = await fetch<{ payload: User }>(URL + "/updatePassword", {
+    const response = await fetch(URL + "/updatePassword", {
       method: "POST",
       body: JSON.stringify({email: mail}),
     });
@@ -56,7 +56,7 @@ const initialState: User = {
   error: "",
 };
 
-const userSlice = createSlice<User>({
+const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {

@@ -39,7 +39,7 @@ const LogIn = () => {
 
   useEffect(() => {
     if (user.error) {
-      dispatch(resetError({error: ""}));
+      dispatch(resetError());
     }
   }, [dispatch]);
 
@@ -58,7 +58,7 @@ const LogIn = () => {
   }, [user.message, user.error, user.user.token, dispatch, navigate]);
 
   const cancelHande = ()=>{
-    dispatch(resetMessage({message: ""}));
+    dispatch(resetMessage());
   };
 
   return <div className="log_wrapper">
@@ -79,8 +79,8 @@ const LogIn = () => {
       }}
       onSubmit={(values: FormValues) => {
         setEmail(values.email);
-        dispatch(resetError({error: ""}));
-        dispatch(resetMessage({message: ""}));
+        dispatch(resetError());
+        dispatch(resetMessage());
         dispatch(login(values));
       }}>
 

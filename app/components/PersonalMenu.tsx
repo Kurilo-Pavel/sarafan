@@ -12,7 +12,7 @@ const PersonalMenu = () => {
 
   const userInform = useAppSelector(state => state.component.userInform);
   const exit = () => {
-    dispatch(resetUser({user: {}}));
+    dispatch(resetUser());
     localStorage.setItem("token", "");
     localStorage.setItem("admin", "");
     router.push("/");

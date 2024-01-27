@@ -1,4 +1,4 @@
-import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {URL} from "../../constants";
 import {FormValues} from "@/app/components/AddProduct";
 
@@ -150,12 +150,16 @@ const initialState: Products = {
   error: "",
 };
 
-const productSlice = createSlice<Products>({
+const productSlice = createSlice({
   name: "product",
   initialState,
-  reducers: {},
+  reducers: {
+    setError: (state: { error: string }, action: PayloadAction<string>) => {
+      state.error = action.payload;
+    }
+  },
   extraReducers: (builder) => {
-    builder.addCase(getCategory.fulfilled, (state: Products, action) => {
+    builder.addCase(getCategory.fulfilled, (state: Products, action: PayloadAction<Products>) => {
       state.categories = action.payload.categories;
     });
     builder.addCase(getItems.fulfilled, (state: Products, action) => {
@@ -165,7 +169,7 @@ const productSlice = createSlice<Products>({
       state.products = action.payload.products;
       // state.error = action.payload.error;
     });
-    builder.addCase(addProduct.fulfilled, (state:Products,action)=>{
+    builder.addCase(addProduct.fulfilled, (state: Products, action) => {
       state.products = action.payload.products;
     })
     builder.addCase(addCategory.fulfilled, (state: Products, action) => {

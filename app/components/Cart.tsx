@@ -42,7 +42,7 @@ const Cart = () => {
   let items: Item[] = [];
 
   useEffect(() => {
-    dispatch(getOrderCookie({orderItems: []}));
+    dispatch(getOrderCookie());
   }, [dispatch]);
 
   useEffect(() => {
@@ -152,7 +152,7 @@ const Cart = () => {
       type="button"
       disabled={cookieItems.length === 0}
       onClick={() => {
-        dispatch(resetHelp({cart:false}));
+        dispatch(resetHelp({cart: false, delivery: false, payment: false, exchange: false}));
         router.push("/myCart");
       }}
     />

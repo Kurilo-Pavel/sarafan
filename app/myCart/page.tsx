@@ -53,7 +53,7 @@ const MyCart = () => {
   const userSales = useAppSelector(state => state.cookie.userSales);
 
   const handleClick = () => {
-    dispatch(removeMyOrders({orderItems: [], userSales: null, userTotal: null}));
+    dispatch(removeMyOrders());
     const paidOrder = {
       id: (Math.random() * 10).toString(),
       orders: userCookie("myOrder="),

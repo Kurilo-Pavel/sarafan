@@ -42,7 +42,7 @@ const initialState: Cookie = {
   userTotal: null,
 };
 
-const cookieSlice = createSlice<Cookie>({
+const cookieSlice = createSlice({
   name: "cookie",
   initialState,
   reducers: {
