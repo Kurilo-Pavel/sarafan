@@ -11,7 +11,6 @@ import Email from "@/app/components/Email";
 import {addCookie, emailCheck, loginCheck, userCookie} from "@/app/script";
 import TextInput from "@/app/components/TextInput";
 import Button from "@/app/components/Button";
-import {setModal, setModalOption, setModalSuccess, setModalTitle} from "@/app/store/component/componentSlice";
 import {removeMyOrders} from "@/app/store/product/cookieSlice";
 import {useRouter} from "next/navigation";
 import Modal from "@/app/components/Modal";
@@ -52,7 +51,6 @@ const MyCart = () => {
 
   const userTotal = useAppSelector(state => state.cookie.userTotal);
   const userSales = useAppSelector(state => state.cookie.userSales);
-  const modalSuccess = useAppSelector(state => state.component.modalSuccess);
 
   const handleClick = () => {
     dispatch(removeMyOrders({orderItems: [], userSales: null, userTotal: null}));
