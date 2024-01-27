@@ -152,7 +152,7 @@ const Cart = () => {
       type="button"
       disabled={cookieItems.length === 0}
       onClick={() => {
-        dispatch(resetHelp());
+        dispatch(resetHelp({cart:false}));
         router.push("/myCart");
       }}
     />
