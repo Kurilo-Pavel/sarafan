@@ -27,25 +27,25 @@ const Header = () => {
       dispatch(getUserTotal(orders));
       dispatch(getUserSales(orders));
     }
-  }, [orders,dispatch]);
+  }, [orders, dispatch]);
 
   useEffect(() => {
     if (user.token) {
       setToken(user.token);
       localStorage.setItem("token", user.token);
-    }else{
+    } else {
       setToken("");
     }
   }, [user]);
 
   useEffect(() => {
     setToken(localStorage.getItem("token"));
-    dispatch(getLikeCookie({likeItems:null}));
-    dispatch(getOrderCookie({orderItems:[]}));
+    dispatch(getLikeCookie({likeItems: null}));
+    dispatch(getOrderCookie({orderItems: []}));
   }, [dispatch]);
 
   const myCart = () => {
-    dispatch(setCart());
+    dispatch(setCart({cart: true}));
   };
 
   return <div className="header">
@@ -73,7 +73,8 @@ const Header = () => {
       </span>
       {!token && <Link href="/log"><img className="elem_hov" src="/User.svg" alt="Login"/></Link>}
       {token &&
-        <Link href="/personal_data"><img className="elem_hov account_img" src="/account.svg" alt="Account" title="Личный кабинет"/></Link>}
+        <Link href="/personal_data"><img className="elem_hov account_img" src="/account.svg" alt="Account"
+                                         title="Личный кабинет"/></Link>}
     </div>
   </div>
 };
