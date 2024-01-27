@@ -54,18 +54,18 @@ const MyCart = () => {
   const userSales = useAppSelector(state => state.cookie.userSales);
   const modalSuccess = useAppSelector(state => state.component.modalSuccess);
 
-  const  handleClick = () => {
-      dispatch(removeMyOrders());
-      const paidOrder = {
-        id: (Math.random() * 10).toString(),
-        orders: userCookie("myOrder="),
-        cost: itemsCost,
-        date: (new Date()).toLocaleDateString(),
-        time: (new Date()).toLocaleTimeString(),
-      }
-      addCookie(JSON.stringify(paidOrder), "paidOrder=");
-      document.cookie = "myOrder=[];path=/";
-      router.push("/");
+  const handleClick = () => {
+    dispatch(removeMyOrders({orderItems: [], userSales: null, userTotal: null}));
+    const paidOrder = {
+      id: (Math.random() * 10).toString(),
+      orders: userCookie("myOrder="),
+      cost: itemsCost,
+      date: (new Date()).toLocaleDateString(),
+      time: (new Date()).toLocaleTimeString(),
+    }
+    addCookie(JSON.stringify(paidOrder), "paidOrder=");
+    document.cookie = "myOrder=[];path=/";
+    router.push("/");
   };
 
   useEffect(() => {
@@ -224,7 +224,7 @@ const MyCart = () => {
       title={title}
       isInform={false}
       setIsModal={setIsModal}
-      successHandle={()=>handleClick()}
+      successHandle={() => handleClick()}
     />}
   </div>
 };
