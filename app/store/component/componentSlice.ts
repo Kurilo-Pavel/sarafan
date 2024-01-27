@@ -1,4 +1,4 @@
-import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {createSlice, PayloadAction, SliceCaseReducers} from "@reduxjs/toolkit";
 
 type Components = {
   modalSuccess: string;
@@ -28,7 +28,10 @@ const initialState: Components = {
   userInform: true,
 };
 
-const componentSlice = createSlice<Components>({
+class State {
+}
+
+const componentSlice = createSlice({
   name: "component",
   initialState,
   reducers: {
