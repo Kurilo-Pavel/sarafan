@@ -16,14 +16,14 @@ const Help = ({data, cart}: HelpProps) => {
 
   const close = (element:any) => {
     if (element.target.className === "sub_wrapper") {
-      dispatch(resetHelp());
+      dispatch(resetHelp({cart:false,delivery: false,payment: false, exchange: false}));
     }
   };
 
   return <div className="wrapper_help" onClick={(event) => close(event)}>
     <div className="sub_wrapper"/>
     <div className="modal_help" >
-      <div className="close" onClick={() => dispatch(resetHelp())}>
+      <div className="close" onClick={() => dispatch(resetHelp({cart:false,delivery: false,payment: false, exchange: false}))}>
         <span className="cross"/>
       </div>
       <div className="help">
