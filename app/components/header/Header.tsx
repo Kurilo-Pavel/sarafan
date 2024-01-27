@@ -40,8 +40,8 @@ const Header = () => {
 
   useEffect(() => {
     setToken(localStorage.getItem("token"));
-    dispatch(getLikeCookie());
-    dispatch(getOrderCookie());
+    dispatch(getLikeCookie({likeItems:null}));
+    dispatch(getOrderCookie({orderItems:[]}));
   }, [dispatch]);
 
   const myCart = () => {
