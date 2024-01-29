@@ -70,7 +70,7 @@ const cookieSlice = createSlice({
     addLikeCookie: (state: { likeItems: { id: number | null }[] }, action: PayloadAction<string>) => {
       state.likeItems = addCookie(action.payload, "likeItems=");
     },
-    deleteLikeCookie: (state: { likeItems: { id: number | null }[] }, action: PayloadAction<number | null>) => {
+    deleteLikeCookie: (state: { likeItems: { id: number | null }[] }, action: PayloadAction<string | null>) => {
       state.likeItems = deleteCookie(action.payload, "likeItems=");
     },
     getOrderCookie: (state: { orderItems: OrderCookie }) => {
