@@ -94,7 +94,8 @@ const addCookie = (product, section) => {
 
 const deleteCookie = (item, section) => {
   let cookie = userCookie(section);
-  const items = cookie.filter(product => product.id !== item);
+  const items = cookie.filter(product => {
+    return JSON.stringify(product) !== item});
   document.cookie = `${section}${JSON.stringify(items)};path=/`;
   return items;
 };

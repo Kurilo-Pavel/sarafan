@@ -7,14 +7,16 @@ import {addLikeCookie, deleteLikeCookie} from "@/app/store/product/cookieSlice";
 import {useAppDispatch, useAppSelector} from "@/app/store/hooks";
 
 type CardProps = {
+  category: string;
   id: number | null;
+
   image: string;
   title: string;
   price: number | null;
   classCard: string;
   classImage?: string;
   isLike?: boolean;
-  category: string;
+
   sale: number | null;
 };
 
@@ -53,7 +55,7 @@ const Card = ({image, title, price, classCard, classImage, isLike, id, category,
         alt="full_like"
         src="/Like_full_fill.svg"
         onClick={() => {
-          dispatch(deleteLikeCookie(id));
+          dispatch(deleteLikeCookie({id: id}));
           setIsClickLike(false);
         }}
         className="item_like"/>

@@ -67,6 +67,7 @@ const Cart = () => {
     dispatch(deleteOrderCookie(product));
     setCookieItems(cookieItems.filter(value => JSON.stringify(value) !== product));
     marker = true;
+    setIsModal(false);
   };
 
   const plusCount = (data: Item) => {
