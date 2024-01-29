@@ -55,7 +55,7 @@ const Card = ({image, title, price, classCard, classImage, isLike, id, category,
         alt="full_like"
         src="/Like_full_fill.svg"
         onClick={() => {
-          dispatch(deleteLikeCookie({id: id}));
+          dispatch(deleteLikeCookie(JSON.stringify({id: id})));
           setIsClickLike(false);
         }}
         className="item_like"/>
