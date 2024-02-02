@@ -15,7 +15,7 @@ type TextInputProps = {
   className: string;
 }
 
-const TextInput = ({field, error, placeholder, id, className,text}: TextInputProps) => {
+const TextInput = ({field, error, placeholder, id, className}: TextInputProps) => {
   return <label htmlFor={id} className="label">
     <input
       type="text"
