@@ -6,20 +6,31 @@ import Search from "../Search";
 import List from "../List";
 import Link from "next/link";
 import {Menu} from "../../data";
+import {jwtDecode} from "jwt-decode";
 import {useAppDispatch, useAppSelector} from "../../store/hooks";
 import {useEffect, useState} from "react";
 import {setSection} from "@/app/store/component/componentSlice";
 import {setCart} from "@/app/store/component/componentSlice";
 import {getLikeCookie, getOrderCookie, getUserSales, getUserTotal} from "@/app/store/product/cookieSlice";
+import {setUserData, User} from "@/app/store/user/userSlice";
 
 const Header = () => {
   const dispatch = useAppDispatch();
-
   const user = useAppSelector(state => state.user.user);
   const orders = useAppSelector(state => state.cookie.orderItems);
 
-  const [token, setToken] = useState<string | null>("");
+  const [token, setToken] = useState<string | null>(null);
   const [countOrders, setCountOrders] = useState(0);
+
+  const localToken = localStorage.getItem("token");
+
+  useEffect(() => {
+    if (localToken) {
+      setToken(localToken);
+    }
+    dispatch(getLikeCookie());
+    dispatch(getOrderCookie());
+  }, [dispatch]);
 
   useEffect(() => {
     if (orders && orders[0]?.id) {
@@ -33,16 +44,20 @@ const Header = () => {
     if (user.token) {
       setToken(user.token);
       localStorage.setItem("token", user.token);
-    } else {
-      setToken("");
+    }
+    if (!user.token && !localToken) {
+      setToken(null);
     }
   }, [user]);
 
   useEffect(() => {
-    setToken(localStorage.getItem("token"));
-    dispatch(getLikeCookie());
-    dispatch(getOrderCookie());
-  }, [dispatch]);
+    if (token) {
+      const userData = jwtDecode(token) as User;
+      userData.token = token;
+      dispatch(setUserData(userData));
+    }
+  }, [token]);
+
 
   const myCart = () => {
     dispatch(setCart({cart: true}));

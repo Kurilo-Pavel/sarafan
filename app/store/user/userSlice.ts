@@ -2,18 +2,24 @@ import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {URL} from "../../constants";
 import {FormValues} from "@/app/log/page";
 
-type User ={
-  user: {
-    email?: string;
-    token?: string;
-    admin?: boolean;
-  },
+export type User = {
+  id: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  phone: string;
+  token: string;
+  admin: boolean;
+}
+
+type DataUser = {
+  user: User,
   message: string;
   isNewPassword: boolean;
   error: string
 }
 
-export const registration = createAsyncThunk<User, FormValues>(
+export const registration = createAsyncThunk<DataUser, FormValues>(
   "user/registration",
   async (values: FormValues) => {
     const response = await fetch(URL + "/reg", {
@@ -23,7 +29,7 @@ export const registration = createAsyncThunk<User, FormValues>(
     return await response.json();
   });
 
-export const login = createAsyncThunk<User, FormValues>
+export const login = createAsyncThunk<DataUser, FormValues>
 (
   "user/login",
   async (values: FormValues) => {
@@ -34,7 +40,7 @@ export const login = createAsyncThunk<User, FormValues>
     return await response.json();
   });
 
-export const updatePassword = createAsyncThunk<User, string>(
+export const updatePassword = createAsyncThunk<DataUser, string>(
   "user/updatePassword",
   async (mail) => {
     const response = await fetch(URL + "/updatePassword", {
@@ -44,10 +50,39 @@ export const updatePassword = createAsyncThunk<User, string>(
     return await response.json();
   });
 
+export const saveUsersData = createAsyncThunk<DataUser, {
+  last_name: string;
+  first_name: string;
+  phone: string;
+  email: string;
+  token: string;
+}>(
+  "user/saveUsersData",
+  async (data) => {
+    const response = await fetch(URL + "/saveUsersData", {
+      method: "POST",
+      body: JSON.stringify(data),
+    });
+    return await response.json();
+  });
 
-const initialState: User = {
+export const changedPassword = createAsyncThunk<DataUser, { email: string, oldPassword: string; newPassword: string }>(
+  "user/changedPassword",
+  async (data) => {
+    const response = await fetch(URL + "/changedPassword", {
+      method: "POST",
+      body: JSON.stringify(data),
+    });
+    return await response.json();
+  });
+
+const initialState: DataUser = {
   user: {
+    id: "",
     email: "",
+    firstName: "",
+    lastName: "",
+    phone: "",
     token: "",
     admin: false,
   },
@@ -63,9 +98,16 @@ const userSlice = createSlice({
     setAdmin: (state: { message: string }, action: PayloadAction<string>) => {
       state.message = action.payload;
     },
+    setUserData: (state: { user: User }, action: PayloadAction<User>) => {
+      state.user = action.payload;
+    },
     resetUser: (state: { user: {} }) => {
       state.user = {
+        id: "",
         email: "",
+        firstName: "",
+        lastName: "",
+        phone: "",
         token: "",
         admin: false,
       }
@@ -78,7 +120,7 @@ const userSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(registration.fulfilled, (state: User, action) => {
+    builder.addCase(registration.fulfilled, (state: DataUser, action) => {
       if (action.payload.message) {
         state.message = action.payload.message;
       }
@@ -86,7 +128,7 @@ const userSlice = createSlice({
         state.error = action.payload.error;
       }
     });
-    builder.addCase(login.fulfilled, (state: User, action) => {
+    builder.addCase(login.fulfilled, (state: DataUser, action) => {
       if (action.payload.error) {
         state.error = action.payload.error;
       }
@@ -94,19 +136,36 @@ const userSlice = createSlice({
         state.message = action.payload.message;
       }
       if (action.payload.user) {
-        state.user = action.payload.user;
+        state.user.token = action.payload.user.token;
       }
     });
-    builder.addCase(updatePassword.fulfilled, (state: User, action) => {
+    builder.addCase(updatePassword.fulfilled, (state: DataUser, action) => {
       if (action.payload.message) {
         state.message = action.payload.message;
-      } if(action.payload.error) {
-        state.error= action.payload.error;
+      }
+      if (action.payload.error) {
+        state.error = action.payload.error;
+      }
+    });
+    builder.addCase(saveUsersData.fulfilled, (state: DataUser, action) => {
+      if (action.payload.user) {
+        state.user = action.payload.user;
+      }
+      if (action.payload.error) {
+        state.error = action.payload.error;
+      }
+    });
+    builder.addCase(changedPassword.fulfilled, (state: DataUser, action) => {
+      if (action.payload.message) {
+        state.message = action.payload.message;
+      }
+      if (action.payload.error) {
+        state.error = action.payload.error;
       }
     });
   }
 });
 export const {
-  resetUser, resetMessage, resetError
+  resetUser, resetMessage, resetError, setUserData
 } = userSlice.actions;
 export default userSlice.reducer;

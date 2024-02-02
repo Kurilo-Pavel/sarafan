@@ -18,7 +18,6 @@ import Modal from "@/app/components/Modal";
 interface FormValues {
   firstName: string;
   lastName: string;
-  middleName: string;
   phone: string;
   email: string;
   delivery: string;
@@ -36,7 +35,6 @@ const MyCart = () => {
   const initialValues: FormValues = {
     firstName: "",
     lastName: "",
-    middleName: "",
     phone: "",
     email: "",
     delivery: "",
@@ -89,9 +87,6 @@ const MyCart = () => {
             }
             if (!loginCheck(values.firstName)) {
               errors.firstName = "Некорректно указано имя";
-            }
-            if (!loginCheck(values.middleName)) {
-              errors.middleName = "Некорректно указано отчество";
             }
             if (!values.phone) {
               errors.phone = "Укажите номер телефона";
@@ -148,14 +143,6 @@ const MyCart = () => {
                     placeholder="Имя *"
                     id="firstName"
                     error={touched.firstName ? errors.firstName : undefined}
-                    className="log_input"
-                  />
-                  <Field
-                    name="middleName"
-                    component={TextInput}
-                    placeholder="Отчество *"
-                    id="middleName"
-                    error={touched.middleName ? errors.middleName : undefined}
                     className="log_input"
                   />
                   <Field

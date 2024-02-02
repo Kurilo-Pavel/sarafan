@@ -3,11 +3,11 @@ import classNames from "classnames";
 import React from "react";
 
 type TextInputProps = {
-  field?: {
+  field: {
     name: string,
+    value: string,
     onBlur: React.FocusEventHandler<HTMLInputElement>,
     onChange: React.ChangeEventHandler<HTMLInputElement>,
-    value: string,
   };
   error?: string;
   placeholder: string;
@@ -15,7 +15,7 @@ type TextInputProps = {
   className: string;
 }
 
-const TextInput = ({field, error, placeholder, id, className}: TextInputProps) => {
+const TextInput = ({field, error, placeholder, id, className,text}: TextInputProps) => {
   return <label htmlFor={id} className="label">
     <input
       type="text"

@@ -70,6 +70,16 @@ server.use(cookieParser());
 server.use(express.static(__dirname));
 server.use(express.urlencoded({extended: true}));
 
+const JWToken = (data) => new Promise((resolve, reject) => {
+  jwt.sign(data, SALT, (err, token) => {
+    if (err) {
+      console.log("token error", err);
+      reject({error: err});
+    } else {
+      resolve(token);
+    }
+  });
+});
 
 server.post("/log", express.json({type: "*/*"}), (request, response) => {
   response.setHeader("Access-Control-Allow-Origin", `${FrontendURL}`);
@@ -87,7 +97,7 @@ server.post("/log", express.json({type: "*/*"}), (request, response) => {
       if (err) {
         console.log("not connect with bd", err);
       } else {
-        connection.query(`select * from sessions where id=(select id from users where email='${email}' and password='${password}')`, (err, results) => {
+        connection.query(`select * from sessions where email='${email}' and password='${password}'`, (err, results) => {
           if (err) {
             console.log(err);
           } else {
@@ -95,48 +105,48 @@ server.post("/log", express.json({type: "*/*"}), (request, response) => {
               response.status(401).send({error: "wrong email or password"});
               connection.end();
             } else {
-              const dataUser = results.rows[0];
-              if (dataUser.aut) {
-                jwt.sign({
-                  id: dataUser.id,
-                  email: dataUser.email,
-                  admin: dataUser.admin,
-                }, SALT, (err, token) => {
+              if (results.rows[0].aut) {
+                connection.query(`select * from users where id=${results.rows[0].id}`, (err, result) => {
                   if (err) {
-                    console.log("token error", err);
+                    console.log("cannot get user data from bd", err);
+                    response.status(500).send({error: "cannot get user data"});
+                    connection.end();
                   } else {
-                    connection.query(`update sessions set token = '${token}' where id = ${dataUser.id}`, err => {
-                      if (err) {
-                        console.log("unable to refresh token");
-                        connection.end();
-                      } else {
-                        response.send({user: {id: dataUser.id, email: dataUser.email, token: token}});
-                        connection.end();
-                      }
-                    });
+                    const dataUser = result.rows[0];
+                    JWToken(dataUser).then(token => {
+                      connection.query(`update sessions set token = '${token}' where id = ${dataUser.id}`, err => {
+                        if (err) {
+                          console.log("unable to refresh token");
+                          connection.end();
+                        } else {
+                          response.send({user: {token: token}});
+                          connection.end();
+                        }
+                      });
+                    })
                   }
                 });
               } else {
-                if (date - dataUser.created > timeAuthorization) {
-                  connection.query(`delete from sessions where id=${dataUser.id}`, err => {
+                if (date - results.rows[0].created > timeAuthorization) {
+                  connection.query(`delete from sessions where id=${results.rows[0].id}`, err => {
                     if (err) {
                       console.log("cannot delete the session");
+                      connection.end();
                     } else {
-                      connection.query(`delete from users where id=${dataUser.id}`, err => {
+                      connection.query(`delete from users where id=${results.rows[0].id}`, err => {
                         if (err) {
                           console.log("cannot delete the user");
+                          connection.end();
                         } else {
                           response.send({message: "Токен истек, вам необходимо повторить регистрацию"});
                           connection.end();
                         }
                       });
-
                     }
                   });
                 } else {
-                  response.send({message: `Проверьте свою почту: ${dataUser.email}`});
+                  response.send({message: `Проверьте свою почту: ${results.rows[0].email}`});
                 }
-
               }
             }
           }
@@ -153,7 +163,7 @@ server.post("/reg", express.json({type: "*/*"}), (request, response) => {
   const repPassword = request.body.repPassword;
   const dataUser = {
     email: request.body.email,
-    admin: false
+    admin: false,
   }
   const rules = request.body.rules;
   const date = new Date().getTime();
@@ -171,15 +181,18 @@ server.post("/reg", express.json({type: "*/*"}), (request, response) => {
       if (err) {
         console.log("not connect with bd", err);
       } else {
-        connection.query(`select email from users where email = '${dataUser.email}'`, (err, results) => {
+        connection.query(`select email from sessions where email = '${dataUser.email}'`, (err, results) => {
           if (err) {
             console.log(err);
+            connection.end();
           } else if (results.rows.length) {
             response.status(401).send({error: "choose another email"});
+            connection.end();
           } else {
             connection.query(`select max(id) from users`, (err, results) => {
               if (err) {
                 console.log(err);
+                connection.end();
               } else {
                 for (let key in results.rows[0]) {
                   if (!results.rows[0][key]) {
@@ -189,43 +202,41 @@ server.post("/reg", express.json({type: "*/*"}), (request, response) => {
                   }
                 }
                 const transporter = nodemailer.createTransport(configNodeMailer);
-                jwt.sign(dataUser, SALT, (err, token) => {
-                  if (err) {
-                    console.log("token error", err);
-                  } else {
+                JWToken(dataUser).then((token) => {
 
-                    const message = {
-                      from: "pkuryla@yandex.ru",
-                      to: [dataUser.email],
-                      subject: "Confirm email",
-                      html: `<a href="${URL}/check?token=${token}">Click me</a>`
-                    };
+                  const message = {
+                    from: "pkuryla@yandex.ru",
+                    to: [dataUser.email],
+                    subject: "Confirm email",
+                    html: `<a href="${URL}/check?token=${token}">Click me</a>`
+                  };
 
-                    transporter.sendMail(message, err => {
-                      if (err) {
-                        console.log("sendEmail - error", err);
-                        response.status(401).send({error: "sorry we couldn't send the email"});
-                        connection.end();
-                      } else {
-                        connection.query(`insert into users (id, email, password) values (${dataUser.id}, '${dataUser.email}', '${password}')`, err => {
-                            if (err) {
-                              console.log("err in add new user");
-                            } else {
-                              connection.query(`insert into sessions (id, created, token, email, aut, admin) values (${dataUser.id}, '${date}', '${token}', '${dataUser.email}', false, ${dataUser.admin})`, err => {
-                                if (err) {
-                                  console.log("err in add new sessions", err);
-                                } else {
-                                  response.send({message: `Зайдите на почту: ${dataUser.email} и авторизируйтесь`});
-                                  connection.end();
-                                }
-                              });
-                            }
+                  transporter.sendMail(message, err => {
+                    if (err) {
+                      console.log("sendEmail - error", err);
+                      response.status(401).send({error: "sorry we couldn't send the email"});
+                      connection.end();
+                    } else {
+                      connection.query(`insert into users (id, email,admin) values (${dataUser.id}, '${dataUser.email}', '${dataUser.admin}')`, err => {
+                          if (err) {
+                            console.log("err in add new user");
+                            connection.end();
+                          } else {
+                            connection.query(`insert into sessions (id, created, token, email, aut, password) values (${dataUser.id}, '${date}', '${token}', '${dataUser.email}', false, '${password}')`, err => {
+                              if (err) {
+                                console.log("err in add new sessions", err);
+                                connection.end();
+                              } else {
+                                response.send({message: `Зайдите на почту: ${dataUser.email} и авторизируйтесь`});
+                                connection.end();
+                              }
+                            });
                           }
-                        );
-                      }
-                    });
-                  }
-                });
+                        }
+                      );
+                    }
+                  });
+                })
               }
             });
           }
@@ -277,7 +288,7 @@ server.post("/updatePassword", express.json({type: "*/*"}), (request, response) 
       console.log("not connection with bd", err);
     } else {
       const checkMail = new Promise((resolve, reject) => {
-        connection.query(`select email from users where email='${email}'`, (err, result) => {
+        connection.query(`select email from sessions where email='${email}'`, (err, result) => {
           if (err) {
             connection.end();
           } else {
@@ -288,7 +299,7 @@ server.post("/updatePassword", express.json({type: "*/*"}), (request, response) 
                 lowercase: true
               });
               const userPassword = sha256.hmac(password, SALT);
-              connection.query(`update users set password='${userPassword}' where email='${email}'`, err => {
+              connection.query(`update sessions set password='${userPassword}' where email='${email}'`, err => {
                 if (err) {
                   console.log("error: password is not changed");
                   reject(err);
@@ -719,6 +730,88 @@ server.get("/sale/:page", (request, response) => {
       });
     }
   });
+});
+
+server.post("/saveUsersData", express.json({type: "*/*"}), (request, response) => {
+  response.setHeader("Access-Control-Allow-Origin", `${FrontendURL}`);
+
+  const data = {
+    id: request.body.id,
+    firstName: request.body.firstName,
+    lastName: request.body.lastName,
+    email: request.body.email,
+    phone: request.body.phone,
+    admin: request.body.admin,
+  };
+  const connection = new pg.Client(configPG);
+  connection.connect(err => {
+    if (err) {
+      response.status(500).send({error: "not connection with BD"});
+      console.log("not connection with bd saveUserData");
+    } else {
+      connection.query(`update users set email='${data.email}', lastname='${data.lastName}', firstname='${data.firstName}', phone='${data.phone}' where id=${data.id}`, err => {
+        if (err) {
+          console.log("cannot changed userData", err);
+          connection.end();
+          response.status(500);
+        } else {
+          JWToken(data).then(token => {
+            connection.query(`update sessions set token='${token}', email='${data.email}' where id=${data.id}`, err => {
+              if (err) {
+                console.log("unable to refresh token");
+                connection.end();
+              } else {
+                data.token = token;
+                response.send({user: data});
+                connection.end();
+              }
+            });
+          });
+        }
+      });
+    }
+  });
+});
+
+server.post("/changedPassword", express.json({type: "*/*"}), (request, response) => {
+  response.setHeader("Access-Control-Allow-Origin", `${FrontendURL}`);
+
+  if (!passwordCheck(request.body.newPassword)) {
+    response.status(401).send({error: "Incorrect password"});
+  } else {
+    const oldPassword = sha256.hmac(request.body.oldPassword, SALT);
+    const newPassword = sha256.hmac(request.body.newPassword, SALT);
+    const connection = new pg.Client(configPG);
+    connection.connect(err => {
+      if (err) {
+        console.log("not connect with bd", err);
+      } else {
+        connection.query(`select id from sessions where email='${request.body.email}' and password='${oldPassword}'`, (err, result) => {
+          if (err) {
+            console.log("error in found password");
+            response.status(500);
+            connection.end();
+          } else {
+            if (result.rows[0]) {
+              connection.query(`update sessions set password='${newPassword}'`, err => {
+                if (err) {
+                  console.log("unable to refresh password");
+                  response.status(500);
+                  connection.end();
+                } else {
+                  response.send({message: "Ваш пароль успешно изменен"});
+                  connection.end();
+                }
+              });
+            }else{
+              response.send({message: "Указанный пароль не найден"});
+              connection.end();
+            }
+          }
+        });
+      }
+    });
+  }
 });
 
 server.listen(port, () => {
