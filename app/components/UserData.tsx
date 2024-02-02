@@ -59,10 +59,10 @@ const UserData = () => {
         validate={async (values: FormValuesUser) => {
           const errors: FormErrorsUser = {};
           if (!loginCheck(values.lastName)) {
-            errors.last_name = "Некорректно указана фамилия";
+            errors.lastName = "Некорректно указана фамилия";
           }
           if (!loginCheck(values.firstName)) {
-            errors.first_name = "Некорректно указано имя";
+            errors.firstName = "Некорректно указано имя";
           }
           if (!values.phone) {
             errors.phone = "Номер телефона не указан";
@@ -92,7 +92,7 @@ const UserData = () => {
                 className="log_input"
                 placeholder={"Фамилия"}
                 id="lastName"
-                error={touched.last_name ? errors.last_name : undefined}
+                error={touched.lastName ? errors.lastName : undefined}
               />
               <Field
                 name="firstName"
@@ -100,7 +100,7 @@ const UserData = () => {
                 className="log_input"
                 placeholder={"Имя"}
                 id="firstName"
-                error={touched.first_name ? errors.first_name : undefined}
+                error={touched.firstName ? errors.firstName : undefined}
               />
               <Field
                 name="phone"

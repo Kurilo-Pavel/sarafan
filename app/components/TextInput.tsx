@@ -3,7 +3,7 @@ import classNames from "classnames";
 import React from "react";
 
 type TextInputProps = {
-  field: {
+  field?: {
     name: string,
     value: string,
     onBlur: React.FocusEventHandler<HTMLInputElement>,

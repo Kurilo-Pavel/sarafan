@@ -51,11 +51,11 @@ export const updatePassword = createAsyncThunk<DataUser, string>(
   });
 
 export const saveUsersData = createAsyncThunk<DataUser, {
-  last_name: string;
-  first_name: string;
+  lastName: string;
+  firstName: string;
   phone: string;
   email: string;
-  token: string;
+  id:string;
 }>(
   "user/saveUsersData",
   async (data) => {

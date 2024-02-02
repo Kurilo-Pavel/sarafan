@@ -199,7 +199,7 @@ const MyCart = () => {
           <hr className="line"/>
           <span className="cost_information">Есть промокод?</span>
           <div className="cost_information">
-            <TextInput placeholder="Введите промокод" id="code" className="log_input"/>
+            <TextInput placeholder="Введите промокод" id="code" className="log_input" />
             <button className="button_white">Применить</button>
           </div>
         </div>
