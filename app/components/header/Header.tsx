@@ -1,5 +1,4 @@
 'use client'
-
 import "../../styles/header.css";
 import Logo from "../Logo";
 import Search from "../Search";
@@ -22,12 +21,9 @@ const Header = () => {
   const [token, setToken] = useState<string | null>(null);
   const [countOrders, setCountOrders] = useState(0);
 
-  const localToken = typeof window !== "undefined" ? localStorage.getItem("token") : "";
 
   useEffect(() => {
-    if (localToken) {
-      setToken(localToken);
-    }
+    setToken(localStorage.getItem("token"));
     dispatch(getLikeCookie());
     dispatch(getOrderCookie());
   }, [dispatch]);
@@ -45,7 +41,7 @@ const Header = () => {
       setToken(user.token);
       typeof window !== "undefined" ? localStorage.setItem("token", user.token) : null;
     }
-    if (!user.token && !localToken) {
+    if (!user.token && !localStorage.getItem("token")) {
       setToken(null);
     }
   }, [user]);

@@ -8,7 +8,6 @@ import Password from "@/app/components/Password";
 import Checkbox from "@/app/components/Checkbox";
 import {useAppDispatch, useAppSelector} from "@/app/store/hooks";
 import {changedPassword, saveUsersData} from "@/app/store/user/userSlice";
-import {Fragment, useEffect} from "react";
 
 interface FormValuesUser {
   id: string;
@@ -53,7 +52,6 @@ const UserData = () => {
   };
 
   return <div className="personal_information">
-    {userData.id && <Fragment>
       <Formik
         initialValues={initialValuesUser}
         validate={async (values: FormValuesUser) => {
@@ -162,7 +160,6 @@ const UserData = () => {
           <Checkbox text="Я хочу получать рассылку электронных новостей шоурума"/>
         </div>
       </div>
-    </Fragment>}
   </div>
 };
 export default UserData;
