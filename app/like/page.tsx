@@ -5,7 +5,6 @@ import Card from "../components/Card";
 import {useEffect, useState} from "react";
 import {useAppDispatch, useAppSelector} from "@/app/store/hooks";
 import {getItem} from "@/app/store/product/productSlice";
-import {AppDispatch} from "@/app/store";
 
 type Item = {
   category: string;

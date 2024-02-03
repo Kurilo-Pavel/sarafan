@@ -10,9 +10,7 @@ import Select from "@/app/components/Select";
 import classNames from "classnames";
 import {setDelivery, setExchange, setSection} from "@/app/store/component/componentSlice";
 import {addOrderCookie} from "@/app/store/product/cookieSlice";
-import {AppDispatch} from "@/app/store";
 import Modal from "@/app/components/Modal";
-import {AnyAction} from "redux";
 
 type ItemProps = {
   params: { item: string };

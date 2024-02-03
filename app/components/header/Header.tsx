@@ -22,7 +22,7 @@ const Header = () => {
   const [token, setToken] = useState<string | null>(null);
   const [countOrders, setCountOrders] = useState(0);
 
-  const localToken = localStorage.getItem("token");
+  const localToken = typeof window !== "undefined" ? localStorage.getItem("token") : "";
 
   useEffect(() => {
     if (localToken) {
@@ -43,7 +43,7 @@ const Header = () => {
   useEffect(() => {
     if (user.token) {
       setToken(user.token);
-      localStorage.setItem("token", user.token);
+      typeof window !== "undefined" ? localStorage.setItem("token", user.token) : null;
     }
     if (!user.token && !localToken) {
       setToken(null);

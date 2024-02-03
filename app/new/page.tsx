@@ -7,8 +7,6 @@ import ContentProducts from "@/app/components/ContentProducts";
 import {useAppDispatch, useAppSelector} from "@/app/store/hooks";
 import {useEffect} from "react";
 import {getNewItems} from "@/app/store/product/productSlice";
-import {AppDispatch} from "@/app/store";
-
 
 const NewItems = () => {
   const dispatch = useAppDispatch();

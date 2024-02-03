@@ -9,7 +9,7 @@ import Email from "../components/Email";
 import {useAppDispatch, useAppSelector} from "@/app/store/hooks";
 import {resetError, resetMessage, updatePassword} from "@/app/store/user/userSlice";
 import {useEffect, useState} from "react";
-import {AppDispatch, RootState} from "@/app/store";
+import {RootState} from "@/app/store";
 import Modal from "@/app/components/Modal";
 
 interface FormValues {

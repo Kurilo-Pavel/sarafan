@@ -11,7 +11,7 @@ import Checkbox from "../components/Checkbox";
 import {registration, resetError, resetMessage} from "../store/user/userSlice";
 import {useAppDispatch, useAppSelector} from "../store/hooks";
 import {useEffect, useState} from "react";
-import {AppDispatch, RootState} from "@/app/store";
+import {RootState} from "@/app/store";
 import Modal from "@/app/components/Modal";
 
 interface FormValues {

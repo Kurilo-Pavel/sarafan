@@ -8,7 +8,7 @@ import Button from "../../components/Button";
 import ContentProducts from "../../components/ContentProducts";
 import {useEffect, useState} from "react";
 import AddProduct from "@/app/components/AddProduct";
-import {AppDispatch, RootState} from "@/app/store";
+import {RootState} from "@/app/store";
 import {SelectData} from "@/app/data";
 
 const Clothes = ({params}: { params: { category: string } }) => {

@@ -10,7 +10,7 @@ import {login, resetError, resetMessage} from "../store/user/userSlice";
 import {useAppDispatch, useAppSelector} from "../store/hooks";
 import {useEffect, useState} from "react";
 import Link from "next/link";
-import {AppDispatch, RootState} from "@/app/store";
+import {RootState} from "@/app/store";
 import Modal from "@/app/components/Modal";
 
 export interface FormValues {

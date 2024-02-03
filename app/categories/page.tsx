@@ -10,7 +10,6 @@ import TextInput from "../components/TextInput";
 import Button from "../components/Button";
 import {categoryCheck} from "../script";
 import Link from "next/link";
-import {AppDispatch} from "@/app/store";
 import Modal from "@/app/components/Modal";
 
 interface FormValues {
