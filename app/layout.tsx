@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Sarafan - project',
     description: 'online shop',
-    images: "@/public/png/big/10.jpg"
+    images: "/png/big/"
   },
   title: "Sarafan",
   description: "internet-shop",

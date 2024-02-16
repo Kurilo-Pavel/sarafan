@@ -2,7 +2,6 @@
   grid-column: 1;
   grid-row-start: 3;
   grid-row-end: 4;
-  max-width: 1175px;
   width: 100%;
   justify-self: center;
   margin: 10px 0 100px;
@@ -14,8 +13,8 @@
 
 .checkout_order {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 130px;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 10rem;
 }
 
 .checkout_information {
@@ -39,7 +38,6 @@
 }
 
 .order_rules {
-  width: 375px;
   margin-top: 20px;
   font-size: 14px;
   color: #6F6F6F;
@@ -70,11 +68,18 @@
   width: 100%;
   margin-right: 45px;
 }
-
-.button_white {
-  padding: 20px 90px;
-  width: max-content;
-  background: #FFFFFF;
-  border: 1px solid #CECECE;
-  cursor: pointer;
+@media (max-width: 800px) {
+  .checkout_order{
+    gap: 5rem;
+  }
+}
+@media (max-width: 700px) {
+  .checkout_order{
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 340px) {
+  .cost_information{
+    flex-direction: column;
+  }
 }

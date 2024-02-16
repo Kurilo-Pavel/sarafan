@@ -32,7 +32,8 @@
   position: absolute;
   top: 0;
   right: 0;
-  width: 40%;
+  min-width: 38rem;
+  width: 1%;
   min-height: 100vh;
   background: white;
   opacity: 1;
@@ -65,4 +66,11 @@
 .help_text {
   margin-bottom: 3rem;
   font-size: 1rem;
+}
+
+@media (max-width: 600px) {
+  .modal_help {
+    width: 100%;
+    min-width: 100%;
+  }
 }

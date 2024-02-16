@@ -1,4 +1,3 @@
-import "../styles/contentProducts.css";
 import Card from "./Card";
 import {Fragment, useId} from "react";
 

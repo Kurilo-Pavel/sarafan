@@ -1,8 +1,8 @@
 const Menu = [
-  {title: "Новинки", path: "new"},
-  {title: "Одежда", path: "categories"},
-  {title: "Аксессуары", path: "accessories"},
-  {title: "SALE", path: "sale"}
+  {title: "Новинки", path: "/new"},
+  {title: "Одежда", path: "/categories"},
+  {title: "Аксессуары", path: "/accessories"},
+  {title: "SALE", path: "/sale"}
 ];
 
 const SelectData = [
@@ -48,10 +48,15 @@ const ReturnAndExchange = {
       "занимаемых участниками в отношении поставленных задач."
   }]
 };
+const DataHelp = [
+  {title:"Оплата", value:"payment"},
+  {title:"Доставка", value:"delivery"},
+  {title:"Возврат и обмен", value:"exchange"},
+]
 const Company = [
-  {title: "О нас", path: "about_us"},
-  {title: "Наши магазины", path: "shops"},
-  {title: "Контакты", path: "contacts"}
+  {title: "О нас", path: "/about_us"},
+  {title: "Наши магазины", path: "/shops"},
+  {title: "Контакты", path: "/contacts"}
 ];
 
 const Media = [
@@ -79,6 +84,7 @@ export {
   SelectData,
   Delivery,
   ReturnAndExchange,
+  DataHelp,
   Company,
   Media,
   chooseDelivery,

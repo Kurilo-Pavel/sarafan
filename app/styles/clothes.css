@@ -18,12 +18,12 @@
 
 .product_gallery {
   display: grid;
-  grid-template-columns: repeat(2, 40vw);
+  grid-template-columns: repeat(2, 48%);
   align-items: center;
   justify-content: center;
   justify-items: center;
-  row-gap: 40px;
-  column-gap: 30px;
+  row-gap: 3rem;
+  column-gap: 4%;
 }
 
 .product_button {
@@ -33,4 +33,11 @@
   height: 56px;
   margin-top: 50px;
   font-size: 18px;
+}
+
+@media (max-width: 500px) {
+  .product_gallery {
+    display: flex;
+    flex-direction: column;
+  }
 }

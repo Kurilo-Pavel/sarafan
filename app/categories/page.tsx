@@ -139,7 +139,7 @@ const Categories = () => {
         </Formik>
       </Fragment>}
     </div>
-    <img src="png/IMG_4871.png" alt=""/>
+    <img src="png/IMG_4871.png" alt="" className="img_categories"/>
     {isModal && <Modal
       title={`Вы согласны удалить "${category}"`}
       isInform={false}

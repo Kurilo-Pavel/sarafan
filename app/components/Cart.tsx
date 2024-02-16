@@ -4,13 +4,12 @@ import Button from "@/app/components/Button";
 import {Fragment, useEffect, useState} from "react";
 import {useAppDispatch, useAppSelector} from "@/app/store/hooks";
 import classNames from "classnames";
-import {changeOrderCookie, deleteOrderCookie, getOrderCookie} from "@/app/store/product/cookieSlice";
+import {changeOrderCookie, getOrderCookie} from "@/app/store/product/cookieSlice";
 import Link from "next/link";
 import {
   resetHelp,
 } from "@/app/store/component/componentSlice";
 import {useRouter} from "next/navigation";
-import Modal from "@/app/components/Modal";
 
 type Item = {
   id: number | null;
@@ -24,9 +23,12 @@ type Item = {
   count: number;
 };
 
-let marker = true;
+type CartProps = {
+  setIsModal: (value: boolean) => void;
+  setProduct: (value: string) => void;
+}
 
-const Cart = () => {
+const Cart = ({setIsModal, setProduct}: CartProps) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
 
@@ -34,41 +36,17 @@ const Cart = () => {
   const userTotal = useAppSelector(state => state.cookie.userTotal);
   const userSales = useAppSelector(state => state.cookie.userSales);
 
-  const [isModal, setIsModal] = useState(false);
-  const [cookieItems, setCookieItems] = useState<Item[]>([]);
   const [itemsCost, setItemsCost] = useState(0);
-  const [product, setProduct] = useState<string>("");
-
-  let items: Item[] = [];
 
   useEffect(() => {
     dispatch(getOrderCookie());
   }, [dispatch]);
 
   useEffect(() => {
-    if (orderItems.length && orderItems[0].id) {
-      orderItems.forEach(item => {
-        items = [...items, item];
-        setCookieItems(items);
-      });
-      marker = false;
-
-    }
-  }, [dispatch, orderItems]);
-
-  useEffect(() => {
     if (userTotal !== null && userSales !== null) {
       setItemsCost(userTotal - userSales);
     }
   }, [userTotal]);
-
-
-  const handleClick = () => {
-    dispatch(deleteOrderCookie(product));
-    setCookieItems(cookieItems.filter(value => JSON.stringify(value) !== product));
-    marker = true;
-    setIsModal(false);
-  };
 
   const plusCount = (data: Item) => {
     orderItems.forEach(item => {
@@ -95,8 +73,8 @@ const Cart = () => {
 
   return <Fragment>
     <h1 className="help_title">Моя корзина</h1>
-    <div className="items_field">
-      {cookieItems[0] && cookieItems.map((item, index) => <div key={index} className="item_block">
+    {orderItems.length > 0 && <div className="items_field">
+      {orderItems.map((item, index) => <div key={index} className="item_block">
         <div className="image_wrapper">
           <img
             src={item.main_img}
@@ -143,26 +121,20 @@ const Cart = () => {
           </div>
         </div>
       </div>)}
-    </div>
+    </div>}
     <p className="cost_items">
-      Стоимость товара(-ов): {cookieItems[0] && <><span>{itemsCost}</span> руб.</>}
+      Стоимость товара(-ов): {orderItems[0] && <><span>{itemsCost}</span> руб.</>}
     </p>
     <Button
       text="Перейти к оформлению"
       className="button_white"
       type="button"
-      disabled={cookieItems.length === 0}
+      disabled={orderItems.length === 0}
       onClick={() => {
         dispatch(resetHelp({cart: false, delivery: false, payment: false, exchange: false}));
         router.push("/myCart");
       }}
     />
-    {isModal && <Modal
-      title={"Удалить товар из корзины"}
-      isInform={false}
-      setIsModal={setIsModal}
-      successHandle={handleClick}
-    />}
   </Fragment>
 };
 export default Cart;

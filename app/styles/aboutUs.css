@@ -1,15 +1,42 @@
-.aboutUs_text {
-  margin-block: 50px;
-}
-
 .aboutUs_content {
   display: grid;
   grid-template-columns: 2fr 1.5fr;
-  gap: 30px;
+  row-gap: 4rem;
+  column-gap: 2rem;
   width: 100%;
+}
+
+.aboutUs_text {
+  margin: 0;
+  grid-column-start: 1;
+  grid-column-end: 3;
 }
 
 .aboutUs_img {
   width: 100%;
   height: 100%;
+}
+
+.aboutUs_img_main {
+  grid-row-start: 2;
+  grid-column-start: 1;
+}
+
+.aboutUs_img_sub {
+  grid-row-start: 2;
+  grid-column-start: 2;
+}
+
+@media (max-width: 700px) {
+  .aboutUs_img_main {
+    grid-row-start: 1;
+    grid-column-start: 1;
+    grid-column-end: 3;
+  }
+  
+  .aboutUs_img_sub {
+    grid-row-start: 3;
+    grid-column-start: 1;
+    grid-column-end: 3;
+  }
 }

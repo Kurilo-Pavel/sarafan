@@ -1,8 +1,9 @@
 .subsection {
+  position: relative;
   display: grid;
   grid-template-columns: 1.5fr 1fr;
   gap: 2rem;
-  padding: 70px 50px;
+  padding: 5em 3.5rem;
   background: white;
 }
 
@@ -61,4 +62,38 @@
   margin: 30px 50px 0 0;
   width: 50%;
   gap: 20px;
+}
+
+@media (max-width: 1000px) {
+  .subsection {
+    grid-template-columns: 1fr 2fr;
+  }
+  
+  .subsection_categories {
+    flex-direction: column;
+    gap: 0;
+  }
+  
+  .img_categories {
+    width: 100%;
+  }
+}
+@media (max-width: 700px) {
+  .img_categories{
+    display: none;
+  }
+  .subsection {
+    grid-template-columns: 1fr;
+    padding-block: 0;
+  }
+  .subsection_categories {
+    flex-direction: row;
+    gap: 2rem;
+  }
+}
+@media (max-width: 400px) {
+  .subsection_categories {
+    flex-direction: column;
+    gap: 0;
+  }
 }

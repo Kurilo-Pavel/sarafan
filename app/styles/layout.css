@@ -1,7 +1,9 @@
 body {
   margin: 0;
-  width: 100vw;
-  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
 }
 
 .hide_scroll {
@@ -42,4 +44,30 @@ body {
 
 .cross:after {
   transform: rotate(45deg);
+}
+
+@media (max-width: 700px) {
+  html {
+    /*font-size: 20px;*/
+  }
+  
+  .page {
+    margin-top: 2rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .page {
+    margin-inline: 2.5rem;
+  }
+}
+@media (max-width: 600px) {
+  .page {
+    margin-inline: 2rem;
+  }
+}
+@media (max-width: 500px) {
+  .page {
+    margin-inline: 1.5rem;
+  }
 }

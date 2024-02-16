@@ -7,9 +7,10 @@ type SlideProps = {
   className: string;
 }
 
-const Slide1 = ({className}:SlideProps) => {
-  return <div className={`wrapper_slider ${className}`}>
-    <img src="png/Rectangle_33.png" className="background" alt="Main"/>
+const Slide1 = ({className}: SlideProps) => {
+  return <div
+    className={`wrapper_slider slide1 ${className}`}
+  >
     <div className="section_contain locate_right">
       <span className="contain_text">Весна - лето 2022</span>
       <span className="contain_title">WITH LOVE, TO YOU</span>
@@ -18,9 +19,10 @@ const Slide1 = ({className}:SlideProps) => {
   </div>
 };
 
-const Slide2 = ({className}:SlideProps) => {
-  return <div className={`wrapper_slider ${className}`}>
-    <img src="png/photo_3.jpg" className="background" alt="Main"/>
+const Slide2 = ({className}: SlideProps) => {
+  return <div
+    className={`wrapper_slider slide2 ${className}`}
+  >
     <div className="section_contain locate_left">
       <span className="contain_text">Весна - лето 2022</span>
       <span className="contain_title">WITH LOVE, TO YOU</span>
@@ -29,9 +31,10 @@ const Slide2 = ({className}:SlideProps) => {
   </div>
 };
 
-const Slide3 = ({className}:SlideProps) => {
-  return <div className={`wrapper_slider ${className}`}>
-    <img src="png/photo.jpg" className="background" alt="Main"/>
+const Slide3 = ({className}: SlideProps) => {
+  return <div
+    className={`wrapper_slider slide3 ${className}`}
+  >
     <div className="section_contain locate_right">
       <span className="contain_text">Весна - лето 2022</span>
       <span className="contain_title">WITH LOVE, TO YOU</span>
@@ -40,9 +43,10 @@ const Slide3 = ({className}:SlideProps) => {
   </div>
 };
 
-const Slide4 = ({className}:SlideProps) => {
-  return <div className={`wrapper_slider ${className}`}>
-    <img src="png/photo_6.jpg" className="background" alt="Main"/>
+const Slide4 = ({className}: SlideProps) => {
+  return <div
+    className={`wrapper_slider slide4 ${className}`}
+  >
     <div className="section_contain locate_left">
       <span className="contain_text">Весна - лето 2022</span>
       <span className="contain_title">WITH LOVE, TO YOU</span>

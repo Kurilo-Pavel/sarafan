@@ -72,3 +72,9 @@
   transform: rotate(-45deg);
   opacity: 0.5;
 }
+
+@media (max-width: 700px) {
+  .order {
+    width: 100%;
+  }
+}

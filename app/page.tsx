@@ -7,7 +7,7 @@ import {useAppDispatch, useAppSelector} from "@/app/store/hooks";
 import {useEffect, useState} from "react";
 import {getItems} from "@/app/store/product/productSlice";
 import {Slide1, Slide2, Slide3, Slide4} from "./components/mainSlider/Slides";
-import {AppDispatch} from "@/app/store";
+import classNames from "classnames";
 
 let count = 0;
 
@@ -72,13 +72,14 @@ const MainPage = () => {
     setHiddenSlide(slides[count].component());
   };
 
-  const showSlide = (num: any) => {
+  const showSlide = (num: number) => {
     slides[count].style = "hideBlock";
     setHiddenSlide(slides[count].component());
     slides[num].style = "showBlock";
     setVisibleSlide(slides[num].component());
     count = num;
   };
+
   return <>
     <section className="main_page">
       <div className="main_wrapper">
@@ -90,10 +91,10 @@ const MainPage = () => {
         <span className="arrow" onClick={moveLeft}>{">"}</span>
       </div>
       <div className="main_slider">
-        <span className="slider_circle" onClick={() => showSlide("0")}/>
-        <span className="slider_circle" onClick={() => showSlide("1")}/>
-        <span className="slider_circle" onClick={() => showSlide("2")}/>
-        <span className="slider_circle" onClick={() => showSlide("3")}/>
+        <span className={classNames("slider_circle", {"choose_circle": count === 0})} onClick={() => showSlide(0)}/>
+        <span className={classNames("slider_circle", {"choose_circle": count === 1})} onClick={() => showSlide(1)}/>
+        <span className={classNames("slider_circle", {"choose_circle": count === 2})} onClick={() => showSlide(2)}/>
+        <span className={classNames("slider_circle", {"choose_circle": count === 3})} onClick={() => showSlide(3)}/>
       </div>
     </section>
     <section className="collection">

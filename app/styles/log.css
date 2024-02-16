@@ -33,3 +33,18 @@
 .log_link:hover {
   text-decoration: underline;
 }
+
+@media (max-width: 500px) {
+  .log_wrapper {
+    margin-inline: 1rem;
+  }
+  
+  .log {
+    min-width: 100%;
+    text-align: center;
+  }
+  
+  .registration_label {
+    text-align: left;
+  }
+}

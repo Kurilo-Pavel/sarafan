@@ -1,5 +1,11 @@
-.collection_containSecond{
+.collection_containSecond {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 30px;
+}
+
+@media (max-width: 500px) {
+  .collection_containSecond {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 4rem;
+  }
 }

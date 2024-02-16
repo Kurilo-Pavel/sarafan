@@ -1,5 +1,5 @@
 const Loading = () => {
-  return <div>
+  return <div className="page">
     <h1>Loading...</h1>
   </div>
 };

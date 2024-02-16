@@ -50,7 +50,7 @@ const Modal = ({title, isInform, setIsModal, successHandle, cancelHandle}: Modal
         <Button
           type="button"
           text={isInform ? "Хорошо" : "Нет"}
-          className="section_button"
+          className="contact_feedback_button fill_button"
           onClick={() => closeModal()}
         />
       </div>

@@ -4,7 +4,7 @@
 }
 
 .data_label {
-  margin-bottom: 20px;
+  margin-bottom: 1.5rem;
   cursor: pointer;
 }
 
@@ -15,4 +15,18 @@
 .data_cost {
   font-size: 14px;
   color: #6F6F6F;
+}
+
+@media (max-width: 340px) {
+  .data_field {
+    flex-direction: column;
+    margin-bottom: 1.5rem;
+  }
+  
+  .data_label {
+    margin-bottom: 1rem;
+  }
+  .data_cost{
+    margin-left: 3rem;
+  }
 }

@@ -37,7 +37,9 @@ const Collection = ({title, slider, items, classImage, classCard}: CollectionPro
     }) : null;
     count -= 1;
     if (widthCard) {
-      checkArrow(Math.round(block.getBoundingClientRect().width / widthCard));
+      const currentCards = Math.round(block.parentElement.getBoundingClientRect().width / widthCard);
+      const card = Math.round(block.getBoundingClientRect().width / widthCard)
+      checkArrow(card,currentCards);
     }
   };
 
@@ -56,17 +58,19 @@ const Collection = ({title, slider, items, classImage, classCard}: CollectionPro
     }) : null;
     count += 1;
     if (widthCard) {
-      checkArrow(Math.round(block.getBoundingClientRect().width / widthCard));
+      const currentCards = Math.round(block.parentElement.getBoundingClientRect().width / widthCard);
+      const card = Math.round(block.getBoundingClientRect().width / widthCard)
+      checkArrow(card,currentCards);
     }
   };
 
-  const checkArrow = (cards: any) => {
+  const checkArrow = (cards: number, currentCards) => {
     if (count <= 0) {
       setLeftArrow(false);
     } else {
       setLeftArrow(true);
     }
-    if (count >= cards - 4) {
+    if (count >= cards - currentCards) {
       setRightArrow(false);
     } else {
       setRightArrow(true);

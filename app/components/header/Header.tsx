@@ -7,11 +7,12 @@ import Link from "next/link";
 import {Menu} from "../../data";
 import {jwtDecode} from "jwt-decode";
 import {useAppDispatch, useAppSelector} from "../../store/hooks";
-import {useEffect, useState} from "react";
+import {Fragment, useEffect, useState} from "react";
 import {setSection} from "@/app/store/component/componentSlice";
 import {setCart} from "@/app/store/component/componentSlice";
 import {getLikeCookie, getOrderCookie, getUserSales, getUserTotal} from "@/app/store/product/cookieSlice";
 import {setUserData, User} from "@/app/store/user/userSlice";
+import {input} from "zod";
 
 const Header = () => {
   const dispatch = useAppDispatch();
@@ -56,36 +57,44 @@ const Header = () => {
 
 
   const myCart = () => {
-    dispatch(setCart({cart: true}));
+    dispatch(setCart(true));
   };
 
-  return <div className="header">
-    <List
-      list={Menu}
-      classNameLi="main_section"
-      classNameUl="header_menu"
-    />
-    <Logo/>
-    <div className="header_dataUser">
-      <Search/>
-      <Link
-        href="/like"
-        onClick={() => dispatch(setSection({title: "", path: ""}))}
-      >
-        <img className="elem_hov" src="/Like.svg" alt="Page" title="Избранное"/>
-      </Link>
-      <span
-        onClick={() => myCart()}
-        className="user_cart"
-      >
+  return <div className="header_wrapper">
+    <div className="header">
+      <input type="checkbox" id="burger"/>
+      <label htmlFor="burger" className="burger">
+        <span className="menu_burger"/>
+      </label>
+      <List
+        list={Menu}
+        classNameBlock="menu_block"
+        classNameLi="main_section"
+        classNameSection="header_menu"
+      />
+      <Logo/>
+      <div className="header_dataUser">
+        <div className="hidden"><Search/></div>
+        <Link
+          href="/like"
+          onClick={() => dispatch(setSection({title: "", path: ""}))}
+        >
+          <img className="elem_hov" src="/Like.svg" alt="Page" title="Избранное"/>
+        </Link>
+        <span
+          onClick={() => myCart()}
+          className="user_cart"
+        >
         <img className="elem_hov" src="/Cart.svg" alt="Cart" title="Моя Корзина"/>
-        {orders && orders[0]?.id && <span className="count_items">{countOrders}</span>}
+          {orders && orders[0]?.id && <span className="count_items">{countOrders}</span>}
       </span>
-      {!token && <Link href="/log"><img className="elem_hov" src="/User.svg" alt="Login"/></Link>}
-      {token &&
-        <Link href="/personal_data"><img className="elem_hov account_img" src="/account.svg" alt="Account"
-                                         title="Личный кабинет"/></Link>}
+        {!token && <Link href="/log"><img className="elem_hov" src="/User.svg" alt="Login"/></Link>}
+        {token &&
+          <Link href="/personal_data"><img className="elem_hov account_img" src="/account.svg" alt="Account"
+                                           title="Личный кабинет"/></Link>}
+      </div>
     </div>
+    <div className="visible"><Search/></div>
   </div>
 };
 export default Header;

@@ -1,16 +1,14 @@
 "use client";
 
 import "../../styles/footer.css";
-import {Delivery, Company, Media, ReturnAndExchange} from "@/app/data";
-import Help from "../Help";
+import Help from "@/app/components/Help";
+import {Delivery, DataHelp, Company, Media, ReturnAndExchange} from "@/app/data";
 import List from "../List";
 import Logo from "../Logo";
-import {useAppDispatch, useAppSelector} from "@/app/store/hooks";
-import {setDelivery, setExchange, setPayment} from "@/app/store/component/componentSlice";
+import {useAppSelector} from "@/app/store/hooks";
 import {useEffect} from "react";
 
 const Footer = () => {
-  const dispatch = useAppDispatch();
   const cart = useAppSelector(state => state.component.cart);
   const delivery = useAppSelector(state => state.component.delivery);
   const exchange = useAppSelector(state => state.component.exchange);
@@ -27,25 +25,31 @@ const Footer = () => {
   return <div className="footer">
     <div className="footer_contain">
       <Logo/>
-      <div className="footer_column">
-        <span className="footer_listName">Помощь</span>
-        <span className="footer_list" onClick={() => dispatch(setPayment(!payment))}>Оплата</span>
-        <span className="footer_list" onClick={() => dispatch(setDelivery(!delivery))}>Доставка</span>
-        <span className="footer_list" onClick={() => dispatch(setExchange(!exchange))}>Возврат и обмен</span>
-      </div>
+      <List
+        list={DataHelp}
+        title="Помощь"
+        classNameLi="footer_list"
+        classNameBlock="footer_block"
+        classNameSection="footer_section footer_column_mob"
+        classNameTitle="footer_listName footer_listName_mob"
+        footer={true}
+      />
       <List
         list={Company}
-        classNameLi="footer_list"
         title="Компания"
-        classNameUl="footer_column"
-        classNameTitle="footer_listName"
+        classNameLi="footer_list"
+        classNameBlock="footer_block"
+        classNameSection="footer_section footer_column_mob"
+        classNameTitle="footer_listName footer_listName_mob"
+        footer={true}
       />
       <List
         list={Media}
         classNameLi="footer_list"
         title="Следите за нами"
-        classNameUl="footer_column"
-        classNameTitle="footer_listName"
+        classNameBlock="footer_block"
+        classNameSection="footer_section messengers_mobile"
+        classNameTitle="footer_listName title_mobile"
       />
     </div>
     <p className="footer_text">Все права защищены.Пользовательское соглашение.Политика конфиденциальности

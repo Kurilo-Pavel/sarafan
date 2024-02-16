@@ -34,7 +34,7 @@
   flex-wrap: wrap;
   justify-content: center;
   align-content: center;
-  font-size: 150%;
+  font-size: 110%;
   font-family: cursive;
   color: #FFFFFF;
 }
@@ -111,3 +111,39 @@
   width: 100%;
   height: 100%;
 }
+
+@media (max-width: 700px) {
+  .small_img {
+    height: 40vw;
+  }
+}
+
+@media (max-width: 600px) {
+  .small_img {
+    height: 58vw;
+  }
+}
+
+@media (max-width: 500px) {
+  .collection_item {
+    padding-inline: 0.5rem;
+  }
+  
+  .small_img {
+    height: 100vw;
+  }
+  
+  .wrapper_image {
+    height: 90vw;
+  }
+  
+  .big_card {
+    width: 100%;
+  }
+}
+
+/*@media (max-width: 370px) {*/
+/*  .small_img {*/
+/*    height: 90vw;*/
+/*  }*/
+/*}*/
