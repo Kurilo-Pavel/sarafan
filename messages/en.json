@@ -1,0 +1,236 @@
+{
+  "Global": {
+    "cash": "USD.",
+    "button": "Show more",
+    "color": "Color",
+    "size": "Size",
+    "count": "Amount",
+    "delete": "Delete",
+    "cost": "Cost of item(s):",
+    "deleteItem": "Remove item from cart",
+    "yes": "Yes",
+    "no": "No",
+    "ok": "Ok",
+    "price": "Price"
+  },
+  "DataIcons": {
+    "like": "Favorites",
+    "cart": "My Cart",
+    "login": "Login",
+    "personalData": "Personal account"
+  },
+  "Input": {
+    "lastName": "Last name",
+    "firstName": "First name",
+    "phone": "Phone",
+    "email": "E-mail",
+    "search": "Search",
+    "password": "Password",
+    "currentPassword": "Current password",
+    "newPassword": "New password",
+    "description": "Describe the essence of your appeal",
+    "repeatPassword": "Repeat password"
+  },
+  "ForgotPassword": {
+    "title": "Password recovery",
+    "inform": "Enter your email and we will send you a confirmation code",
+    "button": "Restore"
+  },
+  "AboutUs": {
+    "title": "About us",
+    "description": "The diverse and rich experience framework and location of personnel training contributes to the preparation and implementation of forms of development. The diverse and rich experience framework and location of personnel training contributes to the preparation and implementation of forms of development. On the other hand, the implementation of the planned plans. The diverse and rich experience of the framework and place of training of personnel contributes to the preparation and implementation of forms of development. The diverse and rich experience framework and location of personnel training contributes to the preparation and implementation of forms of development. On the other hand, the implementation of the planned plans"
+  },
+  "Category": {
+    "sort": "Sorting",
+    "filter": "Filter"
+  },
+  "Contacts": {
+    "title": "Contacts",
+    "contactTitle": "Connect with us",
+    "addressTitle": "Showroom address",
+    "address": "Moscow, st. Novy Arbat 36/3, Sfera shopping center, 1st floor",
+    "timeWork": "Opening hours Mon-Sun 12:00 – 21:00",
+    "ideaInform1": "If you have ideas, wishes, comments - write!",
+    "ideaInform2": "And we will do everything to become better.",
+    "inform": "Required fields",
+    "rule": "By clicking on the “Submit” button, I agree to the privacy policy and personal data processing",
+    "button": "Submit",
+    "map": "Map"
+  },
+  "Like": {
+    "title": "Favorites"
+  },
+  "Login": {
+    "title": "Entrance",
+    "button": "Login",
+    "forgotPassword": "Forgot your password?"
+  },
+  "MainInform": {
+    "title": "Inspired by spring",
+    "description": "The diverse and rich experience framework and location of personnel training contributes to the preparation and implementation of forms of development. On the other hand, the implementation of the planned plans",
+    "about": "About the brand"
+  },
+  "MayOrders": {
+    "order": "Order number",
+    "dateOrder": "Order date",
+    "paid": "Paid",
+    "costOrder": "Order cost"
+  },
+  "New": {
+    "path": "New items",
+    "title": "Latest arrivals"
+  },
+  "Path": {
+    "main": "Home"
+  },
+  "PersonalData": {
+    "pathInform": "Personal account / Basic information",
+    "pathOrders": "Personal account / My orders",
+    "title": "Personal account"
+  },
+  "PersonalMenu": {
+    "mainInform": "Basic information",
+    "myOrders": "My orders",
+    "exit": "Exit"
+  },
+  "Registration": {
+    "title": "Registration",
+    "inform": "I agree with the privacy policy and the processing of personal data",
+    "button": "Sign up"
+  },
+  "Slides": {
+    "inform": "Spring - summer 2022",
+    "title": "WITH LOVE, TO YOU",
+    "button": "Go to catalog"
+  },
+  "MainPage": {
+    "nameCollection": "New collection",
+    "nameSlider": "Hurry up to buy"
+  },
+  "MyCart": {
+    "title": "Placing an order",
+    "modalTitle": "Are you sure you want",
+    "checkout": "form",
+    "pay": "pay",
+    "order": "order for the amount",
+    "deliveryType": "Delivery method",
+    "paymentType": "Payment method",
+    "contacts": "Contact details",
+    "symbol": " * ",
+    "inform": "Required fields",
+    "totalCost": "Total cost",
+    "sale": "Amount of discount",
+    "delivery": "Delivery",
+    "promotional": "Promo code",
+    "enterCode": "Enter promotional code",
+    "total": "Total",
+    "qPromotional": "Have a promo code?",
+    "apply": "Apply",
+    "rule": "Pressing a button «{payment,select, cash {оформить} other {оплатить}}», I accept the terms of the public offer and privacy policy"
+  },
+  "Sale": {
+    "title": "Seasonal discounts"
+  },
+  "Shops": {
+    "path": "Our stores"
+  },
+  "UserData": {
+    "title": "Account details",
+    "button": "Save",
+    "passwordTitle": "Change Password",
+    "choosePassword": "Change password",
+    "notifications": "Notifications",
+    "inform": "I would like to receive showroom e-newsletters"
+  },
+  "Errors": {
+    "lastName": "Last name is incorrect",
+    "firstName": "The name is incorrect",
+    "phone": "Please enter your phone number",
+    "email": "Email is incorrect",
+    "payment": "Select a Payment Method",
+    "delivery": "Select delivery method",
+    "color": "You need to select a color",
+    "size": "You need to select a size",
+    "oldPassword": "Please enter your old password",
+    "password": "Enter your password",
+    "description": "Add a message",
+    "passwords": "Passwords do not match",
+    "rules": "You need to agree to the rules"
+  },
+  "DataMenu": {
+    "title1": "New items",
+    "title2": "Clothes",
+    "title3": "Accessories",
+    "title4": "SALE"
+  },
+  "DataLanguage": {
+    "title": "Language",
+    "name1": "English",
+    "name2": "Russian",
+    "name3": "Polish"
+  },
+  "SelectData": {
+    "name1": "New items",
+    "name2": "Ascending price",
+    "name3": "Descending price"
+  },
+  "DataDelivery": {
+    "title": "Delivery",
+    "subTitle1": "Dispatch",
+    "text1": "Ideological considerations of a higher order, as well as the strengthening and development of the structure, allows us to carry out important tasks in developing a personnel training system that meets pressing needs. Thus, the beginning of the daily work of position formation entails the process of introducing and modernizing the positions taken by the participants in relation to the assigned tasks.",
+    "subTitle2": "Delivery",
+    "text2": "Ideological considerations of a higher order, as well as the strengthening and development of the structure, allows us to carry out important tasks in developing a personnel training system that meets pressing needs. Thus, the beginning of the daily work of position formation entails the process of introducing and modernizing the positions taken by the participants in relation to the assigned tasks."
+  },
+  "DataReturnAndExchange": {
+    "title": "Returns and exchanges",
+    "subTitle1": "Return",
+    "text1": "Ideological considerations of a higher order, as well as the strengthening and development of the structure, allows us to carry out important tasks in developing a personnel training system that meets pressing needs. Thus, the beginning of the daily work of position formation entails the process of introducing and modernizing the positions taken by the participants in relation to the assigned tasks.",
+    "subTitle2": "Exchange",
+    "text2": "Ideological considerations of a higher order, as well as the strengthening and development of the structure, allows us to carry out important tasks in developing a personnel training system that meets pressing needs. Thus, the beginning of the daily work of position formation entails the process of introducing and modernizing the positions taken by the participants in relation to the assigned tasks."
+  },
+  "DataHelp": {
+    "title": "Help",
+    "title1": "Payment",
+    "title2": "Delivery",
+    "title3": "Returns and exchanges"
+  },
+  "DataCompany": {
+    "title": "Company",
+    "title1": "About us",
+    "title2": "Our stores",
+    "title3": "Contacts"
+  },
+  "DataMedia": {
+    "title": "Follow us"
+  },
+  "DataChooseDelivery": {
+    "point1": "Pickup",
+    "value1": "Free",
+    "point2": "Courier delivery",
+    "point3": "Delivery by SDEK courier",
+    "point4": "Pickup by SDEK",
+    "point5": "Mail",
+    "prep": "from "
+  },
+  "DataChoosePayment": {
+    "point1": "Online payment by card",
+    "point2": "Payment in cash upon receipt"
+  },
+  "DataItemPage": {
+    "selectSize": "Select size",
+    "table": "Size table",
+    "button": "Add to cart",
+    "description": "Product description",
+    "descriptionItem": "The diverse and rich experience framework and location of personnel training contributes to the preparation and implementation of forms of development. The diverse and rich experience framework and location of personnel training contributes to the preparation and implementation of forms of development.",
+    "care": "Composition and care",
+    "descriptionCare": "The diverse and rich experience framework and location of personnel training contributes to the preparation and implementation of forms of development. The diverse and rich experience framework and location of personnel training contributes to the preparation and implementation of forms of development."
+  },
+  "DataCard": {
+    "addLike": "Add to favorites",
+    "removeLike": "Remove from favorites"
+  },
+  "DataCart": {
+    "title": "My cart",
+    "button": "Go to checkout"
+  }
+}

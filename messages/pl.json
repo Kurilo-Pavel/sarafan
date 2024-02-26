@@ -1,0 +1,236 @@
+{
+  "Global": {
+    "cash": "zl.",
+    "button": "Pokaż więcej",
+    "color": "Kolor",
+    "size": "Rozmiar",
+    "count": "Ilość",
+    "delete": "Usuwać",
+    "cost": "Koszt przedmiotu(ów):",
+    "deleteItem": "Usuń przedmiot z koszyka",
+    "yes": "Tak",
+    "no": "NIE",
+    "ok": "Dobrze",
+    "price": "Cena"
+  },
+  "DataIcons": {
+    "like": "Ulubione",
+    "cart": "Mój koszyk",
+    "login": "Wejście",
+    "personalData": "Obszar osobisty"
+  },
+  "Input": {
+    "lastName": "Nazwisko",
+    "firstName": "Nazwa",
+    "phone": "Telefon",
+    "email": "E-mail",
+    "search": "Szukaj",
+    "password": "Hasło",
+    "currentPassword": "Aktualne hasło",
+    "newPassword": "Nowe hasło",
+    "description": "Opisz istotę swojego odwołania",
+    "repeatPassword": "Powtórz hasło"
+  },
+  "ForgotPassword": {
+    "title": "Odzyskiwanie hasła",
+    "inform": "Podaj swój adres e-mail, a my wyślemy Ci kod potwierdzający",
+    "button": "Przywrócić"
+  },
+  "AboutUs": {
+    "title": "O nas",
+    "description": "Zróżnicowana i bogata baza doświadczeń oraz lokalizacja szkoleń kadr przyczynia się do przygotowania i realizacji form rozwoju. Zróżnicowana i bogata baza doświadczeń oraz lokalizacja szkoleń kadr przyczynia się do przygotowania i realizacji form rozwoju. Z drugiej strony realizacja zaplanowanych planów.Różnorodne i bogate doświadczenie ram i miejsc szkolenia kadr przyczynia się do przygotowania i wdrożenia form rozwoju. Zróżnicowana i bogata baza doświadczeń oraz lokalizacja szkoleń kadr przyczynia się do przygotowania i realizacji form rozwoju. Z drugiej strony realizacja zaplanowanych planów"
+  },
+  "Category": {
+    "sort": "Sortowanie",
+    "filter": "Filtr"
+  },
+  "Contacts": {
+    "title": "Łączność",
+    "contactTitle": "Połącz się z nami",
+    "addressTitle": "Adres salonu",
+    "address": "Moskwa, ul. Nowy Arbat 36/3, Centrum Handlowe Sfera, I piętro",
+    "timeWork": "Godziny otwarcia Pon.-Niedz. 12:00 – 21:00",
+    "ideaInform1": "Jeśli masz pomysły, życzenia, uwagi - napisz!",
+    "ideaInform2": "I zrobimy wszystko, żeby było lepiej.",
+    "inform": "Wymagane pola",
+    "rule": "Klikając przycisk „Wysłać” wyrażam zgodę na politykę prywatności i przetwarzanie danych osobowych",
+    "button": "Wysłać",
+    "map": "Mapa"
+  },
+  "Like": {
+    "title": "Ulubione"
+  },
+  "Login": {
+    "title": "Wejście",
+    "button": "Wejść",
+    "forgotPassword": "Zapomniałeś hasła?"
+  },
+  "MainInform": {
+    "title": "Inspirowana wiosną",
+    "description": "Zróżnicowana i bogata baza doświadczeń oraz lokalizacja szkoleń kadr przyczynia się do przygotowania i realizacji form rozwoju. Z drugiej strony realizacja zaplanowanych planów",
+    "about": "O marce"
+  },
+  "MayOrders": {
+    "order": "Numer zamówienia",
+    "dateOrder": "Data zamówienia",
+    "paid": "Płatny",
+    "costOrder": "Koszt zamówienia"
+  },
+  "New": {
+    "path": "Nowe przedmioty",
+    "title": "Najnowsze przybycia"
+  },
+  "Path": {
+    "main": "Stona Głowna"
+  },
+  "PersonalData": {
+    "pathInform": "Konto osobiste / Podstawowe informacje",
+    "pathOrders": "Konto osobiste / Moje zamówienia",
+    "title": "Obszar osobisty"
+  },
+  "PersonalMenu": {
+    "mainInform": "Podstawowe informacje",
+    "myOrders": "Moje zamówienia",
+    "exit": "Wyjście"
+  },
+  "Registration": {
+    "title": "Rejestracja",
+    "inform": "Zgadzam się z polityką prywatności i przetwarzaniem danych osobowych",
+    "button": "Zarejestruj się"
+  },
+  "Slides": {
+    "inform": "Wiosna - lato 2022",
+    "title": "Z MIŁOŚCIĄ",
+    "button": "Przejdź do katalogu"
+  },
+  "MainPage": {
+    "nameCollection": "Nowa kolekcja",
+    "nameSlider": "Pośpiesz się z zakupem"
+  },
+  "MyCart": {
+    "title": "Składając zamówienie",
+    "modalTitle": "Jesteś pewny że chcesz",
+    "checkout": "uformować",
+    "pay": "płacić",
+    "order": "zamówienie na kwotę",
+    "deliveryType": "Sposób dostawy",
+    "paymentType": "Metoda płatności",
+    "contacts": "Szczegóły kontaktu",
+    "symbol": " * ",
+    "inform": "Wymagane pola",
+    "totalCost": "Całkowity koszt",
+    "sale": "Wysokość rabatu",
+    "delivery": "Dostawa",
+    "promotional": "Kod promocyjny",
+    "enterCode": "Wprowadź kod promocyjny",
+    "total": "Całkowity",
+    "qPromotional": "Masz kod promocyjny?",
+    "apply": "Stosować",
+    "rule": "Naciśnięcie przycisku «{payment,select, cash {оформить} other {оплатить}}», akceptuję warunki oferty publicznej i politykę prywatności"
+  },
+  "Sale": {
+    "title": "Sezonowe rabaty"
+  },
+  "Shops": {
+    "path": "Nasze historie"
+  },
+  "UserData": {
+    "title": "Szczegóły konta",
+    "button": "Zapisywać",
+    "passwordTitle": "Zmień hasło",
+    "choosePassword": "Zmień hasło",
+    "notifications": "Powiadomienia",
+    "inform": "Chcę otrzymywać e-biuletyny dotyczące salonów sprzedaży"
+  },
+  "Errors": {
+    "lastName": "Nazwisko jest nieprawidłowe",
+    "firstName": "Nazwa jest nieprawidłowa",
+    "phone": "Proszę podać swój numer telefonu",
+    "email": "Nieprawidłowy email",
+    "payment": "Wybierz metodę płatności",
+    "delivery": "Wybierz metodę dostawy",
+    "color": "Musisz wybrać kolor",
+    "size": "Musisz wybrać rozmiar",
+    "oldPassword": "Proszę wprowadzić swoje stare hasło",
+    "password": "Wprowadź hasło",
+    "description": "Dodaj wiadomość",
+    "passwords": "Hasła nie pasują do siebie",
+    "rules": "Musisz zaakceptować regulamin"
+  },
+  "DataMenu": {
+    "title1": "Nowe",
+    "title2": "Odzież",
+    "title3": "Akcesoria",
+    "title4": "SALE"
+  },
+  "DataLanguage": {
+    "title": "Język",
+    "name1": "Angielski",
+    "name2": "Rosyjski",
+    "name3": "Polski"
+  },
+  "SelectData": {
+    "name1": "Nowe",
+    "name2": "Cena rosnąca",
+    "name3": "Cena malejąca"
+  },
+  "DataDelivery": {
+    "title": "Dostawa",
+    "subTitle1": "Załatwić",
+    "text1": "Względy ideologiczne wyższego rzędu oraz wzmocnienie i rozwój struktury pozwalają nam realizować ważne zadania w zakresie opracowania systemu szkolenia kadr odpowiadającego naglącym potrzebom. Tym samym rozpoczęcie codziennej pracy nad kształtowaniem stanowisk wiąże się z procesem wprowadzania i unowocześniania stanowisk zajmowanych przez uczestników w związku z przydzielonymi im zadaniami.",
+    "subTitle2": "Dostawa",
+    "text2": "Względy ideologiczne wyższego rzędu oraz wzmocnienie i rozwój struktury pozwalają nam realizować ważne zadania w zakresie opracowania systemu szkolenia kadr odpowiadającego naglącym potrzebom. Tym samym rozpoczęcie codziennej pracy nad kształtowaniem stanowisk wiąże się z procesem wprowadzania i unowocześniania stanowisk zajmowanych przez uczestników w związku z przydzielonymi im zadaniami."
+  },
+  "DataReturnAndExchange": {
+    "title": "Zwroty i wymiany",
+    "subTitle1": "Powrót",
+    "text1": "Względy ideologiczne wyższego rzędu oraz wzmocnienie i rozwój struktury pozwalają nam realizować ważne zadania w zakresie opracowania systemu szkolenia kadr odpowiadającego naglącym potrzebom. Tym samym rozpoczęcie codziennej pracy nad kształtowaniem stanowisk wiąże się z procesem wprowadzania i unowocześniania stanowisk zajmowanych przez uczestników w związku z przydzielonymi im zadaniami.",
+    "subTitle2": "Giełda",
+    "text2": "Względy ideologiczne wyższego rzędu oraz wzmocnienie i rozwój struktury pozwalają nam realizować ważne zadania w zakresie opracowania systemu szkolenia kadr odpowiadającego naglącym potrzebom. Tym samym rozpoczęcie codziennej pracy nad kształtowaniem stanowisk wiąże się z procesem wprowadzania i unowocześniania stanowisk zajmowanych przez uczestników w związku z przydzielonymi im zadaniami."
+  },
+  "DataHelp": {
+    "title": "Pomoc",
+    "title1": "Zapłata",
+    "title2": "Dostawa",
+    "title3": "Zwroty i wymiany"
+  },
+  "DataCompany": {
+    "title": "Firma",
+    "title1": "O nas",
+    "title2": "Nasze historie",
+    "title3": "Łączność"
+  },
+  "DataMedia": {
+    "title": "Podążaj za nami"
+  },
+  "DataChooseDelivery": {
+    "point1": "Ulec poprawie",
+    "value1": "Za darmo",
+    "point2": "Dostawa kurierska",
+    "point3": "Dostawa kurierem SDEK",
+    "point4": "Odbiór przez SDEK",
+    "point5": "Poczta",
+    "prep": "z "
+  },
+  "DataChoosePayment": {
+    "point1": "Płatność on-line kartą",
+    "point2": "Płatność gotówką przy odbiorze"
+  },
+  "DataItemPage": {
+    "selectSize": "Wybierz rozmiar",
+    "table": "Tabela rozmiarów",
+    "button": "Dodaj do koszyka",
+    "description": "Opis produktu",
+    "descriptionItem": "Zróżnicowana i bogata baza doświadczeń oraz lokalizacja szkoleń kadr przyczynia się do przygotowania i realizacji form rozwoju. Zróżnicowana i bogata baza doświadczeń oraz lokalizacja szkoleń kadr przyczynia się do przygotowania i realizacji form rozwoju.",
+    "care": "Skład i pielęgnacja",
+    "descriptionCare": "Zróżnicowana i bogata baza doświadczeń oraz lokalizacja szkoleń kadr przyczynia się do przygotowania i realizacji form rozwoju. Zróżnicowana i bogata baza doświadczeń oraz lokalizacja szkoleń kadr przyczynia się do przygotowania i realizacji form rozwoju."
+  },
+  "DataCard": {
+    "addLike": "Dodaj do ulubionych",
+    "removeLike": "Usuń z ulubionych"
+  },
+  "DataCart": {
+    "title": "Mój koszyk",
+    "button": "Idź do kasy"
+  }
+}

@@ -1,0 +1,62 @@
+import "@/src/app/[locale]/styles/modal.css";
+import Button from "./Button";
+import {DataButton} from "@/src/app/[locale]/data";
+
+type ModalProps = {
+  title: string;
+  isInform: boolean;
+  setIsModal: (value: boolean) => void;
+  successHandle?: () => void;
+  cancelHandle?: () => void;
+};
+
+const Modal = ({title, isInform, setIsModal, successHandle, cancelHandle}: ModalProps) => {
+  const closeModal = () => {
+    const elem = document.querySelector(".modal_wrapper");
+    if (elem) {
+      elem.animate([{
+        opacity: 1
+      }, {
+        opacity: 0
+      }], {
+        duration: 200,
+        fill: "both",
+        easing: "ease-in"
+      });
+      Promise.all(
+        elem.getAnimations({subtree: true}).map((animation) => animation.finished),
+      ).then(() => {
+        setIsModal(false);
+        if (cancelHandle) {
+          cancelHandle();
+        }
+      });
+    }
+  };
+
+  return <div className="modal_wrapper">
+    <div className="modal">
+      <h2 className="modal_title">{title}</h2>
+      <div className="modal_buttons">
+        {!isInform && <Button
+          type="button"
+          text={DataButton().yes}
+          className="contact_feedback_button"
+          onClick={() => {
+            if (successHandle) {
+              successHandle();
+            }
+          }}
+        />}
+        <Button
+          type="button"
+          text={isInform ? DataButton().ok : DataButton().no}
+          className="contact_feedback_button fill_button"
+          onClick={() => closeModal()}
+        />
+      </div>
+    </div>
+  </div>
+};
+
+export default Modal;

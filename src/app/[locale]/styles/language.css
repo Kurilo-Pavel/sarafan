@@ -1,0 +1,36 @@
+.language {
+  position: absolute;
+  display: flex;
+  gap: 1rem;
+  right: 3.5rem;
+  top: 5rem;
+  z-index: 2;
+}
+
+.select_language {
+  outline: none;
+  border: none;
+}
+
+@media (max-width: 900px) {
+  .language {
+    top: 8rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .language {
+    top: 6rem;
+    left: 3.5rem;
+  }
+}
+
+@media (max-width: 500px) {
+  .language {
+    top: 7.5rem;
+    right: 0;
+    left: 0;
+    width: 100%;
+    justify-content: center;
+  }
+}
