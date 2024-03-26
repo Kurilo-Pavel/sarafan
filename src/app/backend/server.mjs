@@ -18,9 +18,9 @@ const server = express();
 const port = 7780;
 
 const configPG = {
-  user: "pavel",
-  password: "CgZ69UnjWTApdXUSfyyKaBs90VhL9m47",
-  host: "dpg-cm7hkced3nmc73cgj2vg-a.frankfurt-postgres.render.com",
+  user: "sarafanbasedate_user",
+  password: "atCCq0WL3uk54brMM7psv6N6pMleJTs5",
+  host: "dpg-co19h97jbltc739624hg-a.frankfurt-postgres.render.com",
   port: 5432,
   database: "sarafanshop",
   ssl: true

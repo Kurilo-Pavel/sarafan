@@ -7,8 +7,7 @@ import {setSection} from "@/src/app/[locale]/store/component/componentSlice";
 
 type AboutUsProps = {
   data: {
-    title: string,
-    description: string;
+    [key:string]:string;
   }
 }
 
