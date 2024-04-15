@@ -50,10 +50,10 @@ export const getCategory = createAsyncThunk<Products, { id: string, locale: stri
     return await response.json();
   });
 
-export const getItems = createAsyncThunk<Products, { page: number | null, locale: string }>(
+export const getItems = createAsyncThunk<Products, { page: number, locale: string, limit: number }>(
   "product/getItems",
-  async (value: { page: number | null, locale: string }) => {
-    const response = await fetch(URL + "/items/" + value.page + "/" + value.locale);
+  async (value: { page: number, locale: string, limit: number }) => {
+    const response = await fetch(URL + "/items/" + value.page + "/" + value.locale + "/" + value.limit);
     return await response.json();
   });
 
@@ -181,6 +181,7 @@ const productSlice = createSlice({
     });
     builder.addCase(getItems.fulfilled, (state: Products, action) => {
       state.products = action.payload.products;
+      console.log(action.payload.products)
     });
     builder.addCase(getProducts.fulfilled, (state: Products, action) => {
       if (action.payload.page === 1) {

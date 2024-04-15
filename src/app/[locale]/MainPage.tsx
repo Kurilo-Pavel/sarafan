@@ -22,8 +22,13 @@ const MainPage = ({collection, slider}: MainPageProps) => {
   const locale = useLocale();
 
   useEffect(() => {
-    dispatch(getItems({page:1, locale:locale}));
+    dispatch(getItems({page: 1, locale: locale, limit: 8}));
   }, [dispatch]);
+
+  useEffect(() => {
+    console.log(items)
+  }, [items])
+
 
   const slides = [
     {
@@ -104,25 +109,25 @@ const MainPage = ({collection, slider}: MainPageProps) => {
       </div>
     </section>
     <section className="collection">
-      {items.length > 0 && <Collection
+      {(items.length && items.length >= 4) > 0 && <Collection
         title={collection}
         slider={false}
         classCard="collection_item"
         classImage="small_img"
-        items={[items[2], items[3], items[4], items[5]]}
+        items={[items[0], items[1], items[2], items[3]]}
       />}
-      {items.length > 0 && <MiniCollection
+      {(items.length > 0 && items.length >= 2) && <MiniCollection
         items={[items[0], items[1]]}
         classImage="card_main_page"
         classCard="collection_item"
       />}
       <MainInform/>
-      {items[0] && <Collection
+      {(items.length > 0 && items.length >= 8) && <Collection
         title={slider}
         slider={true}
         classCard="collection_item"
         classImage="small_img"
-        items={[items[6], items[7], items[8], items[9], items[10], items[11]]}
+        items={[items[4], items[3], items[5], items[6], items[7], items[3]]}
       />}
     </section>
   </>

@@ -656,9 +656,10 @@ server.get("/item/:id/:locale", (request, response) => {
   });
 });
 
-server.get("/items/:page/:locale", (request, response) => {
+server.get("/items/:page/:locale/:limit", (request, response) => {
   response.setHeader("Access-Control-Allow-Origin", `${FrontendURL}`);
-  const countItems = (request.params.page - 1) * COUNT_ITEMS;
+  const limitItem = request.params.limit;
+  const countItems = (request.params.page - 1) * limitItem;
   const locale = request.params.locale;
 
   const connection = new pg.Client(configPG);
@@ -668,7 +669,7 @@ server.get("/items/:page/:locale", (request, response) => {
       console.log("not connection with bd items", err);
     } else {
       const items = new Promise((resolve, reject) => {
-        connection.query(`select id, category_${locale} as category,name_${locale} as name, price, date, sale, main_img from clothes ${countItems ? 'limit ' + countItems + ' ,' + COUNT_ITEMS : ''}`, (err, result) => {
+        connection.query(`select id, category_${locale} as category,name_${locale} as name, price, date, sale, main_img from clothes ${countItems !== undefined ? 'limit ' + limitItem +' OFFSET '+ countItems : ''}`, (err, result) => {
           if (err) {
             reject(err);
           } else {

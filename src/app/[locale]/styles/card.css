@@ -135,6 +135,10 @@
   .small_img {
     height: 58vw;
   }
+  
+  .card_image {
+    height: 50vw;
+  }
 }
 
 @media (max-width: 500px) {
@@ -143,6 +147,10 @@
   }
   
   .small_img {
+    height: 100vw;
+  }
+  
+  .card_image {
     height: 100vw;
   }
   

@@ -44,6 +44,12 @@
   }
 }
 
+@media (max-width: 600px) {
+  .product_gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 @media (max-width: 500px) {
   .product_gallery {
     display: flex;

@@ -15,3 +15,17 @@
 .select:focus-visible {
   outline: none;
 }
+
+@media (max-width: 800px){
+  .filter{
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 700px){
+  .filter{
+    flex-direction: column-reverse;
+    gap: 1rem;
+    height: auto;
+  }
+}

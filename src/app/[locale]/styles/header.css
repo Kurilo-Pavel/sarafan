@@ -213,6 +213,7 @@
   .header_menu {
     position: absolute;
     grid-auto-flow: row;
+    justify-content: center;
     top: 7rem;
     width: 100%;
     max-width: 100%;
@@ -226,6 +227,7 @@
     padding: 1rem 2rem;
     height: 2rem;
     font-size: 1.4rem;
+    text-align: center;
   }
   
   .header_dataUser {
