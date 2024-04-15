@@ -10,7 +10,7 @@ type MiniCollectionProps = {
     price: number | null;
     isLike: boolean;
     category: string;
-    sale: number | null;
+    sale: number;
   }[];
   classImage: string;
   classCard: string;

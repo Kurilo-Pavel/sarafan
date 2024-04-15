@@ -18,7 +18,7 @@ type Item = {
   main_img: string;
   name: string;
   price: number | null;
-  sale: number | null;
+  sale: number;
   size: string;
   color: string;
   count: number;
@@ -93,7 +93,7 @@ const Cart = ({setIsModal, setProduct}: CartProps) => {
             {item.sale && <span
               className="price_sale">{Math.round((item.price ? item.price : 0) * (100 - item.sale) / 100)} {dataCart.cash}</span>}
             <span className={classNames({
-              "item_price": !item.sale,
+              "item_price": item.sale===0,
               "old_price": item.sale
             })}>{item.price} {dataCart.cash}</span>
           </div>

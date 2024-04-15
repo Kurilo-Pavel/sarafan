@@ -20,7 +20,7 @@ type CardProps = {
   sale: number;
 };
 
-const Card = ({image, title, price, classCard, classImage, isLike, id, category, sale}: CardProps) => {
+const Card = ({image, title, price, classCard, isLike, id, category, sale}: CardProps) => {
   const dispatch = useAppDispatch();
   const likes = useAppSelector(state => state.cookie.likeItems);
   const locale = useLocale();
@@ -84,7 +84,7 @@ const Card = ({image, title, price, classCard, classImage, isLike, id, category,
     </p>
       <div className="field_price">
     {sale!==0 && <span className="item_price">{price ? Math.round(price * (100 - sale) / 100) : 0} {dataCard.cash}</span>}
-    <span className={classNames({"item_price": !sale, "old_price": sale})}>{price} {dataCard.cash}</span>
+    <span className={classNames({"item_price": sale===0, "old_price": sale})}>{price} {dataCard.cash}</span>
       </div>
     </Link>
   </div>

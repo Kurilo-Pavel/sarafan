@@ -7,7 +7,7 @@ type ContentProductsProps = {
     id: number | null;
     name: string;
     price: number | null;
-    sale: number | null;
+    sale: number;
     main_img: string | undefined;
   }[];
 }
@@ -16,7 +16,7 @@ const ContentProducts = ({products}: ContentProductsProps) => {
   const id = useId();
   return <Fragment key={id}>
     {products.map((prod: {
-        category: string, id: number | null, name: string, price: number | null, sale: number | null,
+        category: string, id: number | null, name: string, price: number | null, sale: number,
         main_img: string | undefined,
       }) =>
         <Card

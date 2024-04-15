@@ -7,7 +7,7 @@ type OrderCookie = {
   main_img: string;
   name: string;
   price: number | null;
-  sale: number | null;
+  sale: number;
   size: string;
   color: string;
   count: number;
@@ -35,7 +35,7 @@ const initialState: Cookie = {
     name: "",
     price: null,
     category: "",
-    sale: null,
+    sale: 0,
     count: 1,
   }],
   userSales: null,
@@ -94,7 +94,7 @@ const cookieSlice = createSlice({
         name: "",
         price: null,
         category: "",
-        sale: null,
+        sale: 0,
         count: 1,
       }];
       state.userTotal = null;

@@ -11,7 +11,7 @@ type Order = {
     main_img: string;
     name: string;
     price: number | null;
-    sale: number | null;
+    sale: number;
     size: string;
     color: string;
     count: number;

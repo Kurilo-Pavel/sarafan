@@ -12,7 +12,7 @@ type CollectionProps = {
     category: string;
     name: string;
     price: number | null;
-    sale: number | null;
+    sale: number;
   }[];
   classCard: string;
   classImage: string;
