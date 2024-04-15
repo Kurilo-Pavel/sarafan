@@ -9,6 +9,8 @@ import Checkbox from "@/src/app/[locale]/components/Checkbox";
 import {useAppDispatch, useAppSelector} from "@/src/app/[locale]/store/hooks";
 import {changedPassword, saveUsersData} from "@/src/app/[locale]/store/user/userSlice";
 import {useTranslations} from "next-intl";
+import {PayloadAction} from "@reduxjs/toolkit";
+import {useEffect} from "react";
 
 interface FormValuesUser {
   id: string;
@@ -35,7 +37,9 @@ interface FormErrorsPassword {
 
 const UserData = () => {
   const dispatch = useAppDispatch();
+
   const userData = useAppSelector(state => state.user.user);
+
   const translate = useTranslations("UserData");
   const errorsTr = useTranslations("Errors");
   const inputTr = useTranslations("Input");
@@ -134,8 +138,13 @@ const UserData = () => {
         }
         return errors;
       }}
-      onSubmit={(values: FormValuesPassword) => {
-        dispatch(changedPassword(values));
+      onSubmit={async (values: FormValuesPassword) => {
+        const response = await dispatch(changedPassword(values)) as PayloadAction<{ error: string }>;
+        console.log(response.payload)
+        if (!response.payload.error) {
+          values.oldPassword = "";
+          values.newPassword = "";
+        }
       }}>
       {({errors, touched}) => {
         return (

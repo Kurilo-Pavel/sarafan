@@ -4,8 +4,9 @@ import {StoreProvider} from "@/src/app/[locale]/store/StoreProvider";
 import Header from "@/src/app/[locale]/components/header/Header";
 import Footer from "@/src/app/[locale]/components/footer/Footer";
 import React from "react";
-import {NextIntlClientProvider, useMessages} from "next-intl";
+import {NextIntlClientProvider, useMessages, useTranslations} from "next-intl";
 import Language from "@/src/app/[locale]/components/Language";
+import {Delivery, ReturnAndExchange, Payment} from "@/src/app/[locale]/data";
 
 export const metadata: Metadata = {
   openGraph: {
@@ -23,7 +24,7 @@ const RootLayout = ({children, params: {locale}}: {
 }) => {
 
   const messages = useMessages();
-
+  const footerRule = useTranslations("Footer");
   return (
     <StoreProvider>
       <html lang={locale}>
@@ -32,7 +33,12 @@ const RootLayout = ({children, params: {locale}}: {
         <Header/>
         <Language/>
         {children}
-        <Footer/>
+        <Footer
+          dataDelivery={Delivery()}
+          dataReturnAndExchange={ReturnAndExchange()}
+          dataPayment={Payment()}
+          dataRule={footerRule("rule")}
+        />
         </body>
       </NextIntlClientProvider>
       </html>

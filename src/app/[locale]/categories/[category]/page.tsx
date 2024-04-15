@@ -5,11 +5,11 @@ const CategoryPage = ({params}: { params: { category: string } }) => {
   const id = decodeURI(params.category);
   const data = useTranslations("Category");
   const global = useTranslations("Global");
-  console.log(params)
   const dataCategory = {
-    sort: data("sort"),
-    filter: data("filter"),
-    button: global("button")
+    button: global("button"),
+    notItems: data("notItems"),
+    show: data("show"),
+    from: data("from")
   }
   return <Category id={id} dataCategory={dataCategory}/>
 };

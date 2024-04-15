@@ -14,7 +14,6 @@ const Language = () => {
   const [isPending, startTransition] = useTransition();
 
   const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    console.log(params)
     startTransition(() => {
       router.replace({pathname}, {locale: e.target.value});
     });

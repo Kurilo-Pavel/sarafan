@@ -1,6 +1,7 @@
 import "../styles/collection.css";
 import Card from "./Card";
 import {useState} from "react";
+import {CollectionDuration} from "@/src/app/[locale]/constants.mjs";
 
 type CollectionProps = {
   title: string;
@@ -32,14 +33,14 @@ const Collection = ({title, slider, items, classImage, classCard}: CollectionPro
     }, {
       transform: `translateX(${widthCard * -(count - 1)}px)`,
     }], {
-      duration: 2000,
+      duration: CollectionDuration,
       fill: "both"
     }) : null;
     count -= 1;
     if (widthCard) {
       const currentCards = Math.round(block.parentElement.getBoundingClientRect().width / widthCard);
       const card = Math.round(block.getBoundingClientRect().width / widthCard)
-      checkArrow(card,currentCards);
+      checkArrow(card, currentCards);
     }
   };
 
@@ -53,18 +54,18 @@ const Collection = ({title, slider, items, classImage, classCard}: CollectionPro
     }, {
       transform: `translateX(-${widthCard * (count + 1)}px)`,
     }], {
-      duration: 2000,
+      duration: CollectionDuration,
       fill: "both"
     }) : null;
     count += 1;
     if (widthCard) {
       const currentCards = Math.round(block.parentElement.getBoundingClientRect().width / widthCard);
       const card = Math.round(block.getBoundingClientRect().width / widthCard)
-      checkArrow(card,currentCards);
+      checkArrow(card, currentCards);
     }
   };
 
-  const checkArrow = (cards: number, currentCards:number) => {
+  const checkArrow = (cards: number, currentCards: number) => {
     if (count <= 0) {
       setLeftArrow(false);
     } else {

@@ -22,14 +22,15 @@ const PersonalData = ({data}: PersonalDataProps) => {
   const dispatch = useAppDispatch();
   const userInform = useAppSelector(state => state.component.userInform);
   const message = useAppSelector(state => state.user.message);
+  const error = useAppSelector(state => state.user.error);
   const [isModal, setIsModal] = useState(false);
 
   useEffect(() => {
     dispatch(setSection({title: "", path: ""}));
-    if (message) {
+    if (message || error) {
       setIsModal(true);
     }
-  }, [message]);
+  }, [message, error]);
 
   return <div className="page">
     <Path page={userInform ? data.pathInform : data.pathOrders}/>
@@ -41,7 +42,12 @@ const PersonalData = ({data}: PersonalDataProps) => {
       </div>
     </section>
     {isModal &&
-      <Modal title={message} isInform={true} setIsModal={setIsModal} cancelHandle={() => dispatch(resetMessage())}/>}
+      <Modal
+        title={message || error}
+        isInform={true}
+        setIsModal={setIsModal}
+        cancelHandle={() => dispatch(resetMessage())}
+      />}
   </div>
 };
 

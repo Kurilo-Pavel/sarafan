@@ -41,7 +41,7 @@
 
 .item_code {
   font-size: 14px;
-  color: #DADADA;
+  color: #ada8a8;
 }
 
 .item_price {
@@ -142,7 +142,7 @@
 .close_description {
   overflow: hidden;
   margin: 0;
-  animation: 1s linear 0s 1 both hideDescription;
+  animation: 0.5s linear 0s 1 both hideDescription;
 }
 
 @keyframes hideDescription {
@@ -159,7 +159,7 @@
   display: flex;
   overflow: hidden;
   margin: 0;
-  animation: 1s linear 0s 1 both showDescription;
+  animation: 0.5s linear 0s 1 both showDescription;
 }
 
 @keyframes showDescription {

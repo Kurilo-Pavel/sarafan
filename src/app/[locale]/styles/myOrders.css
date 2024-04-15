@@ -8,6 +8,7 @@
 .order {
   position: relative;
   display: flex;
+  align-items: center;
   flex-direction: column;
   gap: 1rem;
   width: 80%;
@@ -63,7 +64,6 @@
 .order_status {
   position: absolute;
   top: 45%;
-  right: 0;
   color: #dad7d7;
   font-size: 4rem;
   text-transform: uppercase;

@@ -54,7 +54,7 @@ const MyOrders = () => {
                   <span>{item.color}</span>
                 </div>
                 <div className="item_param">
-                  <span>c:</span>
+                  <span>{globalTr("size")}:</span>
                   <span>{item.size}</span>
                 </div>
                 <div className="item_param">

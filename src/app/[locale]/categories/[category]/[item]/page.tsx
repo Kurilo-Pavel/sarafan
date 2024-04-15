@@ -14,6 +14,7 @@ const ItemPage = ({params}: ItemProps) => {
 
   const dataItem = {
     selectSize: data("selectSize"),
+    vendorCode: data("vendorCode"),
     table: data("table"),
     button: data("button"),
     description: data("description"),
@@ -25,7 +26,8 @@ const ItemPage = ({params}: ItemProps) => {
     delivery: myCart("delivery"),
     exchange: exchange("title"),
     color: global("color"),
-    cash: global("cash")
+    cash: global("cash"),
+    addItem: data("addItem")
   };
   return <Item params={params} dataItem={dataItem}/>
 };

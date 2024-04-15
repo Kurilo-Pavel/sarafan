@@ -8,9 +8,9 @@ export const localePrefix = 'always';
 
 export const pathnames = {
   "/": {
-    en: "/en",
-    ru: "/ru",
-    pl: "/pl"
+    en: "/",
+    ru: "/",
+    pl: "/"
   },
 
   // '/admin': {

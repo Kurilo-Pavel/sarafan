@@ -2,18 +2,25 @@
 
 import "../../styles/footer.css";
 import Help from "@/src/app/[locale]/components/HelpClient";
-import {Delivery, DataHelp, Company, Media, ReturnAndExchange} from "@/src/app/[locale]/data";
+import {DataHelp, Company, Media} from "@/src/app/[locale]/data";
 import List from "../List";
 import Logo from "../Logo";
 import {useAppSelector} from "@/src/app/[locale]/store/hooks";
 import {useEffect} from "react";
 
+type FooterProps = {
+  dataDelivery: { title: string, content: { title: string, text: string }[] },
+  dataReturnAndExchange: { title: string, content: { title: string, text: string }[] },
+  dataPayment: { title: string, content: { title: string, text: string }[] },
+  dataRule: string
+};
 
-const Footer = () => {
+const Footer = ({dataDelivery, dataReturnAndExchange, dataPayment, dataRule}: FooterProps) => {
   const cart = useAppSelector(state => state.component.cart);
   const delivery = useAppSelector(state => state.component.delivery);
   const exchange = useAppSelector(state => state.component.exchange);
   const payment = useAppSelector(state => state.component.payment);
+
   useEffect(() => {
     if (cart || delivery || exchange || payment) {
       document.getElementsByTagName("body")[0].style.overflowY = "hidden";
@@ -46,16 +53,17 @@ const Footer = () => {
       <List
         list={Media().list}
         classNameLi="footer_list"
-        title={Company().title}
+        title={Media().title}
         classNameBlock="footer_block"
         classNameSection="footer_section messengers_mobile"
         classNameTitle="footer_listName title_mobile"
       />
     </div>
-    <p className="footer_text">Все права защищены.Пользовательское соглашение.Политика конфиденциальности
+    <p className="footer_text">{dataRule}
       © 2022 sarafancollection.ru</p>
-    {delivery && <Help data={Delivery()} cart={false}/>}
-    {exchange && <Help data={ReturnAndExchange()} cart={false}/>}
+    {delivery && <Help data={dataDelivery} cart={false}/>}
+    {exchange && <Help data={dataReturnAndExchange} cart={false}/>}
+    {payment && <Help data={dataPayment} cart={false}/>}
     {cart && <Help cart={true}/>}
   </div>
 };

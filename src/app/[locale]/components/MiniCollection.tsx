@@ -1,5 +1,6 @@
 import "../styles/miniCollection.css";
 import Card from "./Card";
+import {useTranslations} from "next-intl";
 
 type MiniCollectionProps = {
   items: {
@@ -15,19 +16,23 @@ type MiniCollectionProps = {
   classCard: string;
 }
 const MiniCollection = ({items, classImage, classCard}: MiniCollectionProps) => {
-  return <div className="collection_containSecond">
-    {items.map((item, index) => <Card
-      key={index}
-      image={item.main_img?item.main_img:""}
-      title={item.name}
-      category={item.category}
-      price={item.price}
-      id={item.id}
-      classImage={classImage}
-      classCard={classCard}
-      isLike={item.isLike}
-      sale={item.sale}
-    />)}
+  const title = useTranslations("MiniCollection");
+  return <div>
+    <h4 className="collection_title miniCollection_title">{title("title")}</h4>
+    <div className="collection_containSecond">
+      {items.map((item, index) => <Card
+        key={index}
+        image={item.main_img ? item.main_img : ""}
+        title={item.name}
+        category={item.category}
+        price={item.price}
+        id={item.id}
+        classImage={classImage}
+        classCard={classCard}
+        isLike={item.isLike}
+        sale={item.sale}
+      />)}
+    </div>
   </div>
 };
 export default MiniCollection;

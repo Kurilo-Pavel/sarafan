@@ -1,6 +1,6 @@
 {
   "Global": {
-    "cash": "USD.",
+    "cash": "USD",
     "button": "Show more",
     "color": "Color",
     "size": "Size",
@@ -41,6 +41,11 @@
     "description": "The diverse and rich experience framework and location of personnel training contributes to the preparation and implementation of forms of development. The diverse and rich experience framework and location of personnel training contributes to the preparation and implementation of forms of development. On the other hand, the implementation of the planned plans. The diverse and rich experience of the framework and place of training of personnel contributes to the preparation and implementation of forms of development. The diverse and rich experience framework and location of personnel training contributes to the preparation and implementation of forms of development. On the other hand, the implementation of the planned plans"
   },
   "Category": {
+    "notItems": "Product is out of stock",
+    "show": "Showing",
+    "from": "of"
+  },
+  "PikingItems": {
     "sort": "Sorting",
     "filter": "Filter"
   },
@@ -48,6 +53,7 @@
     "title": "Contacts",
     "contactTitle": "Connect with us",
     "addressTitle": "Showroom address",
+    "phoneNumber": "Phone",
     "address": "Moscow, st. Novy Arbat 36/3, Sfera shopping center, 1st floor",
     "timeWork": "Opening hours Mon-Sun 12:00 – 21:00",
     "ideaInform1": "If you have ideas, wishes, comments - write!",
@@ -70,11 +76,14 @@
     "description": "The diverse and rich experience framework and location of personnel training contributes to the preparation and implementation of forms of development. On the other hand, the implementation of the planned plans",
     "about": "About the brand"
   },
-  "MayOrders": {
+  "MyOrders": {
     "order": "Order number",
     "dateOrder": "Order date",
     "paid": "Paid",
     "costOrder": "Order cost"
+  },
+  "MiniCollection": {
+    "title": "Hot offer"
   },
   "New": {
     "path": "New items",
@@ -110,8 +119,8 @@
   "MyCart": {
     "title": "Placing an order",
     "modalTitle": "Are you sure you want",
-    "checkout": "form",
-    "pay": "pay",
+    "checkout": "Form",
+    "pay": "Pay",
     "order": "order for the amount",
     "deliveryType": "Delivery method",
     "paymentType": "Payment method",
@@ -126,7 +135,8 @@
     "total": "Total",
     "qPromotional": "Have a promo code?",
     "apply": "Apply",
-    "rule": "Pressing a button «{payment,select, cash {оформить} other {оплатить}}», I accept the terms of the public offer and privacy policy"
+    "rule": "Pressing a button «{payment,select, cash {Form} other {Pay}}», I accept the terms of the public offer and privacy policy"
+
   },
   "Sale": {
     "title": "Seasonal discounts"
@@ -158,7 +168,7 @@
     "rules": "You need to agree to the rules"
   },
   "DataMenu": {
-    "title1": "New items",
+    "title1": "New",
     "title2": "Clothes",
     "title3": "Accessories",
     "title4": "SALE"
@@ -180,6 +190,11 @@
     "text1": "Ideological considerations of a higher order, as well as the strengthening and development of the structure, allows us to carry out important tasks in developing a personnel training system that meets pressing needs. Thus, the beginning of the daily work of position formation entails the process of introducing and modernizing the positions taken by the participants in relation to the assigned tasks.",
     "subTitle2": "Delivery",
     "text2": "Ideological considerations of a higher order, as well as the strengthening and development of the structure, allows us to carry out important tasks in developing a personnel training system that meets pressing needs. Thus, the beginning of the daily work of position formation entails the process of introducing and modernizing the positions taken by the participants in relation to the assigned tasks."
+  },
+  "DataPayment": {
+    "title": "Payment",
+    "subTitle1": "",
+    "text1": "Ideological considerations of a higher order, as well as the strengthening and development of the structure, allows us to carry out important tasks in developing a personnel training system that meets pressing needs. Thus, the beginning of the daily work of position formation entails the process of introducing and modernizing the positions taken by the participants in relation to the assigned tasks."
   },
   "DataReturnAndExchange": {
     "title": "Returns and exchanges",
@@ -218,19 +233,26 @@
   },
   "DataItemPage": {
     "selectSize": "Select size",
+    "vendorCode": "Vendor code",
     "table": "Size table",
     "button": "Add to cart",
     "description": "Product description",
     "descriptionItem": "The diverse and rich experience framework and location of personnel training contributes to the preparation and implementation of forms of development. The diverse and rich experience framework and location of personnel training contributes to the preparation and implementation of forms of development.",
     "care": "Composition and care",
-    "descriptionCare": "The diverse and rich experience framework and location of personnel training contributes to the preparation and implementation of forms of development. The diverse and rich experience framework and location of personnel training contributes to the preparation and implementation of forms of development."
+    "descriptionCare": "The diverse and rich experience framework and location of personnel training contributes to the preparation and implementation of forms of development. The diverse and rich experience framework and location of personnel training contributes to the preparation and implementation of forms of development.",
+    "addItem": "Product added to cart"
   },
   "DataCard": {
     "addLike": "Add to favorites",
-    "removeLike": "Remove from favorites"
+    "removeLike": "Remove from favorites",
+    "empty": "You haven't chosen anything yet"
   },
   "DataCart": {
     "title": "My cart",
-    "button": "Go to checkout"
+    "button": "Go to checkout",
+    "empty": "You haven't chosen anything yet"
+  },
+  "Footer": {
+    "rule": "All rights reserved.User Agreement.Privacy Policy"
   }
 }

@@ -3,11 +3,16 @@
   padding-inline: 1rem;
 }
 
-.wrapper_image {
+/*.wrapper_image {*/
+/*  position: relative;*/
+/*  display: flex;*/
+/*  align-items: center;*/
+/*  overflow: hidden;*/
+/*}*/
+.card {
   position: relative;
-  display: flex;
-  align-items: center;
-  overflow: hidden;
+  width: 100%;
+  height: 100%;
 }
 
 .item_like {
@@ -23,13 +28,21 @@
   cursor: pointer;
 }
 
+.item_link {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: black;
+  height: 100%;
+}
+
 .sale_block {
   position: absolute;
-  bottom: 1%;
-  left: 1%;
+  top: 0;
+  left: 0;
   border-radius: 50%;
   padding: 1rem;
-  z-index: 3;
+  z-index: 2;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -49,22 +62,28 @@
 
 .item_text {
   margin: 1.5rem 0 0.5rem 0;
-  height: 2.4rem;
+  height: 3.4rem;
   overflow: hidden;
   display: -webkit-box;
   text-overflow: ellipsis;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
-  text-decoration: none;
-  color: black;
 }
 
 .item_text:hover {
   text-decoration: underline;
 }
 
+.field_price {
+  display: flex;
+  flex-direction: row;
+  
+  justify-content: space-between
+}
+
 .item_price {
   margin: 0;
+  font-weight: bold;
 }
 
 .price_sale {
@@ -72,6 +91,7 @@
   padding-right: 1rem;
   font-family: cursive;
   font-style: italic;
+  font-weight: bold;
 }
 
 .old_price {
@@ -83,15 +103,8 @@
 }
 
 .big_card {
-  grid-column-start: 1;
-  grid-column-end: 3;
   display: flex;
   flex-direction: column;
-  width: 50vw;
-}
-
-.small_card {
-  width: 100%;
 }
 
 .small_img {
@@ -99,7 +112,7 @@
 }
 
 .medium_img {
-  height: 55vw;
+  height: 50vw;
 }
 
 .card_main_page {

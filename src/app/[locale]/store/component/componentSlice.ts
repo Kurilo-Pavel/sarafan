@@ -43,15 +43,10 @@ const componentSlice = createSlice({
     },
     setHelp: (state: { payment: boolean, delivery: boolean, exchange: boolean }, action: PayloadAction<string|undefined>) => {
       if (action.payload === "payment") {
-        console.log(1)
         state.payment = true;
       } else if (action.payload === "delivery") {
-        console.log(2)
-
         state.delivery = true;
       } else if (action.payload === "exchange") {
-        console.log(3)
-
         state.exchange = true;
       }
     },

@@ -1,0 +1,17 @@
+.filter {
+  display: flex;
+  gap: 90px;
+  align-self: center;
+  justify-content: flex-end;
+  height: 2.5rem;
+  font-size: 14px;
+}
+.select {
+  width: 170px;
+  border: none;
+  cursor: pointer;
+}
+
+.select:focus-visible {
+  outline: none;
+}

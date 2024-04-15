@@ -34,6 +34,8 @@ const Cart = ({setIsModal, setProduct}: CartProps) => {
   const dispatch = useAppDispatch();
   const locale = useLocale();
 
+  const dataCart = DataCart();
+
   const orderItems = useAppSelector(state => state.cookie.orderItems);
   const userTotal = useAppSelector(state => state.cookie.userTotal);
   const userSales = useAppSelector(state => state.cookie.userSales);
@@ -74,8 +76,8 @@ const Cart = ({setIsModal, setProduct}: CartProps) => {
   };
 
   return <Fragment>
-    <h1 className="help_title">{DataCart().title}</h1>
-    {orderItems.length > 0 && <div className="items_field">
+    <h1 className="help_title">{dataCart.title}</h1>
+    {orderItems.length > 0 ? <div className="items_field">
       {orderItems.map((item, index) => <div key={index} className="item_block">
         <div className="image_wrapper">
           <img
@@ -89,22 +91,22 @@ const Cart = ({setIsModal, setProduct}: CartProps) => {
                 className="item_title">{item.name}</Link>
           <div className="price_block">
             {item.sale && <span
-              className="price_sale">{Math.round((item.price ? item.price : 0) * (100 - item.sale) / 100)} {DataCart().cash}</span>}
+              className="price_sale">{Math.round((item.price ? item.price : 0) * (100 - item.sale) / 100)} {dataCart.cash}</span>}
             <span className={classNames({
               "item_price": !item.sale,
               "old_price": item.sale
-            })}>{item.price} {DataCart().cash}</span>
+            })}>{item.price} {dataCart.cash}</span>
           </div>
           <div className="param_block">
-            <span>{DataCart().size}</span>
+            <span>{dataCart.size}</span>
             <span className="selected_param selected_size">{item.size}</span>
           </div>
           <div className="param_block">
-            <span>{DataCart().color}</span>
+            <span>{dataCart.color}</span>
             <span className="selected_param selected_color">{item.color}</span>
           </div>
           <div className="param_block">
-            <span>{DataCart().count}</span>
+            <span>{dataCart.count}</span>
             <div className="item_counter">
               <span className="count_button" onClick={() => minusCount(item)}>-</span>
               <span className="count">{item.count}</span>
@@ -119,7 +121,7 @@ const Cart = ({setIsModal, setProduct}: CartProps) => {
             />
             <Button
               type="button"
-              text={DataCart().delete}
+              text={dataCart.delete}
               className="delete_title"
               onClick={() => {
                 deleteItem(JSON.stringify(item));
@@ -127,12 +129,12 @@ const Cart = ({setIsModal, setProduct}: CartProps) => {
           </div>
         </div>
       </div>)}
-    </div>}
+    </div> : <h2>{dataCart.empty}</h2>}
     <p className="cost_items">
-      {DataCart().cost} {orderItems[0] && <><span>{itemsCost}</span> {DataCart().cash}</>}
+      {dataCart.cost} {orderItems[0] && <><span>{itemsCost}</span> {dataCart.cash}</>}
     </p>
     <Button
-      text={DataCart().button}
+      text={dataCart.button}
       className="button_white"
       type="button"
       disabled={orderItems.length === 0}

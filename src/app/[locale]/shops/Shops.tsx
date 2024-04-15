@@ -7,8 +7,10 @@ import {setSection} from "@/src/app/[locale]/store/component/componentSlice";
 type ShopsProps = {
   data: {
     path: string;
+    address: string;
   }
 }
+
 const OurShops = ({data}: ShopsProps) => {
   const dispatch = useAppDispatch();
 
@@ -18,6 +20,7 @@ const OurShops = ({data}: ShopsProps) => {
 
   return <div className="page">
     <Path page={data.path}/>
+    <h2>{data.address}</h2>
   </div>
 };
 

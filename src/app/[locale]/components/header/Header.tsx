@@ -16,11 +16,19 @@ import {useLocale} from "next-intl";
 
 const Header = () => {
   const dispatch = useAppDispatch();
+  const locale = useLocale();
+
   const user = useAppSelector(state => state.user.user);
   const orders = useAppSelector(state => state.cookie.orderItems);
-  const locale = useLocale();
+  const likes = useAppSelector(state => state.cookie.likeItems);
+
   const [token, setToken] = useState<string | null>(null);
   const [countOrders, setCountOrders] = useState(0);
+  const [countLikes, setCountLikes] = useState(0);
+
+  useEffect(() => {
+    setCountLikes(likes.length);
+  }, [likes]);
 
   useEffect(() => {
     setToken(localStorage.getItem("token"));
@@ -77,9 +85,11 @@ const Header = () => {
         <Link
           href={"/like" as "/"}
           locale={locale}
+          className="user_cart"
           onClick={() => dispatch(setSection({title: "", path: ""}))}
         >
           <img className="elem_hov" src="/Like.svg" alt="Page" title={DataIcons().like}/>
+          {orders && orders[0]?.id && <span className="count_items">{countLikes}</span>}
         </Link>
         <span
           onClick={() => myCart()}

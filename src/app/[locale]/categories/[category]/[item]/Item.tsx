@@ -15,9 +15,10 @@ import {useLocale} from "next-intl";
 
 type ItemProps = {
   params: { item: string };
-  dataItem:{
+  dataItem: {
     color: string;
     selectSize: string;
+    vendorCode: string;
     table: string;
     button: string;
     description: string;
@@ -29,10 +30,11 @@ type ItemProps = {
     delivery: string;
     exchange: string;
     cash: string;
+    addItem:string;
   }
 };
 
-const Item = ({params,dataItem}: ItemProps) => {
+const Item = ({params, dataItem}: ItemProps) => {
   const dispatch = useAppDispatch();
   const id = Number(decodeURI(params.item));
   const item = useAppSelector((state => state.product.product));
@@ -48,7 +50,7 @@ const Item = ({params,dataItem}: ItemProps) => {
 
   useEffect(() => {
     dispatch(getItem({id, locale}));
-  }, [id,dispatch]);
+  }, [id, dispatch]);
 
   useEffect(() => {
     if (item.main_img) {
@@ -74,7 +76,7 @@ const Item = ({params,dataItem}: ItemProps) => {
       <div className="data_item">
         <div className="title">
           <h1 className="title_item">{item.name}</h1>
-          <span className="item_code">{item.id}</span>
+          <span className="item_code">{dataItem.vendorCode} {item.id}</span>
         </div>
         <div className="item_price">
           <span className="item_coins">{item.price}</span>
@@ -84,10 +86,10 @@ const Item = ({params,dataItem}: ItemProps) => {
         <div className="item_color">
           <p className="color_name">{dataItem.color}:<span className="item_getColor">{itemColor}</span></p>
           <div className="section_colors">
-            {item.colors && item.colors.map((color: string, index: number) =>
-              <span key={index} className={classNames("color", {"chooseColor": itemColor === color})}
-                    style={{"background": `${color}`}}
-                    onClick={() => setItemColor(color)}/>
+            {item.colors && item.colors.map((value: { color: string, id: string }, index: number) =>
+              <span key={index} className={classNames("color", {"chooseColor": itemColor === value.color})}
+                    style={{"background": `${value.id}`}}
+                    onClick={() => setItemColor(value.color)}/>
             )}
           </div>
         </div>
@@ -105,7 +107,7 @@ const Item = ({params,dataItem}: ItemProps) => {
           text={dataItem.button}
           className="contact_feedback_button"
           type="button"
-          onClick={() => {
+          onClick={async () => {
             if (!itemColor) {
               setIsModal(true);
               setTitle(dataItem.errorColor);
@@ -124,6 +126,9 @@ const Item = ({params,dataItem}: ItemProps) => {
                 sale: item.sale,
                 count: 1,
               })));
+              setIsModal(true);
+              setTitle(dataItem.addItem);
+
             }
           }}
         />

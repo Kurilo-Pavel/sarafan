@@ -69,11 +69,15 @@ const MyCart = ({myCart}: DataProps) => {
   let router = useRouter();
   const dispatch = useAppDispatch();
 
+  const total = useAppSelector(state => state.cookie.userTotal);
+  const sales = useAppSelector(state => state.cookie.userSales);
+  const userData = useAppSelector(state => state.user.user);
+
   const initialValues: FormValues = {
-    firstName: "",
-    lastName: "",
-    phone: "",
-    email: "",
+    firstName: userData.firstName || "",
+    lastName: userData.lastName || "",
+    phone: userData.phone || "",
+    email: userData.email || "",
     delivery: "",
     payment: ""
   }
@@ -85,9 +89,6 @@ const MyCart = ({myCart}: DataProps) => {
   const [title, setTitle] = useState("");
   const [userTotal, setUserTotal] = useState<number | null>(0);
   const [userSales, setUserSales] = useState<number | null>(0);
-
-  const total = useAppSelector(state => state.cookie.userTotal);
-  const sales = useAppSelector(state => state.cookie.userSales);
 
   useEffect(() => {
     setUserTotal(total);
@@ -214,9 +215,6 @@ const MyCart = ({myCart}: DataProps) => {
                   type="submit"
                 />
                 <p className="order_rules">
-                  {/*Нажимая на кнопку «{payment === "cash" ? myCart.checkoutProp : myCart.payProp}», я принимаю условия*/}
-                  {/*публичной*/}
-                  {/*оферты и политики конфиденциальности*/}
                   {DataMyCart(payment).rule}
                 </p>
               </Form>)

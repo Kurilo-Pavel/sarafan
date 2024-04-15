@@ -41,6 +41,11 @@
     "description": "Zróżnicowana i bogata baza doświadczeń oraz lokalizacja szkoleń kadr przyczynia się do przygotowania i realizacji form rozwoju. Zróżnicowana i bogata baza doświadczeń oraz lokalizacja szkoleń kadr przyczynia się do przygotowania i realizacji form rozwoju. Z drugiej strony realizacja zaplanowanych planów.Różnorodne i bogate doświadczenie ram i miejsc szkolenia kadr przyczynia się do przygotowania i wdrożenia form rozwoju. Zróżnicowana i bogata baza doświadczeń oraz lokalizacja szkoleń kadr przyczynia się do przygotowania i realizacji form rozwoju. Z drugiej strony realizacja zaplanowanych planów"
   },
   "Category": {
+    "notItems": "Nie ma produktu na stanie",
+    "show": "Wyświetlam",
+    "from": "z"
+  },
+  "PikingItems": {
     "sort": "Sortowanie",
     "filter": "Filtr"
   },
@@ -48,6 +53,7 @@
     "title": "Łączność",
     "contactTitle": "Połącz się z nami",
     "addressTitle": "Adres salonu",
+    "phoneNumber": "Telefon",
     "address": "Moskwa, ul. Nowy Arbat 36/3, Centrum Handlowe Sfera, I piętro",
     "timeWork": "Godziny otwarcia Pon.-Niedz. 12:00 – 21:00",
     "ideaInform1": "Jeśli masz pomysły, życzenia, uwagi - napisz!",
@@ -70,18 +76,21 @@
     "description": "Zróżnicowana i bogata baza doświadczeń oraz lokalizacja szkoleń kadr przyczynia się do przygotowania i realizacji form rozwoju. Z drugiej strony realizacja zaplanowanych planów",
     "about": "O marce"
   },
-  "MayOrders": {
+  "MyOrders": {
     "order": "Numer zamówienia",
     "dateOrder": "Data zamówienia",
     "paid": "Płatny",
     "costOrder": "Koszt zamówienia"
+  },
+  "MiniCollection": {
+    "title": "Gorąca Oferta"
   },
   "New": {
     "path": "Nowe przedmioty",
     "title": "Najnowsze przybycia"
   },
   "Path": {
-    "main": "Stona Głowna"
+    "main": "Strona Głowna"
   },
   "PersonalData": {
     "pathInform": "Konto osobiste / Podstawowe informacje",
@@ -110,8 +119,8 @@
   "MyCart": {
     "title": "Składając zamówienie",
     "modalTitle": "Jesteś pewny że chcesz",
-    "checkout": "uformować",
-    "pay": "płacić",
+    "checkout": "Uformować",
+    "pay": "Płacić",
     "order": "zamówienie na kwotę",
     "deliveryType": "Sposób dostawy",
     "paymentType": "Metoda płatności",
@@ -126,7 +135,7 @@
     "total": "Całkowity",
     "qPromotional": "Masz kod promocyjny?",
     "apply": "Stosować",
-    "rule": "Naciśnięcie przycisku «{payment,select, cash {оформить} other {оплатить}}», akceptuję warunki oferty publicznej i politykę prywatności"
+    "rule": "Naciśnięcie przycisku «{payment,select, cash {Płacić} other {Uformować}}», akceptuję warunki oferty publicznej i politykę prywatności"
   },
   "Sale": {
     "title": "Sezonowe rabaty"
@@ -181,6 +190,11 @@
     "subTitle2": "Dostawa",
     "text2": "Względy ideologiczne wyższego rzędu oraz wzmocnienie i rozwój struktury pozwalają nam realizować ważne zadania w zakresie opracowania systemu szkolenia kadr odpowiadającego naglącym potrzebom. Tym samym rozpoczęcie codziennej pracy nad kształtowaniem stanowisk wiąże się z procesem wprowadzania i unowocześniania stanowisk zajmowanych przez uczestników w związku z przydzielonymi im zadaniami."
   },
+  "DataPayment": {
+    "title": "Zapłata",
+    "subTitle1": "",
+    "text1": "Względy ideologiczne wyższego rzędu oraz wzmocnienie i rozwój struktury pozwalają nam realizować ważne zadania w zakresie opracowania systemu szkolenia kadr odpowiadającego naglącym potrzebom. Tym samym rozpoczęcie codziennej pracy nad kształtowaniem stanowisk wiąże się z procesem wprowadzania i unowocześniania stanowisk zajmowanych przez uczestników w związku z przydzielonymi im zadaniami."
+  },
   "DataReturnAndExchange": {
     "title": "Zwroty i wymiany",
     "subTitle1": "Powrót",
@@ -218,12 +232,14 @@
   },
   "DataItemPage": {
     "selectSize": "Wybierz rozmiar",
+    "vendorCode": "Kod producenta",
     "table": "Tabela rozmiarów",
     "button": "Dodaj do koszyka",
     "description": "Opis produktu",
     "descriptionItem": "Zróżnicowana i bogata baza doświadczeń oraz lokalizacja szkoleń kadr przyczynia się do przygotowania i realizacji form rozwoju. Zróżnicowana i bogata baza doświadczeń oraz lokalizacja szkoleń kadr przyczynia się do przygotowania i realizacji form rozwoju.",
     "care": "Skład i pielęgnacja",
-    "descriptionCare": "Zróżnicowana i bogata baza doświadczeń oraz lokalizacja szkoleń kadr przyczynia się do przygotowania i realizacji form rozwoju. Zróżnicowana i bogata baza doświadczeń oraz lokalizacja szkoleń kadr przyczynia się do przygotowania i realizacji form rozwoju."
+    "descriptionCare": "Zróżnicowana i bogata baza doświadczeń oraz lokalizacja szkoleń kadr przyczynia się do przygotowania i realizacji form rozwoju. Zróżnicowana i bogata baza doświadczeń oraz lokalizacja szkoleń kadr przyczynia się do przygotowania i realizacji form rozwoju.",
+    "addItem": "Produkt dodany do koszyka"
   },
   "DataCard": {
     "addLike": "Dodaj do ulubionych",
@@ -231,6 +247,10 @@
   },
   "DataCart": {
     "title": "Mój koszyk",
-    "button": "Idź do kasy"
+    "button": "Idź do kasy",
+    "empty": "Jeszcze niczego nie wybrałeś"
+  },
+  "Footer": {
+    "rule": "Wszelkie prawa zastrzeżone.Umowa użytkownika.Polityka prywatności"
   }
 }

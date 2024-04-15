@@ -10,12 +10,12 @@ type Categories = {
 type Product = {
   category: string;
   code: string | null;
-  colors: string[];
+  colors: { color: string, id: string }[];
   date: string | null;
   id: number | null;
   name: string;
   price: number | null;
-  sale: number | null;
+  sale: number;
   sizes: string[] | null;
   views: number | null;
   main_img: string | undefined;
@@ -32,6 +32,8 @@ type Products = {
   sort_popular: Product[];
   sort_sale: Product[];
   error: string;
+  page: number,
+  numberItems: number;
 };
 
 export const getCategories = createAsyncThunk<Products, string>(
@@ -55,10 +57,10 @@ export const getItems = createAsyncThunk<Products, { page: number | null, locale
     return await response.json();
   });
 
-export const getProducts = createAsyncThunk<Products, { id: string, page: number | undefined, locale: string }>(
+export const getProducts = createAsyncThunk<Products, { id: string, page: number, locale: string, typeSort: string }>(
   "product/getProducts",
-  async (value: { id: string, page: number | undefined, locale: string }) => {
-    const response = await fetch(URL + "/clothes/" + value.id + "/" + value.locale + "/" + value.page);
+  async (value: { id: string, page: number, locale: string, typeSort: string }) => {
+    const response = await fetch(URL + "/clothes/" + value.id + "/" + value.locale + "/" + value.page + "/" + value.typeSort);
     return await response.json();
   });
 
@@ -120,17 +122,17 @@ export const getItem = createAsyncThunk<Products, { id: number | null, locale: s
     return await response.json();
   });
 
-export const getNewItems = createAsyncThunk<Products, { page: number | null, locale: string }>(
+export const getNewItems = createAsyncThunk<Products, { page: number, locale: string, typeSort: string }>(
   "product/getNewItems",
-  async (value: { page: number | null, locale: string }) => {
-    const response = await fetch(URL + `/newItems/` + value.page + "/" + value.locale);
+  async (value: { page: number, locale: string, typeSort: string }) => {
+    const response = await fetch(URL + `/newItems/` + value.page + "/" + value.locale + "/" + value.typeSort);
     return await response.json();
   });
 
-export const getSaleItems = createAsyncThunk<Products, { page: number | null, locale: string }>(
+export const getSaleItems = createAsyncThunk<Products, { page: number, locale: string, typeSort: string }>(
   "product/getSaleItems",
-  async (value: { page: number | null, locale: string }) => {
-    const response = await fetch(URL + `/sale/` + value.page + "/" + value.locale,
+  async (value: { page: number, locale: string, typeSort: string }) => {
+    const response = await fetch(URL + `/sale/` + value.page + "/" + value.locale + "/" + value.typeSort,
     );
     return await response.json();
   });
@@ -141,12 +143,12 @@ const initialState: Products = {
   product: {
     category: "",
     code: "",
-    colors: [""],
+    colors: [{color: "", id: ""}],
     date: "",
     id: null,
     name: "",
     price: null,
-    sale: null,
+    sale: 0,
     sizes: [""],
     views: null,
     main_img: "",
@@ -158,6 +160,8 @@ const initialState: Products = {
   sort_popular: [],
   sort_sale: [],
   error: "",
+  page: 0,
+  numberItems: 0,
 };
 
 const productSlice = createSlice({
@@ -179,8 +183,13 @@ const productSlice = createSlice({
       state.products = action.payload.products;
     });
     builder.addCase(getProducts.fulfilled, (state: Products, action) => {
-      state.products = action.payload.products;
-
+      if (action.payload.page === 1) {
+        state.products = action.payload.products;
+      } else {
+        state.products = [...state.products, ...action.payload.products];
+      }
+      state.page = action.payload.page;
+      state.numberItems = action.payload.numberItems;
     });
     builder.addCase(addProduct.fulfilled, (state: Products, action) => {
       state.products = action.payload.products;
@@ -191,17 +200,29 @@ const productSlice = createSlice({
     builder.addCase(deleteCategory.fulfilled, (state: Products, action) => {
       state.categories = action.payload.categories;
     });
-    builder.addCase(sortProduct.fulfilled, (state: Products, action) => {
-      state.products = action.payload.products;
-    });
+    // builder.addCase(sortProduct.fulfilled, (state: Products, action) => {
+    //   state.products = action.payload.products;
+    // });
     builder.addCase(getItem.fulfilled, (state: Products, action) => {
       state.product = action.payload.product;
     });
     builder.addCase(getNewItems.fulfilled, (state: Products, action) => {
-      state.products = action.payload.products;
+      if (action.payload.page === 1) {
+        state.products = action.payload.products;
+      } else {
+        state.products = [...state.products, ...action.payload.products];
+      }
+      state.page = action.payload.page;
+      state.numberItems = action.payload.numberItems;
     });
     builder.addCase(getSaleItems.fulfilled, (state: Products, action) => {
-      state.products = action.payload.products;
+      if (action.payload.page === 1) {
+        state.products = action.payload.products;
+      } else {
+        state.products = [...state.products, ...action.payload.products];
+      }
+      state.page = action.payload.page;
+      state.numberItems = action.payload.numberItems;
     });
   }
 });

@@ -55,7 +55,7 @@ export const saveUsersData = createAsyncThunk<DataUser, {
   firstName: string;
   phone: string;
   email: string;
-  id:string;
+  id: string;
 }>(
   "user/saveUsersData",
   async (data) => {
@@ -66,7 +66,7 @@ export const saveUsersData = createAsyncThunk<DataUser, {
     return await response.json();
   });
 
-export const changedPassword = createAsyncThunk<DataUser, { email: string, oldPassword: string; newPassword: string }>(
+export const changedPassword = createAsyncThunk<{ error: string, message: string }, { email: string, oldPassword: string; newPassword: string }>(
   "user/changedPassword",
   async (data) => {
     const response = await fetch(URL + "/changedPassword", {
@@ -150,12 +150,13 @@ const userSlice = createSlice({
     builder.addCase(saveUsersData.fulfilled, (state: DataUser, action) => {
       if (action.payload.user) {
         state.user = action.payload.user;
+        state.message = action.payload.message;
       }
       if (action.payload.error) {
         state.error = action.payload.error;
       }
     });
-    builder.addCase(changedPassword.fulfilled, (state: DataUser, action) => {
+    builder.addCase(changedPassword.fulfilled, (state: DataUser, action: { payload: { error: string, message: string } }) => {
       if (action.payload.message) {
         state.message = action.payload.message;
       }

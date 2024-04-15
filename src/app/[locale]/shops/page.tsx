@@ -2,9 +2,11 @@ import Shops from "@/src/app/[locale]/shops/Shops";
 import {useTranslations} from "next-intl";
 
 const ShopsPage = ()=>{
-  const translate = useTranslations("Shops");
+  const shops = useTranslations("Shops");
+  const address = useTranslations("Contacts");
   const data = {
-    path: translate("path")
+    path: shops("path"),
+    address: address("address")
   };
   return <Shops data={data}/>
 };

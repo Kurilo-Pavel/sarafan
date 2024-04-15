@@ -1,7 +1,7 @@
 "use client";
 
 import "../styles/help.css";
-import {Fragment, useState} from "react";
+import {Fragment, useEffect, useState} from "react";
 import {useAppDispatch} from "@/src/app/[locale]/store/hooks";
 import {resetHelp} from "@/src/app/[locale]/store/component/componentSlice";
 import Cart from "@/src/app/[locale]/components/Cart";
@@ -14,13 +14,13 @@ type HelpClientProps = {
   data?: { title: string, content: { title: string, text: string }[] };
 };
 
-const HelpClient = ({data, cart, }: HelpClientProps) => {
+const HelpClient = ({data, cart}: HelpClientProps) => {
   const dispatch = useAppDispatch();
+
+  const titleModal = DataHelpMessage().title;
 
   const [isModal, setIsModal] = useState(false);
   const [product, setProduct] = useState<string>("");
-
-  const titleModal = DataHelpMessage().title;
 
   const close = () => {
     const wrapper = document.querySelector(".sub_wrapper");

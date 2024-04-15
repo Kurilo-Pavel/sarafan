@@ -22,14 +22,14 @@ const DataLanguage = () => {
   };
 };
 
-const SelectData = () => {
-  const data = useTranslations("SelectData");
-  return [
-    {value: "new", name: data("name1")},
-    {value: "increase", name: data("name2")},
-    {value: "decrease", name: data("name3")},
-  ];
-};
+// const SelectData = () => {
+//   const data = useTranslations("SelectData");
+//   return [
+//     {value: "new", name: data("name1")},
+//     {value: "increase", name: data("name2")},
+//     {value: "decrease", name: data("name3")},
+//   ];
+// };
 
 const Delivery = () => {
   const data = useTranslations("DataDelivery");
@@ -43,6 +43,17 @@ const Delivery = () => {
       {
         title: data("subTitle2"),
         text: data("text2")
+      }]
+  };
+};
+const Payment = () => {
+  const data = useTranslations("DataPayment");
+  return {
+    title: data("title"),
+    content: [
+      {
+        title: data("subTitle1"),
+        text: data("text1")
       }]
   };
 };
@@ -157,6 +168,7 @@ const DataCart = () => {
     size: global("size"),
     delete: global("delete"),
     button: data("button"),
+    empty: data("empty")
   };
 };
 
@@ -199,14 +211,23 @@ const DataSlides = () => {
 const DataHelpMessage = () => {
   const data = useTranslations("Global");
   const titleModal: string = data("deleteItem");
-  return {title:titleModal};
+  return {title: titleModal};
 };
+
+// const DataPikingItems = () => {
+//   const data = useTranslations("PikingItems");
+//   return {
+//     sort: data("sort"),
+//     filter: data("filter")
+//   };
+// };
 
 export {
   Menu,
   DataLanguage,
-  SelectData,
+  // SelectData,
   Delivery,
+  Payment,
   ReturnAndExchange,
   DataHelp,
   Company,
@@ -221,5 +242,6 @@ export {
   DataButton,
   DataPersonalMenu,
   DataSlides,
-  DataHelpMessage
+  DataHelpMessage,
+  // DataPikingItems
 };

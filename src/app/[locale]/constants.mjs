@@ -5,7 +5,8 @@ const PASS = "hcarfnblkzgbehrs"
 const URL = "https://sarafan-server1.onrender.com";
 const FrontendURL = "https://sarafan.onrender.com";
 const SALT = "1afadvf0bjda2bmad4bo1fbd2bl";
-const COUNT_ITEMS = 10;
+const COUNT_ITEMS = 4;
+const CollectionDuration = 300;
 const EMAIL = {
   minLength: 3,
   maxLength: 256,
@@ -53,4 +54,4 @@ const CATEGORY = {
 
 const timeAuthorization = 3 * 60 * 60 * 60 * 60;
 
-export {URL,FrontendURL, SALT, COUNT_ITEMS, EMAIL, PASSWORD, USER, PASS, timeAuthorization, LOGIN, DESCRIPTION, CATEGORY};
+export {URL,FrontendURL, SALT, COUNT_ITEMS, CollectionDuration, EMAIL, PASSWORD, USER, PASS, timeAuthorization, LOGIN, DESCRIPTION, CATEGORY};

@@ -4,7 +4,12 @@
   align-items: center;
   margin-inline: 1rem;
   text-decoration: none;
+  scale: 1.2;
   color: black;
+}
+
+.header > .logo {
+  width: 100%;
 }
 
 .logo:hover {

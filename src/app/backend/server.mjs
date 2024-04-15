@@ -380,26 +380,53 @@ server.get("/category/:id/:locale", express.json({type: "*/*"}), (request, respo
   });
 });
 
-server.get("/clothes/:categories/:locale/:page", express.json({type: "*/*"}), (request, response) => {
+server.get("/clothes/:categories/:locale/:page/:sort", express.json({type: "*/*"}), (request, response) => {
   response.setHeader("Access-Control-Allow-Origin", `${FrontendURL}`);
 
   const countItems = (request.params.page - 1) * COUNT_ITEMS;
   const idCategory = request.params.categories;
   const locale = request.params.locale;
+  let sortType;
+  switch (request.params.sort) {
+    case "all":
+      sortType = null;
+      break;
+    case "new":
+      sortType = "date";
+      break;
+    case "increase":
+      sortType = "price * (100-sale)/100";
+      break;
+    case "decrease":
+      sortType = "price * (100-sale)/100 desc";
+      break;
+    default:
+      break;
+  }
+
   const connection = new pg.Client(configPG);
   connection.connect(err => {
-    if (err) {
-      console.log("2not connect with bd", err);
-    } else {
-      connection.query(`select id, name_${locale} as name, category_${locale} as category, price, sale, main_img from clothes where category_id=${idCategory} ${countItems ? 'limit ' + countItems + ', ' + COUNT_ITEMS : ''}`, async (err, result) => {
-        if (err) {
-          console.log(err);
-        } else {
-          response.send({products: result.rows});
-        }
-      });
+      if (err) {
+        response.status(500).send({error: "not connection with bd"});
+        console.log("2not connect with bd", err);
+      } else {
+        connection.query(`select id from clothes where category_id=${idCategory}`, async (err, result) => {
+            if (err) {
+            } else {
+              const numberItems = result.rows.length;
+              connection.query(`select id, name_${locale} as name, category_${locale} as category, price, sale, main_img from clothes where category_id=${idCategory} ${sortType?'order by '+ sortType : ''} ${countItems !== undefined ? 'limit ' + COUNT_ITEMS +' OFFSET '+ countItems : ''}`, async (err, result) => {
+                if (err) {
+                  console.log(err);
+                } else {
+                  response.send({products: result.rows, page: request.params.page * 1, numberItems: numberItems});
+                }
+              });
+            }
+          }
+        );
+      }
     }
-  });
+  );
 });
 
 server.post("/category/add/:categories", (request, response) => {
@@ -453,48 +480,11 @@ server.delete("/category/delete/:categories", (request, response) => {
   });
 });
 
-server.post("/category/clothes/sort:sort?category:category?page:page?locale:locale", (request, response) => {
-  response.setHeader("Access-Control-Allow-Origin", `${FrontendURL}`);
-  const locale = request.params.locale;
-  let type;
-  let countItems = (request.params.page - 1) * COUNT_ITEMS;
-  let id = request.params.category;
-
-  switch (request.params.sort) {
-    case "new":
-      type = "date";
-      break;
-    case "increase":
-      type = "price";
-      break;
-    case "decrease":
-      type = "price desc";
-      break;
-    default:
-      break;
-  }
-  const connection = new pg.Client(configPG);
-  connection.connect(err => {
-    if (err) {
-      console.log("1not connect with bd", err);
-    } else {
-      connection.query(`select id, name_${locale} as name, category_${locale} as category, price, sale, main_img from clothes where category_id='${id}' order by ${type} ${countItems ? 'limit ' + countItems + ', ' + COUNT_ITEMS : ''}`, (err, results) => {
-        if (err) {
-          console.log(err);
-        } else {
-          response.send({products: results.rows});
-          connection.end();
-        }
-      });
-    }
-  });
-});
-
-server.post("/category/clothes/addProduct", (request, response) => {
+server.post("/category/clothes/addProduct/:locale", (request, response) => {
   response.setHeader("Access-Control-Allow-Origin", `${FrontendURL}`);
   response.setHeader("Access-Control-Allow-Headers", "Content-Type");
   response.setHeader("Access-Control-Allow-Headers", "Authorization");
-
+  const locale = request.params.locale;
   const date = new Date().getTime();
   const token = request.headers.authorization;
   const connection = new pg.Client(configPG);
@@ -567,7 +557,7 @@ server.post("/category/clothes/addProduct", (request, response) => {
 
               const addColor = new Promise((resolve, reject) => {
                 JSON.parse(loadProgress.body.color).map(color => {
-                  connection.query(`insert into colors (id,color) values (${newId},'${color}')`, err => {
+                  connection.query(`insert into colors_${locale} (id,color) values (${newId},'${color}')`, err => {
                     if (err) {
                       reject({error: err});
                     } else {
@@ -615,7 +605,7 @@ server.get("/item/:id/:locale", (request, response) => {
     } else {
 
       const dataItem = new Promise((resolve, reject) => {
-        connection.query(`select id, category_${locale} as category, name_${locale} as name, price, date, sale, views, description, main_img, sub_img from clothes where id=${id}`, (err, result) => {
+        connection.query(`select id, category_${locale} as category, name_${locale} as name, description_${locale} as description, price, date, sale, views, main_img, sub_img from clothes where id=${id}`, (err, result) => {
           if (err) {
             reject(err);
           } else {
@@ -625,12 +615,14 @@ server.get("/item/:id/:locale", (request, response) => {
       });
 
       const colors = new Promise((resolve, reject) => {
-        connection.query(`select color from colors where id=${id}`, (err, result) => {
+        connection.query(`select color_${locale} as color, color_en as id from colors where id=${id}`, (err, result) => {
           if (err) {
             console.log("colors error");
             reject(err);
           } else {
-            resolve(result.rows.map(data => data.color));
+            resolve(result.rows.map(data => {
+              return {color: data.color, id: data.id}
+            }));
           }
         });
       });
@@ -692,20 +684,48 @@ server.get("/items/:page/:locale", (request, response) => {
   });
 });
 
-server.get("/newItems/:page/:locale", (request, response) => {
+server.get("/newItems/:page/:locale/:sort", (request, response) => {
   response.setHeader("Access-Control-Allow-Origin", `${FrontendURL}`);
 
   const countItems = (request.params.page - 1) * COUNT_ITEMS;
   const locale = request.params.locale;
+  let sortType;
 
+  switch (request.params.sort) {
+    case "all":
+      sortType = null;
+      break;
+    case "new":
+      sortType = "date";
+      break;
+    case "increase":
+      sortType = "price * (100-sale)/100";
+      break;
+    case "decrease":
+      sortType = "price * (100-sale)/100 desc";
+      break;
+    default:
+      break;
+  }
   const connection = new pg.Client(configPG);
   connection.connect(err => {
     if (err) {
       response.status(500).send({error: "not connection with bd"});
       console.log("not connection with bd newItems", err);
     } else {
+
+      const numberItems = new Promise((resolve, reject) => {
+        connection.query(`select id from clothes`, (err, result) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(result.rows.length);
+          }
+        });
+      });
+
       const newItems = new Promise((resolve, reject) => {
-        connection.query(`select id, category_${locale} as category,name_${locale} as name, price, date, sale, main_img  from clothes order by date ${countItems ? 'limit ' + countItems + ', ' + COUNT_ITEMS : ''}`, (err, result) => {
+        connection.query(`select id, category_${locale} as category,name_${locale} as name, price, date, sale, main_img  from clothes ${sortType?'order by '+ sortType : ''} ${countItems !== undefined ? 'limit ' + COUNT_ITEMS +' OFFSET '+ countItems : ''}`, (err, result) => {
           if (err) {
             reject(err);
           } else {
@@ -713,20 +733,38 @@ server.get("/newItems/:page/:locale", (request, response) => {
           }
         });
       });
-      newItems.then(items => {
-        response.send({products: items});
+
+      newItems.then(async items => {
+        response.send({products: items, page: request.params.page * 1, numberItems: await numberItems});
         connection.end();
       })
     }
   });
 });
 
-
-server.get("/sale/:page/:locale", (request, response) => {
+server.get("/sale/:page/:locale/:sort", (request, response) => {
   response.setHeader("Access-Control-Allow-Origin", `${FrontendURL}`);
 
   const countItems = (request.params.page - 1) * COUNT_ITEMS;
   const locale = request.params.locale;
+  let sortType;
+
+  switch (request.params.sort) {
+    case "all":
+      sortType = null;
+      break;
+    case "new":
+      sortType = "date";
+      break;
+    case "increase":
+      sortType = "price * (100-sale)/100";
+      break;
+    case "decrease":
+      sortType = "price * (100-sale)/100 desc";
+      break;
+    default:
+      break;
+  }
 
   const connection = new pg.Client(configPG);
   connection.connect(err => {
@@ -734,8 +772,19 @@ server.get("/sale/:page/:locale", (request, response) => {
       response.status(500).send({error: "not connection with bd"});
       console.log("not connection with bd sale", err);
     } else {
+
+      const numberItems = new Promise((resolve, reject) => {
+        connection.query(`select id from clothes where sale>0`, (err, result) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(result.rows.length);
+          }
+        });
+      });
+
       const items = new Promise((resolve, reject) => {
-        connection.query(`select id, category_${locale} as category,name_${locale} as name, price, date, sale, main_img  from clothes where sale>0 ${countItems ? 'limit ' + countItems + ',' + COUNT_ITEMS : ''}`, (err, result) => {
+        connection.query(`select id, category_${locale} as category,name_${locale} as name, price, date, sale, main_img  from clothes where sale>0 ${sortType?'order by '+ sortType : ''} ${countItems !== undefined ? 'limit ' + COUNT_ITEMS +' OFFSET '+ countItems : ''}`, (err, result) => {
           if (err) {
             reject(err);
           } else {
@@ -743,8 +792,9 @@ server.get("/sale/:page/:locale", (request, response) => {
           }
         });
       });
-      items.then(items => {
-        response.send({products: items});
+
+      items.then(async items => {
+        response.send({products: items, page: request.params.page * 1, numberItems: await numberItems});
         connection.end();
       });
     }
@@ -768,7 +818,7 @@ server.post("/saveUsersData", express.json({type: "*/*"}), (request, response) =
       response.status(500).send({error: "not connection with BD"});
       console.log("not connection with bd saveUserData");
     } else {
-      connection.query(`update users set email='${data.email}', lastname='${data.lastName}', firstname='${data.firstName}', phone='${data.phone}' where id=${data.id}`, err => {
+      connection.query(`update users set email='${data.email}', lastName='${data.lastName}', firstName='${data.firstName}', phone='${data.phone}' where id=${data.id}`, err => {
         if (err) {
           console.log("cannot changed userData", err);
           connection.end();
@@ -781,7 +831,8 @@ server.post("/saveUsersData", express.json({type: "*/*"}), (request, response) =
                 connection.end();
               } else {
                 data.token = token;
-                response.send({user: data});
+                console.log(data)
+                response.send({user: data, message: "Новые данные сохранены"});
                 connection.end();
               }
             });
@@ -823,7 +874,7 @@ server.post("/changedPassword", express.json({type: "*/*"}), (request, response)
                 }
               });
             } else {
-              response.send({message: "Указанный пароль не найден"});
+              response.status(500).send({error: "Указанный пароль не найден"});
               connection.end();
             }
           }
